@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios')
 
+
 router
-    .route('/')
-    .get(async (req, res) => {
+    .route('/login')
+    .post(async (req, res) => {
         try {
             // const data = await getPeople()
             // res.json(data)
@@ -14,8 +15,8 @@ router
     })
 
 router
-    .route('/:id')
-    .get(async (req, res) => {
+    .route('/register')
+    .post(async (req, res) => {
         try {
             // const person = checkId(req.params.id, data)
             // res.json(person)
