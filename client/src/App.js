@@ -1,14 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
 
-function App() {
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from '@chakra-ui/react'
+
+const App = ({ Component }) => {
   return (
-    <div className="App">
-      
-    </div>
-  );
+    <ChakraProvider>
+      <Component />
+    </ChakraProvider>
+  )
 }
 
 export default App;
