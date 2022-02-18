@@ -12,12 +12,13 @@ const port = 8000
 app.use(express.json())
 app.use(cors())
 
+configRoutes(app);
+
 // **** REACT APP ****
 app.use(express.static(path.join(__dirname, '../../', 'client', 'public')));
 app.get("/*", (req, res) => res.sendFile(path.resolve(__dirname, '../../', 'client', 'public', 'index.html')));
 
 
-configRoutes(app);
 
 app.listen(port, async () => {
     //  COLOR FOR TEXT

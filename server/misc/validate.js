@@ -1,5 +1,5 @@
 module.exports = {
-    checkString(str) {
+    checkStr(str) {
         if (! str) throw 'string does not exist'
         if (typeof str !== 'string') throw 'input is not a string'
         const trimmed = str.trim()

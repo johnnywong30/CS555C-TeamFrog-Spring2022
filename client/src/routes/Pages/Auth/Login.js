@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Container, Divider, FormControl, FormLabel, FormErrorMessage, Heading, HStack, Input, Stack, Text, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle, AlertDescription, Box, Button, CloseButton, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Stack, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react'
 import * as React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 import { Field } from './Field'
 import { PasswordField } from './PasswordField'
 
+import Mongo from '../../../services/mongo';
+import { notifyClear } from '../../../redux/actions/common'
+
 const Login = () => {
     // hook to use redux actions
     const dispatch = useDispatch()
+    const { msg, status, loading } = useSelector(({ common }) => common)
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -19,10 +24,12 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log({
-            email: email,
-            password: password
-        })
+        dispatch(Mongo.onLogin(email, password))
+    }
+
+    const handleClear = (e) => {
+        e.preventDefault()
+        dispatch(notifyClear())
     }
 
     return (
@@ -73,7 +80,14 @@ const Login = () => {
                             sm: 'xl',
                         }}
                     >
-                        <Stack spacing="6">
+                        <Stack spacing="5">
+                            {msg &&
+                                <Alert status={status} borderRadius="10">
+                                    <AlertIcon />
+                                    {msg}
+                                    <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
+                                </Alert>
+                            }
                             <HStack spacing="1" justify="center">
                                 <Text color="muted">Don't have an account?</Text>
                                 <Link to="/register">
@@ -95,8 +109,7 @@ const Login = () => {
                         </Button> */}
                             </HStack>
                             <Stack spacing="6">
-                                <Button colorScheme={"green"} variant="solid" type="submit">Login</Button>
-
+                                <Button colorScheme={"green"} variant="solid" type="submit" isLoading={loading}>Login</Button>
                             </Stack>
                         </Stack>
                     </Box>

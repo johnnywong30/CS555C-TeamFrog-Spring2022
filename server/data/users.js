@@ -1,7 +1,7 @@
 const { checkStr } = require('../misc/validate')
 const { users } = require('../config/mongoCollections')
 const { ObjectId } = require('mongodb')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 module.exports = {
     async getUser(_email) {
@@ -9,6 +9,7 @@ module.exports = {
         const collection = await users()
         const user = await collection.findOne({ email: email })
         if (user === null) return []
+        // make sure we always remove the password using removeKey when we send it back to the client
         return [user]
     },
     async getUsers() {
@@ -18,9 +19,10 @@ module.exports = {
         return userList
     },
     async createUser(_firstName, _lastName, _email, _password, _company) {
+        
         const email = checkStr(_email)
-        const userExists = this.getUser(email)
-        if (userExists.length > 0) throw 'account with that email exists'
+        const userExists = await this.getUser(email)
+        if (userExists.length > 0) throw 'Account with that email exists'
         const firstName = checkStr(_firstName)
         const lastName = checkStr(_lastName)
         const password = checkStr(_password)
@@ -55,16 +57,37 @@ module.exports = {
             // titles is an array of title ids that this user has obtained
             // 0 is 'Tadpole'
             titles: [0],
+            // title is the currently selected title
+            title: 0
         }
         const insertInfo = await collection.insertOne(newUser)
-        if (! insertInfo.acknowledged || ! insertInfo.insertedId) throw 'could not register user'
-
+        if (! insertInfo.acknowledged || ! insertInfo.insertedId) throw 'Could not register user'
+        const user = await this.getUser(email)
+        return {
+            ...user,
+            password: 'thats not very froggers of you',
+            successMsg: `Successfully registered account for ${email}!`
+        }
     },
 
     async validateUser(_email, _password) {
-        const
+        const email = checkStr(_email)
+        const inputPassword = checkStr(_password)
+        const userExists = await this.getUser(email)
+        const errorMsg = 'Invalid email or password'
+        if (userExists.length < 1) throw errorMsg
+        const user = userExists[0]
+        const { password } = user
+        const match = await bcrypt.compare(inputPassword, password)
+        if (match) {
+            return {
+                ...user,
+                password: 'thats not very froggers of you'
+            }
+        } else {
+            throw errorMsg
+        }
     },
-    async comparePasswords(_pass1, _pass2) {
-
-    }
+    
+    // TODO: updates for each individual User field 
 }

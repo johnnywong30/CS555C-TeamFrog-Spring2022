@@ -2,8 +2,6 @@ import { FormControl, FormLabel, IconButton, Input, InputGroup, InputRightElemen
 import * as React from 'react'
 import { HiEye, HiEyeOff } from 'react-icons/hi'
 
-// Credit/source: https://pro.chakra-ui.com/components/application/authentication
-
 export const PasswordField = React.forwardRef((props, ref) => {
     const { isOpen, onToggle } = useDisclosure()
     const inputRef = React.useRef(null)
@@ -22,14 +20,6 @@ export const PasswordField = React.forwardRef((props, ref) => {
         <FormControl>
             <FormLabel htmlFor="password">Password</FormLabel>
             <InputGroup>
-                <InputRightElement>
-                    <IconButton
-                        variant="link"
-                        aria-label={isOpen ? 'Mask password' : 'Reveal password'}
-                        icon={isOpen ? <HiEyeOff /> : <HiEye />}
-                        onClick={onClickReveal}
-                    />
-                </InputRightElement>
                 <Input
                     id="password"
                     ref={mergeRef}
@@ -39,6 +29,14 @@ export const PasswordField = React.forwardRef((props, ref) => {
                     required
                     {...props}
                 />
+                <InputRightElement>
+                    <IconButton
+                        variant="link"
+                        aria-label={isOpen ? 'Mask password' : 'Reveal password'}
+                        icon={isOpen ? <HiEyeOff /> : <HiEye />}
+                        onClick={onClickReveal}
+                    />
+                </InputRightElement>
                 
             </InputGroup>
         </FormControl>
