@@ -1,4 +1,4 @@
-import { onRegister, onLogin } from "./Auth";
+import { onRegister, onLogin } from "./auth";
 
 const Mongo = {
     // Authentication
