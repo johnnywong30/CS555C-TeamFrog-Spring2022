@@ -1,24 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Heading,
-  Stack,
-  Text
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
 
-export default function Hero({
-  title,
-  subtitle,
-  image,
-  ctaLink,
-  ctaText,
-  ...rest
-}) {
+export default function Hero({title, subtitle, image, ctaLink, ctaText, ...rest}) {
   return (
     <Flex
       align="center"
@@ -67,15 +52,6 @@ export default function Hero({
             {ctaText}
           </Button>
         </Link>
-        <Text
-          fontSize="xs"
-          mt={2}
-          textAlign="center"
-          color="primary.800"
-          opacity="0.6"
-        >
-          No credit card required.
-        </Text>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         {/* TODO: Make this change every X secs */}

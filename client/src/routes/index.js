@@ -7,6 +7,10 @@ import RestrictedRoute from '../components/RestrictedRoute';
 
 import { Auth } from './Pages/Auth';
 import { Home } from './Pages/Home';
+import { Profile } from './Pages/Profile';
+import { Collection } from './Pages/Collection';
+import { Friends } from './Pages/Friends';
+import { Store } from './Pages/Store';
 
 const Routes = () => {
     // hook to dispatch actions
@@ -15,21 +19,32 @@ const Routes = () => {
     // hook to just find the current location the user is at route wise 
     const location = useLocation()
     const isAuth = useSelector(({ auth }) => auth.auth)
-    console.log(isAuth)
-    if (! isAuth && (location.pathname === '' || location.pathname === '/' || location.pathname === '/froggers')) {
-        console.log(isAuth)
-        return <Redirect to={'/login'} />
-    } else if (isAuth && (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register')) {
-        console.log(isAuth)
-        return <Redirect to={'/froggers'} />
+
+    const redirectHome = () => {
+        return <Redirect to={'/froggers'}/>
     }
-    
+
+    const freePaths = ['/', '/login', '/register']
+    const restrictedPaths = ['', '/froggers', '/profile', '/collection', '/friends', '/store', '/logout']
+    if (! isAuth && (restrictedPaths.includes(location.pathname))) {
+        return <Redirect to={'/login'} />
+    } else if (isAuth && (freePaths.includes(location.pathname))) {
+        return <Redirect to={'/froggers'} />
+    } 
     return (
         <>
             <Switch>
                 <Route exact path="/login" component={Auth} />
                 <Route exact path="/" component={Auth} />
+                <RestrictedRoute exact path="/logout" component={Auth} />
                 <RestrictedRoute exact path="/froggers" component={Home} />
+                <RestrictedRoute exact path="/profile" component={Profile} />
+                <RestrictedRoute exact path="/collection" component={Collection} />
+                <RestrictedRoute exact path="/friends" component={Friends} />
+                <RestrictedRoute exact path="/store" component={Store} />
+                {/* This last route is to redirect any bad routes to home page if logged in */}
+                {/* If not logged in, then redirects to login page */}
+                <Route exact path="*" component={redirectHome}/>
             </Switch>
         </>
     )
