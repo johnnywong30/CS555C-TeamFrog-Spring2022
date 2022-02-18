@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path')
+const cookieParser = require('cookie-parser')
 
 const configRoutes = require('./routes');
 const connection = require('./config/mongoConnection');
@@ -11,13 +12,16 @@ const port = 8000
 
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser());
+
+
+configRoutes(app);
 
 // **** REACT APP ****
 app.use(express.static(path.join(__dirname, '../../', 'client', 'public')));
 app.get("/*", (req, res) => res.sendFile(path.resolve(__dirname, '../../', 'client', 'public', 'index.html')));
 
 
-configRoutes(app);
 
 app.listen(port, async () => {
     //  COLOR FOR TEXT
