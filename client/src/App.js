@@ -7,12 +7,13 @@ import configureStore, { history } from './redux/store/'
 import Routes from './routes'
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from '@chakra-ui/react'
+import customTheme from './components/utils/theme'
 
 export const store = configureStore()
 
 const App = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <Provider store={store}>
             <ConnectedRouter history={history}>
                 <Switch>

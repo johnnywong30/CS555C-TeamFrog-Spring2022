@@ -1,7 +1,8 @@
 import { User } from "../../models/User";
 
 const INIT_STATE = {
-    user: {}
+    user: {},
+    auth: false
 }
 
 const authReducer = (state = INIT_STATE, action) => {
@@ -11,12 +12,12 @@ const authReducer = (state = INIT_STATE, action) => {
         case "LOGIN_USER":
             return {
                 ...state,
-                user: new User(payload)
+                user: new User(payload),
+                auth: true
             }
         case "LOGOUT_USER":
             return {
                 ...state,
-                user: {}
             }
         default:
             return state

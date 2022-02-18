@@ -16,6 +16,8 @@ const Register = () => {
     const dispatch = useDispatch()
     const { msg, status, loading } = useSelector(({ common }) => common)
 
+    // TODO: use useEffect to check cookies to see if we can login already
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')

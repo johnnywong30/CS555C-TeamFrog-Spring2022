@@ -27,7 +27,6 @@ export const onRegister = (firstName, lastName, email, password, company) => {
             dispatch(startLoading())
             const { data } = await axios.post(`/auth/register`, reqBody)
             const { successMsg, errorMsg } = data
-            console.log(data)
             if (successMsg) dispatch(notifySuccess(successMsg))
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
@@ -49,7 +48,6 @@ export const onLogin = (email, password) => {
             dispatch(startLoading())
             const { data } = await axios.post(`/auth/login`, reqBody)
             dispatch(loginAuthUser(data))
-            console.log(data)
             const { successMsg, errorMsg } = data
             if (successMsg) dispatch(notifySuccess(successMsg))
             if (errorMsg) dispatch(notifyFail(errorMsg))
