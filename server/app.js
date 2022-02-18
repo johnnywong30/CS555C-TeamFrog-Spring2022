@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path')
+const cookieParser = require('cookie-parser')
 
 const configRoutes = require('./routes');
 const connection = require('./config/mongoConnection');
@@ -11,6 +12,8 @@ const port = 8000
 
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser());
+
 
 configRoutes(app);
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios')
+const cookieParser = require('cookie-parser')
 const users = require('../data/users')
 
 router
@@ -9,11 +10,13 @@ router
         try {
             const { email, password } = req.body
             const user = await users.validateUser(email, password)
-            res.json(user)
+            // TODO use cookies to store authentication session
+            // res.cookie("auth", user)
+            res.json(user).end()
         } catch (e) {
             console.log(e)
             res.statusMessage = e
-            res.status(200).json({errorMsg: e})
+            res.status(200).json({ errorMsg: e }).end()
         }
     })
 
@@ -27,7 +30,31 @@ router
         } catch (e) {
             console.log(e)
             res.statusMessage = e
-            res.status(200).json({errorMsg: e})
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+
+router
+    .route('/logout')
+    .post(async (req, res) => {
+        try {
+            // res.clearCookie("auth").end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+
+router
+    .route('/')
+    .get(async (req, res) => {
+        try {
+
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
         }
     })
 
