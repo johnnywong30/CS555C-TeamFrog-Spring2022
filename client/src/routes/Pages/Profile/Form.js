@@ -19,9 +19,20 @@ const Form = () => {
     }
  
     const handleFirstName = (e) => {
-        // e.preventDefault()
         if (e !== firstName && e.trim().length > 0) {
             dispatch(Mongo.updateFirstName(email, e))
+        }
+    }
+
+    const handleLastName = (e) => {
+        if (e !== lastName && e.trim().length > 0) {
+            dispatch(Mongo.updateLastName(email, e))
+        }
+    }
+
+    const handleCompany = (e) => {
+        if (e !== company && e.trim().length > 0) {
+            dispatch(Mongo.updateCompany(email, e))
         }
     }
 
@@ -57,8 +68,16 @@ const Form = () => {
                             <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
                         </Alert>
                     }
+                    <VStack>
+                        <Heading orientation="horizontal" size="lg">
+                            Profile
+                        </Heading>
+                        <Divider orientation='horizontal' />
+                    </VStack>
                     <Stack spacing="5">
-                        <Field defaultValue={firstName} onSubmit={handleFirstName}/>
+                        <Field defaultValue={firstName} onSubmit={handleFirstName} id={'firstName'} label={'First Name'}/>
+                        <Field defaultValue={lastName} onSubmit={handleLastName} id={'lastName'} label={'Last Name'}/>
+                        <Field defaultValue={company} onSubmit={handleCompany} id={'company'} label={'Company'}/>
                     </Stack>
                 </Stack>
             </Box>
