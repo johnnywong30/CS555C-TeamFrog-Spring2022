@@ -15,3 +15,14 @@ export const logoutAuthUser = () => {
         })
     }
 }
+
+export const updateUser = (user) => {
+    console.log('i am here')
+    console.log(user)
+    return async dispatch => {
+        dispatch({
+            type: "UPDATE_USER",
+            payload: user
+        })
+    }
+}
