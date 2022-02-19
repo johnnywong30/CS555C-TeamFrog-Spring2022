@@ -19,6 +19,17 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
             }
+        // Note: UPDATE_USER and LOGIN_USER do the same thing code wise
+        // It's just that we should keep the semantics consistent
+        // With the actual action we're trying to accomplish
+        case "UPDATE_USER":
+            console.log('i am this reducer')
+            console.log(payload)
+            return {
+                ...state,
+                user: new User(payload),
+                auth: true
+            }
         default:
             return state
     }

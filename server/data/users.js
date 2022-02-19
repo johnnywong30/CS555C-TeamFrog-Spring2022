@@ -63,6 +63,7 @@ module.exports = {
         const insertInfo = await collection.insertOne(newUser)
         if (! insertInfo.acknowledged || ! insertInfo.insertedId) throw 'Could not register user'
         const user = await this.getUser(email)
+        if (user.length < 1) throw 'Could not get user'
         return {
             ...user,
             password: 'thats not very froggers of you',
@@ -89,5 +90,83 @@ module.exports = {
         }
     },
     
-    // TODO: updates for each individual User field 
+    async updateFirstName(_email, _firstName) {
+        const email = checkStr(_email)
+        const firstName = checkStr(_firstName)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        if (user.firstName === firstName) throw 'New first name cannot be the same as the original'
+        const collection = await users()
+        const updatedUser = {
+            ...user,
+            firstName: firstName
+        }
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: updatedUser}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated First Name'
+        }
+    },
+    async updateLastName(_email, _lastName) {
+        const email = checkStr(_email)
+        const lastName = checkStr(_lastName)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        if (user.lastName === lastName) throw 'New last name cannot be the same as the original'
+        const collection = await users()
+        const updatedUser = {
+            ...user,
+            lastName: lastName
+        }
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: updatedUser}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated Last Name'
+        }
+    },
+    async updateCompany(_email, _company) {
+        const email = checkStr(_email)
+        const company = checkStr(_company)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        if (user.company === company) throw 'New company cannot be the same as the original'
+        const collection = await users()
+        const updatedUser = {
+            ...user,
+            company: company
+        }
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: updatedUser}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated Company'
+        }
+    },
+    // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
