@@ -1,5 +1,5 @@
 # TODO
-- [ ] Write documentation
+- [x] Write documentation
   - [x] Write frontend documentation
-  - [ ] Write backend documentation
-  - [ ] Write setup documentation
+  - [x] Write backend documentation
+  - [x] Write setup documentation
