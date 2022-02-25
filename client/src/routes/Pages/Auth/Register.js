@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription, Box, Button, CloseButton, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Stack, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle, AlertDescription, Box, Button, CloseButton, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Stack, Text, useBreakpointValue, useColorModeValue, VStack, bgGradient } from '@chakra-ui/react'
 
 import * as React from 'react'
 import { useEffect, useState } from 'react';
@@ -42,85 +42,88 @@ const Register = () => {
 
 
     return (
-        < Container
-            maxW="lg"
-            py={{
-                base: '12',
-                md: '24',
-            }
-            }
-            px={{
-                base: '0',
-                sm: '8',
-            }}
-        >
+        <Box w='100%' h='100vh' bgGradient='linear(to-tl, green.200, purple.300)'>
+            < Container
+                maxW="lg"
+                py={{
+                    base: '12',
+                    md: '24',
+                }
+                }
+                px={{
+                    base: '0',
+                    sm: '8',
+                }}
+            >
 
-            <form onSubmit={handleSubmit}>
-                <Stack spacing="8">
-                    <Stack spacing="6">
-                        <Stack
-                            spacing={{
-                                base: '2',
-                                md: '3',
+                <form onSubmit={handleSubmit}>
+                    <Stack spacing="8">
+                        <Stack spacing="6">
+                            <Stack
+                                spacing={{
+                                    base: '2',
+                                    md: '3',
+                                }}
+                                textAlign="center"
+                            >
+                            </Stack>
+                        </Stack>
+                        <Box
+                            py={{
+                                base: '0',
+                                sm: '8',
                             }}
-                            textAlign="center"
+                            px={{
+                                base: '4',
+                                sm: '10',
+                            }}
+                            bg={useBreakpointValue({
+                                base: 'transparent',
+                                sm: 'bg-surface',
+                            })}
+                            boxShadow={{
+                                base: 'none',
+                                sm: useColorModeValue('md', 'md-dark'),
+                            }}
+                            borderRadius={{
+                                base: 'none',
+                                sm: 'xl',
+                            }}
+                            backgroundColor='white'
                         >
-                        </Stack>
-                    </Stack>
-                    <Box
-                        py={{
-                            base: '0',
-                            sm: '8',
-                        }}
-                        px={{
-                            base: '4',
-                            sm: '10',
-                        }}
-                        bg={useBreakpointValue({
-                            base: 'transparent',
-                            sm: 'bg-surface',
-                        })}
-                        boxShadow={{
-                            base: 'none',
-                            sm: useColorModeValue('md', 'md-dark'),
-                        }}
-                        borderRadius={{
-                            base: 'none',
-                            sm: 'xl',
-                        }}
-                    >
-                        <Stack spacing="5">
-                            {msg &&
-                                <Alert status={status} borderRadius="10">
-                                    <AlertIcon />
-                                    {msg}
-                                    <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear}/>
-                                </Alert>
-                            }
-                            <HStack spacing="1" justify="center">
-                                <Text color="muted">Already have an account?</Text>
-                                <Link to="/login">
-                                    <Button variant="link" colorScheme="blue">
-                                        Login
-                                    </Button>
-                                </Link>
-                            </HStack>
                             <Stack spacing="5">
-                                <Field required type={"first name"} value={firstName} onChange={handleFirstName} />
-                                <Field required type={"last name"} value={lastName} onChange={handleLastName} />
-                                <Field required type={"email"} value={email} onChange={handleEmail} />
-                                <PasswordField value={password} onChange={handlePassword} />
-                                <Field required type="company" value={company} onChange={handleCompany} />
-                            </Stack>
-                            <Stack spacing="6">
-                                <Button colorScheme={"green"} variant="solid" type="submit" isLoading={loading}>Register</Button>
+                                {msg &&
+                                    <Alert status={status} borderRadius="10">
+                                        <AlertIcon />
+                                        {msg}
+                                        <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear}/>
+                                    </Alert>
+                                }
+                                <HStack spacing="1" justify="center">
+                                    <Text color="muted">Already have an account?</Text>
+                                    <Link to="/login">
+                                        <Button variant="link" colorScheme="blue">
+                                            Login
+                                        </Button>
+                                    </Link>
+                                </HStack>
+                                <Stack spacing="5">
+                                    <Field required type={"first name"} value={firstName} onChange={handleFirstName} />
+                                    <Field required type={"last name"} value={lastName} onChange={handleLastName} />
+                                    <Field required type={"email"} value={email} onChange={handleEmail} />
+                                    <PasswordField value={password} onChange={handlePassword} />
+                                    <Field required type="company" value={company} onChange={handleCompany} />
+                                </Stack>
+                                <Stack spacing="6">
+                                    <Button colorScheme={"green"} variant="solid" type="submit" isLoading={loading}>Register</Button>
 
+                                </Stack>
                             </Stack>
-                        </Stack>
-                    </Box>
-                </Stack>
-            </form>
-        </Container >
+                        </Box>
+                    </Stack>
+                </form>
+            </Container >
+        </Box>
     )
 }
 
