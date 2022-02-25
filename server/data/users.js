@@ -12,12 +12,14 @@ module.exports = {
         // make sure we always remove the password using removeKey when we send it back to the client
         return [user]
     },
+    
     async getUsers() {
         const collection = await users()
         const userList = await collection.find({}).toArray()
         if (!userList) throw 'could not get all users'
         return userList
     },
+
     async createUser(_firstName, _lastName, _email, _password, _company) {
         
         const email = checkStr(_email)
@@ -64,11 +66,20 @@ module.exports = {
         if (! insertInfo.acknowledged || ! insertInfo.insertedId) throw 'Could not register user'
         const user = await this.getUser(email)
         if (user.length < 1) throw 'Could not get user'
-        return {
-            ...user,
+        const ret = {
+            ...user[0],
             password: 'thats not very froggers of you',
             successMsg: `Successfully registered account for ${email}!`
         }
+        return ret
+    },
+
+    async deleteUser(_email) {
+        const email = checkStr(_email)
+        const collection = await users()
+        const deletionInfo = await collection.deleteOne({email: email})
+        if (deletionInfo.deleteCount === 0) throw `Could not delete account for ${email}`
+        return true
     },
 
     async validateUser(_email, _password) {
