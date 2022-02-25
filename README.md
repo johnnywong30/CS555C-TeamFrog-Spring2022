@@ -19,3 +19,14 @@ We are planning on building a water-drinking progression game called Frog Nanny.
 7. Run the client with `yarn start` when you're in the client directory.
 8. Run the server with `yarn start` when you're in the server directory.
 9. Script to do this for you to come later...(maybe?)
+
+## Dependency Installation via scripts
+1. cd scripts
+2. bash install.sh
+
+## Start Script
+1. cd scripts
+2. bash start.sh
+3. Wait for client to start (should see unused variable errors)
+4. Ctrl + C
+5. Wait for server to start
