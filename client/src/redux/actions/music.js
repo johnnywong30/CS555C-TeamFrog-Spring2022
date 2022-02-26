@@ -14,6 +14,14 @@ export const pauseMusic = () => {
     }
 }
 
+export const unpauseMusic = () => {
+    return async dispatch => {
+        dispatch({
+            type: "UNPAUSE_MUSIC"
+        })
+    }
+}
+
 export const increaseMusic = () => {
     return async dispatch => {
         dispatch({
