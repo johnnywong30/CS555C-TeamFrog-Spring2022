@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, IconButton, useDisclosure } from "@chakra-ui/react";
+import { AiFillPlayCircle, AiFillPauseCircle, AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
 import Logo from "../ui/Logo";
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { startMusic, pauseMusic, unPauseMusic, changeMusic} from '../../redux/actions/music'
 import useSound from 'use-sound'
-import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
@@ -75,11 +75,20 @@ const Header = (props) => {
                         to={"/froggers"}
                     />
                 </MenuItem>
+                {/* music menu */}
                 <IconButton
-                        variant="link"
-                        icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
-                        onClick={onClickReveal}
-                    />
+                    variant="link"
+                    icon={<AiFillStepBackward/>}
+                />
+                <IconButton
+                    variant="link"
+                    icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
+                    onClick={onClickReveal}
+                />
+                <IconButton
+                    variant="link"
+                    icon={<AiFillStepForward/>}
+                />
             </Flex>
 
             <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
