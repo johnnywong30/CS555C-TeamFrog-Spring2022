@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, IconButton } from "@chakra-ui/react";
 import Logo from "../ui/Logo";
+import { useEffect, useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import useSound from 'use-sound'
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
@@ -41,7 +45,7 @@ const MenuIcon = () => (
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
-
+    
     return (
         <Flex
             as="nav"
@@ -80,6 +84,10 @@ const Header = (props) => {
                     direction={["column", "row", "row", "row"]}
                     pt={[4, 4, 0, 0]}
                 >
+                    <IconButton
+                        variant="link"
+                        icon={<AiFillPauseCircle/>}
+                    />
                     <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/collection">Frogs</MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
