@@ -21,12 +21,18 @@ const musicReducer = (state = INIT_STATE, action) => {
         case "PLAY_MUSIC":
             return {
                 ...state,
+                playing: true,
                 source: getSong(state.source)
             }
         case "PAUSE_MUSIC":
             return {
                 ...state,
                 playing: false
+            }
+        case "UNPAUSE_MUSIC":
+            return {
+                ...state,
+                playing: true
             }
         case "INCREASE_MUSIC":
             return {
@@ -40,7 +46,9 @@ const musicReducer = (state = INIT_STATE, action) => {
             }
         case "CHANGE_MUSIC":
             return {
-
+                ...state,
+                playing: true,
+                source: getSong(state.source)
             }
         default:
             return state
