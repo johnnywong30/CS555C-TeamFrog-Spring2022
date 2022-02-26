@@ -5,7 +5,7 @@ import { AiFillPlayCircle, AiFillPauseCircle, AiFillStepBackward, AiFillStepForw
 import Logo from "../ui/Logo";
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { startMusic, pauseMusic, unPauseMusic, changeMusic} from '../../redux/actions/music'
+import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
 import useSound from 'use-sound'
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
@@ -49,9 +49,19 @@ const Header = (props) => {
     const dispatch = useDispatch();
     const { playing, source, volume } = useSelector(({ music }) => music)
     const { isOpen, onToggle } = useDisclosure();
+    let firstSong = true;
+    const [play] = useSound(source)
 
-    const onClickReveal = () => {
+    const toggleMusic = () => {
         onToggle()
+        if (firstSong) { dispatch(startMusic()); firstSong = false}
+        (playing && !firstSong) ? dispatch(pauseMusic()) : dispatch(unpauseMusic())
+        if (playing) {
+            play()
+            console.log(`Playing: ${playing}`)
+            console.log(`Source: ${source}`)
+        }
+        console.log(firstSong)
     }
     
     return (
@@ -83,7 +93,7 @@ const Header = (props) => {
                 <IconButton
                     variant="link"
                     icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
-                    onClick={onClickReveal}
+                    onClick={toggleMusic}
                 />
                 <IconButton
                     variant="link"

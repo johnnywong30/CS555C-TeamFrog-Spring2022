@@ -21,7 +21,7 @@ const getSong = (currentSong) => {
 const INIT_STATE = {
     playing: false,
     source: '',
-    volume: 0.5
+    volume: 1.0
 }
 
 const musicReducer = (state = INIT_STATE, action) => {
