@@ -1,5 +1,7 @@
-const fs = require('graceful-fs')
-const musicList = fs.readdirSync('../../constants')
+import test from '../../constants/[MapleStory BGM] Aqua Dungeon Deep Sea.mp3'
+const musicList = [test]
+console.log(musicList)
+console.log("hi");
 
 const getSong = (currentSong) => {
     let newSong = musicList[Math.floor(Math.random() * musicList.length)]
