@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, Button, IconButton } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, IconButton, useDisclosure } from "@chakra-ui/react";
 import Logo from "../ui/Logo";
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import { startMusic, pauseMusic, unPauseMusic, changeMusic} from '../../redux/actions/music'
 import useSound from 'use-sound'
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
 
@@ -45,6 +46,13 @@ const MenuIcon = () => (
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
+    const dispatch = useDispatch();
+    const { playing, source, volume } = useSelector(({ music }) => music)
+    const { isOpen, onToggle } = useDisclosure();
+
+    const onClickReveal = () => {
+        onToggle()
+    }
     
     return (
         <Flex
@@ -67,7 +75,11 @@ const Header = (props) => {
                         to={"/froggers"}
                     />
                 </MenuItem>
-
+                <IconButton
+                        variant="link"
+                        icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
+                        onClick={onClickReveal}
+                    />
             </Flex>
 
             <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -84,10 +96,6 @@ const Header = (props) => {
                     direction={["column", "row", "row", "row"]}
                     pt={[4, 4, 0, 0]}
                 >
-                    <IconButton
-                        variant="link"
-                        icon={<AiFillPauseCircle/>}
-                    />
                     <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/collection">Frogs</MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
