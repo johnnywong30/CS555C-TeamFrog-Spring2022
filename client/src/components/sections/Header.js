@@ -42,22 +42,31 @@ const MenuIcon = () => (
     </svg>
 );
 
+let firstSong = true;
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
     const dispatch = useDispatch();
     const { playing, source, volume } = useSelector(({ music }) => music)
-    let firstSong = true;
-    const [play, {stop, isPlaying}] = useSound('../../constants/aquadungeondeepsea.mp3')
+    const [play, {stop}] = useSound(source)
+    const { isOpen, onToggle } = useDisclosure();
 
     const toggleMusic = () => {
-        if (firstSong) { dispatch(startMusic()); firstSong = false}
-        (playing && !firstSong) ? dispatch(pauseMusic()) : dispatch(unpauseMusic())
-        if (playing) {
-            console.log(`Playing: ${playing}`)
-            console.log(`Source: ${source}`)
+        onToggle();
+        // i don't think it's updating
+        // the store fast enough when i call dispatch(startMusic())
+        // like 'playing' stays false,
+        // and the source is still nothing
+        // im assuming this has to do with async functions
+        // but i can't figure it out :(
+        if (firstSong) { 
+            dispatch(startMusic());
+            firstSong = false 
         }
-        play()
+        else {
+            (playing && !firstSong) ? dispatch(pauseMusic()) : dispatch(unpauseMusic())
+        }
+        (playing) ? play() : stop();
     }
     
     return (
@@ -88,10 +97,9 @@ const Header = (props) => {
                 />
                 <IconButton
                     variant="link"
-                    active={isPlaying}
-                    icon={isPlaying ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
-                    // onClick={toggleMusic}
-                    onClick={play}
+                    onClick={toggleMusic}
+                    aria-label={isOpen ? "Pause Music" : "Play Music"}
+                    icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
                 />
                 <IconButton
                     variant="link"

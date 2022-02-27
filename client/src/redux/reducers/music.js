@@ -9,8 +9,9 @@ import s8 from '../../constants/mulunghill.mp3'
 import s9 from '../../constants/nightmarket.mp3'
 import s10 from '../../constants/snowdrop.mp3'
 import s11 from '../../constants/uponthesky.mp3'
+// is there a better way to do this lmao
+// i kept getting method not found when i tried to use fs
 const musicList = [s1, s2, s3 , s4, s5, s6, s7, s8, s9, s10, s11]
-console.log(musicList);
 const getSong = (currentSong) => {
     let newSong = musicList[Math.floor(Math.random() * musicList.length)]
     while (currentSong === newSong) {
