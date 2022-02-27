@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, IconButton, useDisclosure } from "@chakra-ui/react";
 import { AiFillPlayCircle, AiFillPauseCircle, AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
 import Logo from "../ui/Logo";
-import { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
 import useSound from 'use-sound'
 
@@ -48,20 +47,17 @@ const Header = (props) => {
     const toggleMenu = () => setShow(!show);
     const dispatch = useDispatch();
     const { playing, source, volume } = useSelector(({ music }) => music)
-    const { isOpen, onToggle } = useDisclosure();
     let firstSong = true;
-    const [play] = useSound(source)
+    const [play, {stop, isPlaying}] = useSound('../../constants/aquadungeondeepsea.mp3')
 
     const toggleMusic = () => {
-        onToggle()
         if (firstSong) { dispatch(startMusic()); firstSong = false}
         (playing && !firstSong) ? dispatch(pauseMusic()) : dispatch(unpauseMusic())
         if (playing) {
-            play()
             console.log(`Playing: ${playing}`)
             console.log(`Source: ${source}`)
         }
-        console.log(firstSong)
+        play()
     }
     
     return (
@@ -92,8 +88,10 @@ const Header = (props) => {
                 />
                 <IconButton
                     variant="link"
-                    icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
-                    onClick={toggleMusic}
+                    active={isPlaying}
+                    icon={isPlaying ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
+                    // onClick={toggleMusic}
+                    onClick={play}
                 />
                 <IconButton
                     variant="link"
