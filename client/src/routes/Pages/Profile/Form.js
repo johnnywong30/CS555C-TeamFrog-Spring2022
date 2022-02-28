@@ -59,6 +59,7 @@ const Form = () => {
                     base: 'none',
                     sm: 'xl',
                 }}
+                backgroundColor = 'white'
             >
                 <Stack spacing="5">
                     {msg &&

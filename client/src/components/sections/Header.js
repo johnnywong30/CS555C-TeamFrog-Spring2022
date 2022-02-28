@@ -9,6 +9,7 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
             mb={{ base: isLast ? 0 : 8, sm: 0 }}
             mr={{ base: 0, sm: isLast ? 0 : 8 }}
             display="block"
+            color = 'white'
             {...rest}
         >
             <Link to={to}>{children}</Link>
@@ -59,7 +60,7 @@ const Header = (props) => {
                 <MenuItem to="/froggers">
                     <Logo
                         w="100px"
-                        color={["white", "white", "primary.500", "primary.500"]}
+                        color={["white", "white", "white", "white"]}
                         to={"/froggers"}
                     />
                 </MenuItem>
@@ -90,10 +91,10 @@ const Header = (props) => {
                         <Button
                             size="sm"
                             rounded="md"
-                            color={["primary.500", "primary.500", "white", "white"]}
-                            bg={["white", "white", "primary.500", "primary.500"]}
+                            color={["white", "white", "primary.500", "primary.500"]}
+                            bg={["primary.500", "primary.500", "white", "white"]}
                             _hover={{
-                                bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
+                                bg: ["primary.600", "primary.600", "white", "white"]
                             }}
                         >
                             Log Out
