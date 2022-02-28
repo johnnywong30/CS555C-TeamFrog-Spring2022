@@ -1,3 +1,6 @@
+import s1 from '../../constants/aquadungeondeepsea.mp3'
+import s2 from '../../constants/boatquaytown.mp3'
+import s3 from '../../constants/coketown.mp3'
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, IconButton, useDisclosure } from "@chakra-ui/react";
@@ -6,6 +9,17 @@ import Logo from "../ui/Logo";
 import { useDispatch, useSelector } from 'react-redux'
 import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
 import useSound from 'use-sound'
+
+const musicList = [s1, s2, s3]
+
+const getSong = (currentSong) => {
+    let newSong = Math.floor(Math.random() * musicList.length)
+    while (currentSong === newSong) {
+        newSong = Math.floor(Math.random() * musicList.length)
+    }
+    return newSong
+}
+
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
@@ -42,33 +56,40 @@ const MenuIcon = () => (
     </svg>
 );
 
-let firstSong = true;
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
     const dispatch = useDispatch();
+    const [firstSong, setFirstSong] = React.useState(true)
     const { playing, source, volume } = useSelector(({ music }) => music)
-    const [play, {stop}] = useSound(source)
-    const { isOpen, onToggle } = useDisclosure();
+    // const [play, {pause}] = useSound(s1)
+    const [song, setSong] = React.useState(0)
+    const [playAudio1, pauseAudio1] = useSound(s1, {
+        volume: 0.5
+    })
 
-    const toggleMusic = () => {
-        onToggle();
-        // i don't think it's updating
-        // the store fast enough when i call dispatch(startMusic())
-        // like 'playing' stays false,
-        // and the source is still nothing
-        // im assuming this has to do with async functions
-        // but i can't figure it out :(
-        if (firstSong) { 
-            dispatch(startMusic());
-            firstSong = false 
-        }
-        else {
-            (playing && !firstSong) ? dispatch(pauseMusic()) : dispatch(unpauseMusic())
-        }
-        (playing) ? play() : stop();
+    const [playAudio2, pauseAudio2] = useSound(s2, {
+        volume: 0.5
+    })
+
+    const [playAudio3, pauseAudio3] = useSound(s3, {
+        volume: 0.5
+    })
+
+    const songs = [
+        { play: playAudio1, stop: pauseAudio1.stop},
+        { play: playAudio2, stop: pauseAudio2.stop},
+        { play: playAudio3, stop: pauseAudio3.stop}
+    ]
+    console.log(pauseAudio1)
+    console.log(song)
+    const skipSong = () => {
+        if (song === 2) 
+            setSong(0)
+        else 
+            setSong(song + 1)
     }
-    
+
     return (
         <Flex
             as="nav"
@@ -93,16 +114,19 @@ const Header = (props) => {
                 {/* music menu */}
                 <IconButton
                     variant="link"
-                    icon={<AiFillStepBackward/>}
+                    onClick={songs[song].play}
+                    aria-label={"Play Music"}
+                    icon={<AiFillPlayCircle/>}
                 />
                 <IconButton
                     variant="link"
-                    onClick={toggleMusic}
-                    aria-label={isOpen ? "Pause Music" : "Play Music"}
-                    icon={isOpen ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}
+                    onClick={pauseAudio1.stop}
+                    aria-label={"Pause Music" }
+                    icon={<AiFillPauseCircle/>}
                 />
                 <IconButton
                     variant="link"
+                    onClick={skipSong}
                     icon={<AiFillStepForward/>}
                 />
             </Flex>

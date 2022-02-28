@@ -1,7 +1,8 @@
-export const startMusic = () => {
+export const startMusic = (index) => {
     return async dispatch => {
         dispatch({
-            type: "PLAY_MUSIC"
+            type: "START_MUSIC",
+            payload: index
         })
     }
 }
@@ -38,7 +39,7 @@ export const decreaseMusic = () => {
     }
 }
 
-export const changeMusic = () => {
+export const changeMusic = (index) => {
     return async dispatch => {
         dispatch({
             type: "CHANGE_MUSIC"
