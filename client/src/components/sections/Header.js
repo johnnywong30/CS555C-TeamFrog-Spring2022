@@ -1,25 +1,14 @@
 import s1 from '../../constants/aquadungeondeepsea.mp3'
 import s2 from '../../constants/boatquaytown.mp3'
 import s3 from '../../constants/coketown.mp3'
+import s4 from '../../constants/snowdrop.mp3'
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, Button, IconButton, useDisclosure } from "@chakra-ui/react";
-import { AiFillPlayCircle, AiFillPauseCircle, AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
+import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure } from "@chakra-ui/react";
+import { MusicMenuItem } from './MusicMenuItem'
+import { AiFillDownCircle } from "react-icons/ai"
 import Logo from "../ui/Logo";
 import { useDispatch, useSelector } from 'react-redux'
-import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
-import useSound from 'use-sound'
-
-const musicList = [s1, s2, s3]
-
-const getSong = (currentSong) => {
-    let newSong = Math.floor(Math.random() * musicList.length)
-    while (currentSong === newSong) {
-        newSong = Math.floor(Math.random() * musicList.length)
-    }
-    return newSong
-}
-
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
@@ -59,36 +48,6 @@ const MenuIcon = () => (
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
-    const dispatch = useDispatch();
-    const [firstSong, setFirstSong] = React.useState(true)
-    const { playing, source, volume } = useSelector(({ music }) => music)
-    // const [play, {pause}] = useSound(s1)
-    const [song, setSong] = React.useState(0)
-    const [playAudio1, pauseAudio1] = useSound(s1, {
-        volume: 0.5
-    })
-
-    const [playAudio2, pauseAudio2] = useSound(s2, {
-        volume: 0.5
-    })
-
-    const [playAudio3, pauseAudio3] = useSound(s3, {
-        volume: 0.5
-    })
-
-    const songs = [
-        { play: playAudio1, stop: pauseAudio1.stop},
-        { play: playAudio2, stop: pauseAudio2.stop},
-        { play: playAudio3, stop: pauseAudio3.stop}
-    ]
-    console.log(pauseAudio1)
-    console.log(song)
-    const skipSong = () => {
-        if (song === 2) 
-            setSong(0)
-        else 
-            setSong(song + 1)
-    }
 
     return (
         <Flex
@@ -111,24 +70,17 @@ const Header = (props) => {
                         to={"/froggers"}
                     />
                 </MenuItem>
-                {/* music menu */}
-                <IconButton
-                    variant="link"
-                    onClick={songs[song].play}
-                    aria-label={"Play Music"}
-                    icon={<AiFillPlayCircle/>}
-                />
-                <IconButton
-                    variant="link"
-                    onClick={pauseAudio1.stop}
-                    aria-label={"Pause Music" }
-                    icon={<AiFillPauseCircle/>}
-                />
-                <IconButton
-                    variant="link"
-                    onClick={skipSong}
-                    icon={<AiFillStepForward/>}
-                />
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<AiFillDownCircle/>}>
+                        Music
+                    </MenuButton>
+                    <MenuList>
+                        <MusicMenuItem src={s1} song={1} text={"Song 1"}></MusicMenuItem>
+                        <MusicMenuItem src={s2} song={2} text={"Song 2"}></MusicMenuItem>
+                        <MusicMenuItem src={s3} song={3} text={"Song 3"}></MusicMenuItem>
+                        <MusicMenuItem src={s4} song={4} text={"Song 4"}></MusicMenuItem>
+                    </MenuList>
+                </Menu>
             </Flex>
 
             <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -171,3 +123,53 @@ const Header = (props) => {
 };
 
 export default Header;
+/*
+import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
+    // const dispatch = useDispatch();
+    // const [firstSong, setFirstSong] = React.useState(true)
+    // const { playing, source, volume } = useSelector(({ music }) => music)
+    // const [play, {pause}] = useSound(s1)
+    // const [song, setSong] = React.useState(0)
+    // const [playAudio1, pauseAudio1] = useSound(s1, {
+    //     volume: 0.5
+    // })
+
+    // const [playAudio2, pauseAudio2] = useSound(s2, {
+    //     volume: 0.5
+    // })
+
+    // const [playAudio3, pauseAudio3] = useSound(s3, {
+    //     volume: 0.5
+    // })
+
+    // const songs = [
+    //     { play: playAudio1, stop: pauseAudio1.stop},
+    //     { play: playAudio2, stop: pauseAudio2.stop},
+    //     { play: playAudio3, stop: pauseAudio3.stop}
+    // ]
+    // console.log(pauseAudio1)
+    // console.log(song)
+    // const skipSong = () => {
+    //     if (song === 2) 
+    //         setSong(0)
+    //     else 
+    //         setSong(song + 1)
+    // }
+                    /* music menu */
+                /* <IconButton
+                    variant="link"
+                    onClick={songs[song].play}
+                    aria-label={"Play Music"}
+                    icon={<AiFillPlayCircle/>}
+                />
+                <IconButton
+                    variant="link"
+                    onClick={pauseAudio1.stop}
+                    aria-label={"Pause Music" }
+                    icon={<AiFillPauseCircle/>}
+                />
+                <IconButton
+                    variant="link"
+                    onClick={skipSong}
+                    icon={<AiFillStepForward/>}
+                /> */
