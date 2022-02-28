@@ -43,11 +43,11 @@ router
         }
     })
 router
-    .route('/getUser')
+    .route('/updateFriendsList')
     .post(async (req, res) => {
         try {
-            const { email } = req.body
-            const user = await users.getUser(email)[0]
+            const { email, friendEmail} = req.body
+            const user = await users.updateFriendsList(email, friendEmail)
             res.json(user).end()
         } catch (e) {
             console.log(e)
@@ -55,6 +55,7 @@ router
             res.status(200).json({ errorMsg: e }).end()
         }
     })
+
 
 // TODO: the rest of the update routes
 

@@ -179,5 +179,34 @@ module.exports = {
             successMsg: 'Successfully updated Company'
         }
     },
+    async updateFriendsList(_email, _friendEmail) {
+        const email = checkStr(_email)
+        const friendEmail = checkStr(_friendEmail)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const friendExists = await this.getUser(friendEmail)
+        if (friendExists.length < 1) throw 'This person does not exist'
+        const friend = friendExists[0]
+        if (user.email === friend.email) throw 'Cannot add yourself'
+        const collection = await users()
+        const updatedUser = {
+            ...user,
+            friends: [...user.friends, friendEmail]
+        }
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: updatedUser}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully added friend'
+        }
+    }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }

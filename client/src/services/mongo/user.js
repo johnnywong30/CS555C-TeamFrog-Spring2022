@@ -76,14 +76,15 @@ export const updateCompany = (email, company) => {
     }
 }
 
-export const refetchUser = (email) => {
+export const addFriend = (email, friendEmail) => {
     return async dispatch => {
         const reqBody = {
-            email: email
+            email: email,
+            friendEmail: friendEmail
         }
         try {
             dispatch(startLoading())
-            const { data } = await axios.post('/user/refetchUser', reqBody)
+            const { data } = await axios.post('/user/updateFriendsList', reqBody)
             const { successMsg, errorMsg } = data
             if (successMsg) {
                 dispatch(notifySuccess(successMsg)) 
@@ -92,7 +93,7 @@ export const refetchUser = (email) => {
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
         } catch (error) {
-            console.log("There was an error in refetchUser...", error)
+            console.log("There was an error in updateFriends...", error)
             dispatch(notifyFail(error.message))
             dispatch(endLoading())
         }
