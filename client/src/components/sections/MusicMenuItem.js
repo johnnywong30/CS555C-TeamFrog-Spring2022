@@ -30,6 +30,7 @@ export const MusicMenuItem = React.forwardRef((props, ref) => {
         return (
             <MenuItem 
                 onClick={() => {
+                    playingS2 ? stop() : play()
                     setPlayingS2(!playingS2)
                 }} 
                 icon={playingS2 ? <AiFillPauseCircle/> : <AiFillPlayCircle/>} 
@@ -42,6 +43,7 @@ export const MusicMenuItem = React.forwardRef((props, ref) => {
         return (
             <MenuItem 
                 onClick={() => {
+                    playingS3 ? stop() : play()
                     setPlayingS3(!playingS3)
                 }} 
                 icon={playingS3 ? <AiFillPauseCircle/> : <AiFillPlayCircle/>} 
@@ -54,6 +56,7 @@ export const MusicMenuItem = React.forwardRef((props, ref) => {
         return (
             <MenuItem 
                 onClick={() => {
+                    playingS4 ? stop() : play()
                     setPlayingS4(!playingS4)
                 }} 
                 icon={playingS4 ? <AiFillPauseCircle/> : <AiFillPlayCircle/>} 
