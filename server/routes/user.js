@@ -42,6 +42,19 @@ router
             res.status(200).json({ errorMsg: e }).end()
         }
     })
+router
+    .route('/getUser')
+    .post(async (req, res) => {
+        try {
+            const { email } = req.body
+            const user = await users.getUser(email)[0]
+            res.json(user).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
 
 // TODO: the rest of the update routes
 

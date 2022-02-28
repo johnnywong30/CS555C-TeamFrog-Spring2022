@@ -76,11 +76,10 @@ export const updateCompany = (email, company) => {
     }
 }
 
-export const refetchUser = (email, friends) => {
+export const refetchUser = (email) => {
     return async dispatch => {
         const reqBody = {
-            email: email,
-            friends: friends
+            email: email
         }
         try {
             dispatch(startLoading())
