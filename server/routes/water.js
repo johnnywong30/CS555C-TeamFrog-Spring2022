@@ -1,18 +1,67 @@
 const express = require('express');
 const router = express.Router();
-const users = require('../data/users')
+const water = require('../data/water')
+const moment = require('moment');
+const water = require('../data/water');
 
 router
-    .route('/addWater')
+    .route('/add')
     .post(async (req, res) => {
         try {
-            const { email, water } = req.body
-            // res.json(user).end()
+            const { email, amount } = req.body
+            const time = moment().format('MMMM Do YYYY, h:mm:ss a')
+            const waterData = { timestamp: time, amount: amount}
+            const response = await water.insertWater(email, waterData)
+            res.status(200).json(response).end()
         } catch (e) {
             console.log(e)
             res.statusMessage = e
             res.status(200).json({ errorMsg: e }).end()
         }
     })
+
+router
+    .route('/get/:email/:id')
+    .get(async (req, res) => {
+        try {
+            const email = req.params.email
+            const id = req.params.id
+            const data = await water.getWater(email, id)
+            res.status(200).json(data).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+
+router
+    .route('/getAll/:email')
+    .get(async (req, res) => {
+        try {
+            const email = req.params.email
+            const data = await water.getAllWater(email)
+            res.status(200).json(data).end() 
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+
+router
+    .route('/delete/')
+    .post(async (req, res) => {
+        try {
+            const { email, id } = req.body
+            const response = await water.deleteWater(email, id)
+            res.status(200).json(response).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+
 
 module.exports = router;
