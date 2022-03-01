@@ -41,6 +41,8 @@ module.exports = {
             // if an id is in this array, this user owns that frog
             // all users start with frog 0
             ownedFrogs: [0],
+            // currently selected frog
+            frog: 0,
             // friends is an array of emails of this user's friends
             friends: [], 
             money: 0,
