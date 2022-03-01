@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const water = require('../data/water')
 const moment = require('moment');
-const water = require('../data/water');
 
 router
     .route('/add')
