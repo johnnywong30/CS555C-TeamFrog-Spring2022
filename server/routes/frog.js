@@ -28,4 +28,18 @@ router
             res.status(200).json({ errorMsg: e}).end()
         }
     })
+
+router
+    .route('/createFrog')
+    .post(async (req, res) => {
+        try {
+            const { name, link } = req.body
+            const frog = await frogs.createFrog(name, link)
+            res.json(frog).end()
+        } catch(e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e}).end()
+        }
+    })
 module.exports = router;
