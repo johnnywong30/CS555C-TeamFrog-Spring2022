@@ -189,6 +189,8 @@ module.exports = {
         if (friendExists.length < 1) throw 'This person does not exist'
         const friend = friendExists[0]
         if (user.email === friend.email) throw 'Cannot add yourself'
+        const inList = user.friends.filter((x) => x === friendEmail)
+        if (inList.length !== 0) { throw 'This user is already your friend'}
         const collection = await users()
         const updatedUser = {
             ...user,

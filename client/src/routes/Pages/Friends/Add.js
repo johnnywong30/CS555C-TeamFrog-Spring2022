@@ -1,13 +1,15 @@
-import { Input, Stack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Text, Button, useDisclosure, FormControl, FormLabel } from '@chakra-ui/react'
+import { Alert, AlertIcon, CloseButton, Input, Stack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Text, Button, useDisclosure, FormControl, FormLabel } from '@chakra-ui/react'
 import * as React from 'react'
 import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Mongo from '../../../services/mongo';
+import { notifyClear } from '../../../redux/actions/common'
 
 const Add = () => {
     // hook to use redux actions
     const dispatch = useDispatch();
+    const { msg, status } = useSelector(({ common }) => common)
     const { email } = useSelector(({ auth }) => auth.user)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [ friendEmail, setFriendEmail ] = useState('')
@@ -17,8 +19,13 @@ const Add = () => {
         console.log(friendEmail)   
     }
 
+    const handleClear = (e) => {
+        e.preventDefault()
+        dispatch(notifyClear())
+    }
+
     const handleSubmit = (e) => {
-        console.log("hi")
+        console.log(friendEmail)
         e.preventDefault()
         dispatch(Mongo.addFriend(email, friendEmail))
     }
@@ -30,6 +37,13 @@ const Add = () => {
                     isOpen={isOpen}
                     onClose={onClose}
                 >
+                    {msg &&
+                        <Alert status={status} borderRadius="10">
+                            <AlertIcon />
+                            {msg}
+                            <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
+                        </Alert>
+                    }
                     <ModalOverlay/>
                     <ModalContent>
                         <ModalHeader>Enter a friend's email.</ModalHeader>
