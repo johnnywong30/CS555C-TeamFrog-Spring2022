@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Box, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
 
-export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest }) {
+export default function Collection({ title, subtitle, image, ctaLink, ctaText, ...rest }) {
     return (
         <Flex align="center" justify={{ base: "center", md: "space-around", xl: "space-between" }} direction={{ base: "column-reverse", md: "row" }} wrap="no-wrap" minH="70vh" px={8} mb={16} {...rest}>
             <Stack spacing={4} w={{ base: "80%", md: "40%" }} align={["center", "center", "flex-start", "flex-start"]}>
@@ -27,7 +27,7 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
     );
 }
 
-Hero.propTypes = {
+Collection.propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.string,
     image: PropTypes.string,
@@ -35,7 +35,7 @@ Hero.propTypes = {
     ctaLink: PropTypes.string,
 };
 
-Hero.defaultProps = {
+Collection.defaultProps = {
     title: "React landing page with Chakra UI",
     subtitle: "This is the subheader section where you describe the basic benefits of your product",
     image: "https://source.unsplash.com/collection/404339/800x600",
