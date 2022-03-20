@@ -33,8 +33,8 @@ router
     .route('/createFrog')
     .post(async (req, res) => {
         try {
-            const { name, link } = req.body
-            const frog = await frogs.createFrog(name, link)
+            const {frogId, name, url } = req.body
+            const frog = await frogs.createFrog(frogId, name, url)
             res.json(frog).end()
         } catch(e) {
             console.log(e)
