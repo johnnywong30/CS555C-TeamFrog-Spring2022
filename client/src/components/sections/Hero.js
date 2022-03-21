@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Box, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
 
-export default function Hero({title, subtitle, image, ctaLink, ctaText, ...rest}) {
+export default function Hero({ title, subtitle, image, ctaLink, ctaText, ctaAction, ...rest }) {
   return (
     <Flex
       align="center"
@@ -40,18 +40,17 @@ export default function Hero({title, subtitle, image, ctaLink, ctaText, ...rest}
         >
           {subtitle}
         </Heading>
-        <Link to={ctaLink}>
-          <Button
-            colorScheme="primary"
-            borderRadius="8px"
-            py="4"
-            px="4"
-            lineHeight="1"
-            size="md"
-          >
-            {ctaText}
-          </Button>
-        </Link>
+        <Button
+          colorScheme="primary"
+          borderRadius="8px"
+          py="4"
+          px="4"
+          lineHeight="1"
+          size="md"
+          onClick={ctaAction}
+        >
+          {ctaText}
+        </Button>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         {/* TODO: Make this change every X secs */}
