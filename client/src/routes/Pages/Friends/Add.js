@@ -25,25 +25,25 @@ const Add = () => {
     }
 
     const handleSubmit = (e) => {
-        console.log(friendEmail)
+        onClose()
         e.preventDefault()
         dispatch(Mongo.addFriend(email, friendEmail))
     }
 
     return (
             <Stack>
+                {msg &&
+                    <Alert status={status} borderRadius="10">
+                        <AlertIcon />
+                        {msg}
+                        <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
+                    </Alert>
+                }
                 <Button onClick={onOpen}>Add Friend</Button>
                 <Modal
                     isOpen={isOpen}
                     onClose={onClose}
                 >
-                    {msg &&
-                        <Alert status={status} borderRadius="10">
-                            <AlertIcon />
-                            {msg}
-                            <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
-                        </Alert>
-                    }
                     <ModalOverlay/>
                     <ModalContent>
                         <ModalHeader>Enter a friend's email.</ModalHeader>
