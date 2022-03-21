@@ -11,6 +11,14 @@ module.exports = {
         return [frog]
     },
 
+    async getFrogLink(_id) {
+        const id = checkStr(_id)
+        const collection = await frogs()
+        const frog = await collection.findOne({frogId: id})
+        if (frog === null) return []
+        return frog.url
+    },
+
     async getFrogs() {
         const collection = await frogs()
         const frogList = await collection.find({}).toArray()

@@ -1,10 +1,9 @@
 import React from 'react'
 
 import { SimpleGrid, Box, Image, Container, Heading} from "@chakra-ui/react";
-import Hero from '../../../components/sections/Hero'
 import Layout from '../../../components/layouts/Layout'
 
-const urls = ["https://imgur.com/cScfraF.png", "https://imgur.com/p5iRh9X.png", "https://imgur.com/cScfraF.png", "https://imgur.com/cScfraF.png"]
+const urls = ["https://imgur.com/cScfraF.png", "https://imgur.com/p5iRh9X.png", "https://imgur.com/cScfraF.png", "https://imgur.com/VJeksGH.png"]
 
 export const Collection = () => {
     return (

@@ -42,4 +42,15 @@ router
             res.status(200).json({ errorMsg: e}).end()
         }
     })
+
+router
+    .route('/getFrogLink/:id')
+    .get(async(req, res) => {
+        try {
+          const link = await frogs.getFrogLink(req.params.id)
+          return res.json(link);
+        } catch (e) {
+            return res.status(200).json({ errorMsg: e}).end()
+        }
+    })
 module.exports = router;
