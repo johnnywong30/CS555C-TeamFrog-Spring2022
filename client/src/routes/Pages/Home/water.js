@@ -16,6 +16,7 @@ const Water = ({ isOpen, onClose, ...rest }) => {
     const { msg, status, loading } = useSelector(({ common }) => common)
     const { user } = useSelector(({ auth }) => auth)
 
+    // measurement is so annoying oof
     const measurement = user.measurement === 'imperial' ? 'cups' : 'liters'
 
     const handleSubmit = async () => {

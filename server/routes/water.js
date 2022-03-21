@@ -8,7 +8,7 @@ router
     .post(async (req, res) => {
         try {
             const { email, amount } = req.body
-            const time = moment().format('MMMM Do YYYY, h:mm:ss a')
+            const time = moment().format('YYYY-MM-DD, h:mm:ss a')
             const waterData = { timestamp: time, amount: amount}
             const response = await water.insertWater(email, waterData)
             res.status(200).json(response).end()
