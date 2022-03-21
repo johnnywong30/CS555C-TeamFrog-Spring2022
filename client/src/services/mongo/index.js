@@ -1,5 +1,6 @@
 import { onRegister, onLogin } from "./auth";
 import { updateFirstName, updateLastName, updateCompany } from './user'
+import { insertWater, getWater, getWaterHistory } from './water'
 
 const Mongo = {
     // Authentication
@@ -10,7 +11,10 @@ const Mongo = {
     updateLastName: updateLastName,
     updateCompany: updateCompany,
     // TODO: rest of the updates
-    
+    // Water
+    insertWater: insertWater,
+    getWater: getWater, 
+    getWaterHistory: getWaterHistory
 }
 
 export default Mongo;
