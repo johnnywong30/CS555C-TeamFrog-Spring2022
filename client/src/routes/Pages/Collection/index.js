@@ -1,19 +1,35 @@
 import React from 'react'
 
+import { SimpleGrid, Box, Image, Container, Heading} from "@chakra-ui/react";
 import Hero from '../../../components/sections/Hero'
 import Layout from '../../../components/layouts/Layout'
+
+const urls = ["https://imgur.com/cScfraF.png", "https://imgur.com/p5iRh9X.png", "https://imgur.com/cScfraF.png", "https://imgur.com/cScfraF.png"]
 
 export const Collection = () => {
     return (
         <Layout>
-          <Hero
-            title="Collection"
-            subtitle="Stay hydrated with these cute companions."
-            // fix image please we need 8 bit frog
-            image="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/72ab65af-8fbb-435a-bce5-006678f410ce/dxuj30-67386eae-c494-42b7-9820-5113259aeb08.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzcyYWI2NWFmLThmYmItNDM1YS1iY2U1LTAwNjY3OGY0MTBjZVwvZHh1ajMwLTY3Mzg2ZWFlLWM0OTQtNDJiNy05ODIwLTUxMTMyNTlhZWIwOC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.Iv8T-1gyI2xcF4sXMoTtVvMDF9IbPsMjoH3vJDJYUzQ"
-            ctaText="Give Your Frog Some Water"
-            ctaLink="/hydrate"
-          />
+          <Heading color='white'>Frog Collection</Heading>
+          <Container maxW='container.md'
+                py={{
+                    base: '20',
+                    md: '24',
+                }
+                }
+                px={{
+                    base: '0',
+                    sm: '2',
+                }}>
+            <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
+            {urls.map((url) => (
+              <Box height='225px'>
+                <Image
+                  src={url}
+                />
+              </Box>))}
+            </SimpleGrid>
+          </Container>
+          
         </Layout>
       );
 }
