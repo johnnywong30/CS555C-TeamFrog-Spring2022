@@ -98,12 +98,13 @@ const Header = (props) => {
                     direction={["column", "row", "row", "row"]}
                     pt={[4, 4, 0, 0]}
                 >
-                    <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/collection">Frogs</MenuItem>
+                    <MenuItem to="/challenges">Challenges</MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}
                     <MenuItem to="/friends">Friends</MenuItem>
                     <MenuItem to="/store">Store</MenuItem>
+                    <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/logout" isLast>
                         <Button
                             size="sm"
