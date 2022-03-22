@@ -12,7 +12,7 @@ module.exports = {
         if (! num) throw 'num does not exist'
         if (typeof num !== 'string' && typeof num !== 'number') throw 'num is not a number'
         if (typeof num === 'string') {
-           const checked = str.trim()
+           const checked = num.trim()
            if (checked.length < 1) throw 'input cannot be empty string'
            if( isNaN(parseInt(checked))) throw 'input must be a number'
            if (!Number.isInteger(Number(checked))) throw 'input should be a whole number'
