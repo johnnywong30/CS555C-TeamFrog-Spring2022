@@ -1,5 +1,5 @@
 import { onRegister, onLogin } from "./auth";
-import { updateFirstName, updateLastName, updateCompany } from './user'
+import { updateFirstName, updateLastName, updateCompany, updateChallenges } from './user'
 
 const Mongo = {
     // Authentication
@@ -9,6 +9,7 @@ const Mongo = {
     updateFirstName: updateFirstName,
     updateLastName: updateLastName,
     updateCompany: updateCompany,
+    updateChallenges: updateChallenges,
     // TODO: rest of the updates
     
 }

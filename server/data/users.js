@@ -179,5 +179,26 @@ module.exports = {
             successMsg: 'Successfully updated Company'
         }
     },
+
+    async updateChallenges(_email, _challenge){
+        const email = checkStr(_email)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$push: {challenges: _challenge}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated Challenge'
+        }
+    }
+
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }

@@ -7,12 +7,6 @@ import * as React from 'react'
 import Choices from './choices'
 
 const Select = () => {
-    const allChallenges = [
-        ["challenge1", "desc"],
-        ["challenge2", "desc"],
-        ["challenge3", "desc"],
-        ["challenge4", "desc"],
-    ];
     return (
         <Stack spacing="8">
             <Box
