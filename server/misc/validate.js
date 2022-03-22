@@ -1,6 +1,11 @@
 const { ObjectId } = require('mongodb')
 
 module.exports = {
+    checkNum(num) {
+        if (!num) throw "number does not exist";
+        if (typeof int !== "number") throw "input is not a number";
+        return num;
+    },
     checkStr(str) {
         if (! str) throw 'string does not exist'
         if (typeof str !== 'string') throw 'input is not a string'

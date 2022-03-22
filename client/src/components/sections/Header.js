@@ -99,6 +99,7 @@ const Header = (props) => {
                     pt={[4, 4, 0, 0]}
                 >
                     <MenuItem to="/collection">Frogs</MenuItem>
+                    <MenuItem to="/cyclefrogs">Changefrog</MenuItem>
                     <MenuItem to="/challenges">Challenges</MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}

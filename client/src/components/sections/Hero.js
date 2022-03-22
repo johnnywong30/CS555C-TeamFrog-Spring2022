@@ -61,18 +61,17 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ctaActi
 }
 
 Hero.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  image: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    image: PropTypes.string,
+    ctaText: PropTypes.string,
+    ctaLink: PropTypes.string,
 };
 
 Hero.defaultProps = {
-  title: "React landing page with Chakra UI",
-  subtitle:
-    "This is the subheader section where you describe the basic benefits of your product",
-  image: "https://source.unsplash.com/collection/404339/800x600",
-  ctaText: "Create your account now",
-  ctaLink: "/signup"
+    title: "React landing page with Chakra UI",
+    subtitle: "This is the subheader section where you describe the basic benefits of your product",
+    image: "https://source.unsplash.com/collection/404339/800x600",
+    ctaText: "Create your account now",
+    ctaLink: "/signup",
 };

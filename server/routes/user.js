@@ -1,20 +1,30 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const users = require('../data/users')
+const users = require("../data/users");
 
+router.route("/updateFirstName").post(async (req, res) => {
+	try {
+		const { email, firstName } = req.body;
+		const user = await users.updateFirstName(email, firstName);
+		res.json(user).end();
+	} catch (e) {
+		console.log(e);
+		res.statusMessage = e;
+		res.status(200).json({ errorMsg: e }).end();
+	}
+})
 router
-    .route('/updateFirstName')
-    .post(async (req, res) => {
-        try {
-            const { email, firstName } = req.body
-            const user = await users.updateFirstName(email, firstName)
-            res.json(user).end()
-        } catch (e) {
-            console.log(e)
-            res.statusMessage = e
-            res.status(200).json({ errorMsg: e }).end()
-        }
-    })
+    .route('/updateMoney').post(async (req, res) => {
+    try {
+      const { email, money } = req.body;
+      const user = await users.updateMoney(email, money);
+      res.json(user).end();
+    } catch (e) {
+      console.log(e);
+      res.statusMessage = e;
+      res.status(200).json({ errorMsg: e }).end();
+    }
+  })
 
 router
     .route('/updateLastName')
@@ -55,7 +65,6 @@ router
             res.status(200).json({ errorMsg: e }).end()
         }
     })
-
 
 // TODO: the rest of the update routes
 
