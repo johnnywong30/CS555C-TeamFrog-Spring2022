@@ -1,44 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Heading, VStack, Text } from "@chakra-ui/react";
+const frog1 = { name: "Starter Frog", link: "https://imgur.com/cScfraF.png" };
+const frog2 = { name: "Random Frog", link: "https://i.imgur.com/VJeksGH.png" };
+const frogs = [frog1, frog2];
 
-export default function Collection({ title, subtitle, image, ctaLink, ctaText, ...rest }) {
-    return (
-        <Flex align="center" justify={{ base: "center", md: "space-around", xl: "space-between" }} direction={{ base: "column-reverse", md: "row" }} wrap="no-wrap" minH="70vh" px={8} mb={16} {...rest}>
-            <Stack spacing={4} w={{ base: "80%", md: "40%" }} align={["center", "center", "flex-start", "flex-start"]}>
-                <Heading as="h1" size="xl" fontWeight="bold" color="primary.1000" textAlign={["center", "center", "left", "left"]}>
-                    {title}
-                </Heading>
-                <Heading as="h2" size="md" color="primary.1000" opacity="0.8" fontWeight="normal" lineHeight={1.5} textAlign={["center", "center", "left", "left"]}>
-                    {subtitle}
-                </Heading>
-                <Link to={ctaLink}>
-                    <Button colorScheme="primary" borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
-                        {ctaText}
-                    </Button>
-                </Link>
-            </Stack>
-            <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-                {/* TODO: Make this change every X secs */}
-                <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
-            </Box>
-        </Flex>
-    );
+export default function Collection({ handleClick }) {
+	const [index, setIndex] = useState(0);
+
+	const toggleFrog = () => {
+		if (index === frogs.length - 1) setIndex(0);
+		else setIndex(index + 1);
+	};
+
+	const frog = frogs[index];
+
+	return (
+		<Flex align="center" justify={{ base: "center", md: "space-around", xl: "space-between" }} direction={{ base: "column-reverse", md: "row" }} wrap="no-wrap" minH="70vh" px={8} mb={16}>
+			<VStack align="stretch" alignItems="center" spacing="20px">
+				<Heading color="white">{frog.name}</Heading>
+				<Image src={frog.link} size="100%" rounded="1rem" shadow="2xl" />
+				<Button onClick={toggleFrog} w="100%" colorScheme="primary" borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
+					Change Frog
+				</Button>
+			</VStack>
+		</Flex>
+	);
 }
-
-Collection.propTypes = {
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    image: PropTypes.string,
-    ctaText: PropTypes.string,
-    ctaLink: PropTypes.string,
-};
-
-Collection.defaultProps = {
-    title: "React landing page with Chakra UI",
-    subtitle: "This is the subheader section where you describe the basic benefits of your product",
-    image: "https://source.unsplash.com/collection/404339/800x600",
-    ctaText: "Create your account now",
-    ctaLink: "/signup",
-};
