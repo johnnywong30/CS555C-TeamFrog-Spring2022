@@ -5,6 +5,7 @@ import { Container, Grid, GridItem } from '@chakra-ui/react'
 import Layout from '../../../components/layouts/Layout'
 import Form from './Form'
 import History from './History'
+import Streaks from './Streaks'
 
 export const Profile = () => {
     return (
@@ -24,6 +25,9 @@ export const Profile = () => {
                 <Grid w='100%' templateRows='repeat(2, 1fr)' templateColumns='repeat(5, 1fr)' gap={4}>
                     <GridItem rowSpan={1} colSpan={5} w='100%' h='100%'>
                         <Form />
+                    </GridItem>
+                    <GridItem rowSpan={1} colSpan={5} w='100%' h='100%'>
+                        <Streaks />
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={5} w='100%' h='100%'>
                         <History />
