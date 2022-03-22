@@ -12,6 +12,7 @@ import { Collection } from "./Pages/Collection";
 import { Cyclefrog } from "./Pages/Changefrog";
 import { Friends } from "./Pages/Friends";
 import { Store } from "./Pages/Store";
+import { Challenges } from './Pages/Challenges';
 
 const Routes = () => {
 	// hook to dispatch actions
@@ -24,32 +25,32 @@ const Routes = () => {
 	const redirectHome = () => {
 		return <Redirect to={"/froggers"} />;
 	};
-
-	const freePaths = ["/", "/login", "/register"];
-	const restrictedPaths = ["", "/froggers", "/profile", "/collection", "cyclefrogs", "/friends", "/store", "/logout"];
-	if (!isAuth && restrictedPaths.includes(location.pathname)) {
-		return <Redirect to={"/login"} />;
-	} else if (isAuth && freePaths.includes(location.pathname)) {
-		return <Redirect to={"/froggers"} />;
-	}
-	return (
-		<>
-			<Switch>
-				<Route exact path="/login" component={Auth} />
-				<Route exact path="/" component={Auth} />
-				<RestrictedRoute exact path="/logout" component={Auth} />
-				<RestrictedRoute exact path="/froggers" component={Home} />
-				<RestrictedRoute exact path="/profile" component={Profile} />
-				<RestrictedRoute exact path="/collection" component={Collection} />
-				<RestrictedRoute exact path="/cyclefrogs" component={Cyclefrog} />
-				<RestrictedRoute exact path="/friends" component={Friends} />
-				<RestrictedRoute exact path="/store" component={Store} />
-				{/* This last route is to redirect any bad routes to home page if logged in */}
-				{/* If not logged in, then redirects to login page */}
-				<Route exact path="*" component={redirectHome} />
-			</Switch>
-		</>
-	);
-};
+  const freePaths = ['/', '/login', '/register']
+  const restrictedPaths = ['', '/froggers', '/profile', '/collection', '/friends', '/store', '/logout', '/challenges', '/cyclefrogs']
+  if (! isAuth && (restrictedPaths.includes(location.pathname))) {
+      return <Redirect to={'/login'} />
+  } else if (isAuth && (freePaths.includes(location.pathname))) {
+      return <Redirect to={'/froggers'} />
+  } 
+  return (
+      <>
+          <Switch>
+              <Route exact path="/login" component={Auth} />
+              <Route exact path="/" component={Auth} />
+              <RestrictedRoute exact path="/logout" component={Auth} />
+              <RestrictedRoute exact path="/froggers" component={Home} />
+              <RestrictedRoute exact path="/profile" component={Profile} />
+              <RestrictedRoute exact path="/collection" component={Collection} />
+              <RestrictedRoute exact path="/friends" component={Friends} />
+              <RestrictedRoute exact path="/store" component={Store} />
+              <RestrictedRoute exact path="/challenges" component={Challenges} />
+              <RestrictedRoute exact path="/cyclefrogs" component={Cyclefrog} />
+              {/* This last route is to redirect any bad routes to home page if logged in */}
+              {/* If not logged in, then redirects to login page */}
+              <Route exact path="*" component={redirectHome}/>
+          </Switch>
+      </>
+  )
+}
 
 export default Routes;

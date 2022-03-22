@@ -100,6 +100,30 @@ export const updateMoney = (email, money) => {
 	};
 };
 
+export const updateChallenges = (email, challenge) => {
+    return async dispatch => {
+        const reqBody = {
+            email: email,
+            challenge: challenge
+        }
+        console.log(reqBody)
+        try {
+            dispatch(startLoading())
+            const { data } = await axios.post('/challenge/updateChallenges', reqBody)
+            const { successMsg, errorMsg } = data
+            if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateChallenge...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
 export const addFriend = (email, friendEmail) => {
     return async dispatch => {
         const reqBody = {
