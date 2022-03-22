@@ -99,6 +99,12 @@ test('Test for updateCompany', async () => {
     expect(updatedFrogger.company).toBe(newCompany)
 })
 
+test('Test for updateChallenge', async () => {
+    const challenge = 'challenge1'
+    const updatedChallenge = await users.updateChallenges(email, challenge)
+    expect(updatedChallenge.challenges[0]).toBe(challenge)
+})
+
 afterAll(async () => {
     await users.deleteUser(email)
     console.log('Cleaned up leftover test data...')

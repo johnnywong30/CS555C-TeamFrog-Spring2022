@@ -98,12 +98,14 @@ const Header = (props) => {
                     direction={["column", "row", "row", "row"]}
                     pt={[4, 4, 0, 0]}
                 >
-                    <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/collection">Frogs</MenuItem>
+                    <MenuItem to="/cyclefrogs">Changefrog</MenuItem>
+                    <MenuItem to="/challenges">Challenges</MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}
                     <MenuItem to="/friends">Friends</MenuItem>
                     <MenuItem to="/store">Store</MenuItem>
+                    <MenuItem to="/profile">Profile</MenuItem>
                     <MenuItem to="/logout" isLast>
                         <Button
                             size="sm"
@@ -124,53 +126,3 @@ const Header = (props) => {
 };
 
 export default Header;
-/*
-import { startMusic, pauseMusic, unpauseMusic, changeMusic} from '../../redux/actions/music'
-    // const dispatch = useDispatch();
-    // const [firstSong, setFirstSong] = React.useState(true)
-    // const { playing, source, volume } = useSelector(({ music }) => music)
-    // const [play, {pause}] = useSound(s1)
-    // const [song, setSong] = React.useState(0)
-    // const [playAudio1, pauseAudio1] = useSound(s1, {
-    //     volume: 0.5
-    // })
-
-    // const [playAudio2, pauseAudio2] = useSound(s2, {
-    //     volume: 0.5
-    // })
-
-    // const [playAudio3, pauseAudio3] = useSound(s3, {
-    //     volume: 0.5
-    // })
-
-    // const songs = [
-    //     { play: playAudio1, stop: pauseAudio1.stop},
-    //     { play: playAudio2, stop: pauseAudio2.stop},
-    //     { play: playAudio3, stop: pauseAudio3.stop}
-    // ]
-    // console.log(pauseAudio1)
-    // console.log(song)
-    // const skipSong = () => {
-    //     if (song === 2) 
-    //         setSong(0)
-    //     else 
-    //         setSong(song + 1)
-    // }
-                    /* music menu */
-                /* <IconButton
-                    variant="link"
-                    onClick={songs[song].play}
-                    aria-label={"Play Music"}
-                    icon={<AiFillPlayCircle/>}
-                />
-                <IconButton
-                    variant="link"
-                    onClick={pauseAudio1.stop}
-                    aria-label={"Pause Music" }
-                    icon={<AiFillPauseCircle/>}
-                />
-                <IconButton
-                    variant="link"
-                    onClick={skipSong}
-                    icon={<AiFillStepForward/>}
-                /> */

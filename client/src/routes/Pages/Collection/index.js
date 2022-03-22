@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react";
 import { SimpleGrid, Box, Image, Container, Heading} from "@chakra-ui/react";
 import Layout from '../../../components/layouts/Layout'
 import Grid from './Grid';

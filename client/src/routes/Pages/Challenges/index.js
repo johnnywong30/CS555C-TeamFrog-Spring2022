@@ -1,13 +1,14 @@
 import React from 'react'
 import { Container} from '@chakra-ui/react'
 
-import Layout from '../../../components/layouts/Layout'
-import Add from './Add'
 
-export const Friends = () => {
+import Layout from '../../../components/layouts/Layout'
+import Select from './select'
+
+export const Challenges = () => {
     return (
         <Layout>
-          <Container
+            <Container
                 maxW="lg"
                 py={{
                     base: '12',
@@ -19,8 +20,8 @@ export const Friends = () => {
                     sm: '8',
                 }}
             >
-                <Add/>
+                <Select />
             </Container>
         </Layout>
-      );
+    );
 }

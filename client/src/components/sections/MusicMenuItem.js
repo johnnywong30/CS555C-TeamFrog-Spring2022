@@ -12,7 +12,6 @@ export const MusicMenuItem = React.forwardRef((props, ref) => {
     const [playingS3, setPlayingS3] = React.useState(false);
     const [playingS4, setPlayingS4] = React.useState(false);
     const [play, {stop}] = useSound(src)
-    console.log(src);
     if (song === 1) {
         return (
             <MenuItem 
