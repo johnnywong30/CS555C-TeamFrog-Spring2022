@@ -10,7 +10,7 @@ module.exports = {
     },
     checkNum(num) {
         if (! num) throw 'num does not exist'
-        if (typeof num !== 'string' && typeof num !== 'number) throw 'num is not a number'
+        if (typeof num !== 'string' && typeof num !== 'number') throw 'num is not a number'
         if (typeof num === 'string') {
            const checked = str.trim()
            if (checked.length < 1) throw 'input cannot be empty string'
