@@ -1,0 +1,51 @@
+ .history-heatmap text {
+    font-size: 10px;
+    fill: #aaa;
+  }
+  
+  .history-heatmap .history-heatmap-small-text {
+    font-size: 5px;
+  }
+  
+  .history-heatmap rect:hover {
+    stroke: #555;
+    stroke-width: 1px;
+  }
+  
+  /*
+   * Default color scale
+   */
+  
+  .history-heatmap .color-empty {
+    fill: #eeeeee;
+  }
+  
+  .history-heatmap .color-filled {
+    fill: #8cc665;
+  }
+  
+  /*
+   * color scale
+   */
+  
+   /* Less than 1 */
+  .history-heatmap .color-water-0 {
+    fill: #ededed !important;
+  }
+  /* [1, 2)*/
+  .history-heatmap .color-water-1 {
+    fill: #acd5f2 !important;
+  }
+   /* [2, 4) */
+  .history-heatmap .color-water-2 {
+    fill: #7fa8d1 !important;
+  }
+   /* [4, 8) */
+  .history-heatmap .color-water-3 {
+    fill: #49729b !important;
+  }
+   /* [8, inf) */
+  .history-heatmap .color-water-4 {
+    fill: #254e77 !important;
+  }
+  
