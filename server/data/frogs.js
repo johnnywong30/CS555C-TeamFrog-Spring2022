@@ -26,6 +26,14 @@ module.exports = {
         return frogList
     },
 
+    async getFrogUrls() {
+        const collection = await frogs()
+        const frogList = await collection.find({}).project({ frogId: 1, url: 1, _id: 0 }).toArray()
+        console.log(frogList)
+        if (!frogList) throw 'could not get all urls'
+        return frogList
+    },
+
     async createFrog(_frogId, _name, _url) {
         const frogId = checkNum(_frogId);
         const name = checkStr(_name);

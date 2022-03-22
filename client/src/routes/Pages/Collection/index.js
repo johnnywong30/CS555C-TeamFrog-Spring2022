@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SimpleGrid, Box, Image, Container, Heading} from "@chakra-ui/react";
 import Layout from '../../../components/layouts/Layout'
-
+import Grid from './Grid';
 const urls = ["https://imgur.com/cScfraF.png", "https://imgur.com/p5iRh9X.png", "https://imgur.com/cScfraF.png", "https://imgur.com/VJeksGH.png"]
 
 export const Collection = () => {
@@ -18,17 +18,7 @@ export const Collection = () => {
                 px={{
                     base: '0',
                     sm: '2',
-                }}>
-            <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
-            {urls.map((url) => (
-              <Box height='225px'>
-                <Image
-                  src={url}
-                />
-              </Box>))}
-            </SimpleGrid>
-          </Container>
-          
+                }}><Grid/></Container>
         </Layout>
       );
 }
