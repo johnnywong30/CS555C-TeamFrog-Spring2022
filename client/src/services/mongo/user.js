@@ -123,6 +123,4 @@ export const addFriend = (email, friendEmail) => {
         }
     }
 }
-
-=======
 // TODO: update mongo actions for the other user fields like water, titles, etc.
