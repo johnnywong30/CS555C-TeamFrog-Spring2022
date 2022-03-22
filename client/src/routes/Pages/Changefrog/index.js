@@ -1,12 +1,12 @@
 import React from "react";
 
-import Shop from "./Shop";
+import Cyclefrogs from "../../../components/sections/Cyclefrogs";
 import Layout from "../../../components/layouts/Layout";
 
-export const Store = () => {
+export const Cyclefrog = () => {
 	return (
 		<Layout>
-			<Shop />
+			<Cyclefrogs />
 		</Layout>
 	);
 };
