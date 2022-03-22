@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon -q app.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "seed": "node config/seed.js"
   },
   "author": "",
   "license": "ISC",
