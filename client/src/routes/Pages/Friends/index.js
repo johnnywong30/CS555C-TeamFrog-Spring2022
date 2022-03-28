@@ -37,7 +37,7 @@ export const Friends = () => {
                     align='stretch'
                 >
                     <Add/>
-                        <Friend/>
+                        <Friend email={"hi"} firstName={"yo"} lastName={"p"}/>
                         <Friend/>
                 </VStack>
             </Container>
