@@ -30,6 +30,7 @@ export const Friends = () => {
                     sm: 'xl',
                 }}
                 backgroundColor = 'white'
+                minW='5xl'
             >
                 <VStack 
                     divider={<StackDivider borderColor='gray.200' />}
@@ -37,8 +38,7 @@ export const Friends = () => {
                     align='stretch'
                 >
                     <Add/>
-                        <Friend email={"hi"} firstName={"yo"} lastName={"p"}/>
-                        <Friend/>
+                        <Friend email={"hahsdasdasdasdi"} firstName={"yajsdajsddsfo"} lastName={"khasdfasdfasfdp"}/>
                 </VStack>
             </Container>
             

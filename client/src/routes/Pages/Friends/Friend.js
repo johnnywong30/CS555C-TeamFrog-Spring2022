@@ -24,6 +24,7 @@ export const Friend = React.forwardRef((props, ref) => {
             <Text w="100%">{email}</Text>
             <Text w="100%">{firstName}</Text>
             <Text w="100%">{lastName}</Text>
+            {/* need to add a link here to view their frogs */}
             <Text w="100%">Frogs</Text>
             <IconButton icon={<AiOutlineMinusCircle/>} variant='unstyled'/>
         </HStack>
