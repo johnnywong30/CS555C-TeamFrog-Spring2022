@@ -66,6 +66,19 @@ router
         }
     })
 
+router 
+    .route('/updateMeasurement')
+    .post(async (req, res) => {
+        try {
+            const { email, measurement } = req.body
+            const user = await users.updateMeasurement(email, measurement)
+            res.json(user).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
 // TODO: the rest of the update routes
 
 module.exports = router;

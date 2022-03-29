@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Mongo from '../../../services/mongo';
 import { notifyClear } from '../../../redux/actions/common'
 import { Field } from './Field';
+import Measurement from './Measurement';
 
 const Form = () => {
     // hook to use redux actions
     const dispatch = useDispatch()
-    const { email, firstName, lastName, company } = useSelector(({ auth }) => auth.user)
+    const { email, firstName, lastName, company, measurement } = useSelector(({ auth }) => auth.user)
     const { msg, status, loading } = useSelector(({ common }) => common)
 
     const handleClear = (e) => {
@@ -33,6 +34,12 @@ const Form = () => {
     const handleCompany = (e) => {
         if (e !== company && e.trim().length > 0) {
             dispatch(Mongo.updateCompany(email, e))
+        }
+    }
+
+    const handleMeasurement = (e) => {
+        if (e !== measurement && e.trim().length > 0) {
+            dispatch(Mongo.updateMeasurement(email, e))
         }
     }
 
@@ -79,6 +86,7 @@ const Form = () => {
                         <Field defaultValue={firstName} onSubmit={handleFirstName} id={'firstName'} label={'First Name'}/>
                         <Field defaultValue={lastName} onSubmit={handleLastName} id={'lastName'} label={'Last Name'}/>
                         <Field defaultValue={company} onSubmit={handleCompany} id={'company'} label={'Company'}/>
+                        <Measurement value={measurement} onChange={handleMeasurement} />
                     </Stack>
                 </Stack>
             </Box>
