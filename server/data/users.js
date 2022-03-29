@@ -12,7 +12,19 @@ module.exports = {
 		// make sure we always remove the password using removeKey when we send it back to the client
 		return [user];
 	},
-
+    async getUsers() {
+		const collection = await users();
+		const userList = await collection.find({}).toArray();
+		if (!userList) throw "could not get all users";
+		return userList;
+	},
+    async deleteUser(_email) {
+		const email = checkStr(_email);
+		const collection = await users();
+		const deletionInfo = await collection.deleteOne({ email: email });
+		if (deletionInfo.deleteCount === 0) throw `Could not delete account for ${email}`;
+		return true;
+	},
 	async createUser(_firstName, _lastName, _email, _password, _company) {
 		const email = checkStr(_email);
 		const userExists = await this.getUser(email);
@@ -236,6 +248,28 @@ module.exports = {
             password: 'thats not very froggers of you',
             successMsg: 'Successfully updated friends list'
         }
-    }
+    },
+    async updateMeasurement(_email, _measurement) {
+        const email = checkStr(_email)
+        const measurement = checkStr(_measurement)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        if (user.measurement === measurement) throw 'New measurement cannot be the same as the original'
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: {measurement: measurement}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated Company'
+        }
+    },
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }

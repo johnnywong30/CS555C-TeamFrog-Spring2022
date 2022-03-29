@@ -4,7 +4,7 @@ const connection = require('../config/mongoConnection')
 
 const firstName = 'Sophia'
 const lastName = 'Zuo'
-const email = 'froggers@gmail.com'
+const email = 'frog@gmail.com'
 const frogPassword = 'frog'
 const company = 'Bronx Zoo'
 const testArgs = [firstName, lastName, email, frogPassword, company]
@@ -103,6 +103,12 @@ test('Test for updateChallenge', async () => {
     const challenge = 'challenge1'
     const updatedChallenge = await users.updateChallenges(email, challenge)
     expect(updatedChallenge.challenges[0]).toBe(challenge)
+})
+
+test('Test for updateMeasurement', async () => {
+    const measurement = 'metric'
+    const updatedMeasurement = await users.updateMeasurement(email, measurement)
+    expect(updatedMeasurement.measurement).toBe(measurement)
 })
 
 afterAll(async () => {
