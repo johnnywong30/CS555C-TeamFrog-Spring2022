@@ -147,4 +147,27 @@ export const addFriend = (email, friendEmail) => {
         }
     }
 }
+export const updateMeasurement = (email, measurement) => {
+	return async dispatch => {
+		const reqBody = {
+			email: email,
+			measurement: measurement
+		}
+		try {
+            dispatch(startLoading())
+            const { data } = await axios.post('/user/updateMeasurement', reqBody)
+            const { successMsg, errorMsg } = data
+            if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateMeasurement...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+	}
+}
 // TODO: update mongo actions for the other user fields like water, titles, etc.
