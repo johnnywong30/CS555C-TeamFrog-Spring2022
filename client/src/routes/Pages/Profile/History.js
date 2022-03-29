@@ -17,7 +17,7 @@ const History = () => {
 
     // 
     const measurement = user.measurement === 'imperial' ? 'cups' : 'liters'
-    const parseAmount = amount => measurement === 'cups' ? Number(amount) : Number((Number(amount) * 0.236588).toFixed(2))
+    const parseAmount = amount => measurement === 'cups' ? Number((Number(amount)).toFixed(2)) : Number((Number(amount) * 0.236588).toFixed(2))
 
     const cleaned = user.waterHistory.map(stat => {
         return {
