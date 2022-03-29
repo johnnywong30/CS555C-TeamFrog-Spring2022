@@ -93,14 +93,14 @@ module.exports = {
         const frogExists = await this.getFrog(name)
         if (frogExists.length < 1) throw 'This frog does not exist'
         const frog = frogExists[0]
-        if (frog.link === link) throw 'New frog name cannot be the same as the original'
+        if (frog.url === link) throw 'New frog name cannot be the same as the original'
         const collection = await frogs()
         const updatedFrog = {
             ...frog,
-            link: link
+            url: link
         }
-        const updateInfo = await collection.updateOne({link: link}, {$set: updatedFrog})
-        if (updatedFrog.modifiedCount < 1) throw `Could not update frog successfully`
+        const updateInfo = await collection.updateOne({name: name}, {$set: updatedFrog})
+        if (updateInfo.modifiedCount < 1) throw `Could not update frog successfully`
         const updated = await this.getFrog(name)
         if (updated.length < 1) throw 'Could not get frog'
         const data = updated[0]

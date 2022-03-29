@@ -1,9 +1,12 @@
 const frogs = require('../data/frogs')
 const connection = require('../config/mongoConnection')
 
+const frogId = "33"
 const name = 'Starter Frog'
-const link = 'https://imgur.com/cScfraF.png'
-const testArgs = [name, link]
+const url = 'https://imgur.com/cScfraF.png'
+const testArgs = [frogId, name, url]
+let testFrog = {}
+
 beforeAll(async () => {
     testFrog = await frogs.createFrog(...testArgs)
 })
@@ -12,8 +15,8 @@ test('Test for createFrog name', async() => {
     expect(testFrog.name).toBe(name)
 })
 
-test('Test for createFrog link', async() => {
-    expect(testFrog.link).toBe(link)
+test('Test for createFrog url', async() => {
+    expect(testFrog.url).toBe(url)
 })
 
 test('Test for getFrogs', async() => {
@@ -28,13 +31,15 @@ test('Test for updateFrogName', async() => {
 })
 
 test ('Test for updateFrogLink', async() => {
-    const newFrogLink = 'REEE'
-    const updatedfrog = await frogs.updateFrogLink(name, newFrogLink)
-    expect(updatedfrog.link).toBe(newFrogLink)
+    const newFrogName = 'REEE'
+    const newFrogUrl = 'REEE'
+    const updatedfrog = await frogs.updateFrogLink(newFrogName, newFrogUrl)
+    expect(updatedfrog.url).toBe(newFrogUrl)
 })
 
 afterAll(async () => {
-    await frogs.deleteFrog(name)
+    const newFrogName = 'REEE'
+    await frogs.deleteFrog(newFrogName)
     console.log('Cleaned up leftover test data...')
     connection.closeConnection()
 })
