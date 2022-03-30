@@ -7,10 +7,16 @@ import { AiOutlineMinusCircle } from "react-icons/ai"
 import Mongo from '../../../services/mongo';
 
 export const Friend = React.forwardRef((props, ref) => {
-    const { email } = props;
+    const dispatch = useDispatch()
+    const { userEmail, friendEmail } = props;
+    const { msg, status } = useSelector(({ common }) => common)
     const inputRef = React.useRef(null)
     const mergeRef = useMergeRefs(inputRef, ref)
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(Mongo.removeFriend(userEmail, friendEmail))
+    }
     // grid + divider
     return (
         <HStack
@@ -21,13 +27,13 @@ export const Friend = React.forwardRef((props, ref) => {
             textAlign="center"
             alignItems="center"
         >
-            <Text w="100%">{email}</Text>
+            <Text w="100%">{friendEmail}</Text>
             {/* potentially get more info about each friend? */}
             {/* <Text w="100%">{firstName}</Text>
             <Text w="100%">{lastName}</Text> */}
             {/* need to add a link here to view their frogs */}
             <Text w="100%">View Frogs</Text>
-            <IconButton icon={<AiOutlineMinusCircle/>} variant='unstyled'/>
+            <IconButton icon={<AiOutlineMinusCircle/>} variant='unstyled' onClick={handleSubmit}/>
         </HStack>
     )
 })

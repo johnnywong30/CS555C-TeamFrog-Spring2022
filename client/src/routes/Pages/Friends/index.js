@@ -7,7 +7,7 @@ import Add from './Add'
 import Friend from './Friend'
 
 export const Friends = () => {
-    const { friends } = useSelector(({ auth }) => auth.user)
+    const { email, friends } = useSelector(({ auth }) => auth.user)
 
     return (
         <Layout>
@@ -41,7 +41,7 @@ export const Friends = () => {
                     align='stretch'
                 >
                     <Add/>
-                        {friends.map(friend => <Friend email={friend}/>)}
+                        {friends.map(friend => <Friend userEmail={email} friendEmail={friend}/>)}
                         {/* <Friend email={"hahsdasdasdasdi"} firstName={"yajsdajsddsfo"} lastName={"khasdfasdfasfdp"}/> */}
                 </VStack>
             </Container>

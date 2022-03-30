@@ -155,7 +155,7 @@ export const removeFriend = (email, friendEmail) => {
 		}
 		try {
 			dispatch(startLoading())
-            const { data } = await axios.post('/user/updateFriendsList', reqBody)
+            const { data } = await axios.post('/user/removeFriend', reqBody)
             const { successMsg, errorMsg } = data
 			if (successMsg) {
                 dispatch(notifySuccess(successMsg)) 
