@@ -1,11 +1,14 @@
 import React from 'react'
 import { VStack, StackDivider, Container, useBreakpointValue, useColorModeValue,} from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Layout from '../../../components/layouts/Layout'
 import Add from './Add'
 import Friend from './Friend'
 
 export const Friends = () => {
+    const { friends } = useSelector(({ auth }) => auth.user)
+
     return (
         <Layout>
           <Container
@@ -38,7 +41,8 @@ export const Friends = () => {
                     align='stretch'
                 >
                     <Add/>
-                        <Friend email={"hahsdasdasdasdi"} firstName={"yajsdajsddsfo"} lastName={"khasdfasdfasfdp"}/>
+                        {friends.map(friend => <Friend email={friend}/>)}
+                        {/* <Friend email={"hahsdasdasdasdi"} firstName={"yajsdajsddsfo"} lastName={"khasdfasdfasfdp"}/> */}
                 </VStack>
             </Container>
             

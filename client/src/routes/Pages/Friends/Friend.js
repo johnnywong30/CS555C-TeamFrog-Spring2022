@@ -7,7 +7,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai"
 import Mongo from '../../../services/mongo';
 
 export const Friend = React.forwardRef((props, ref) => {
-    const { email, firstName, lastName } = props;
+    const { email } = props;
     const inputRef = React.useRef(null)
     const mergeRef = useMergeRefs(inputRef, ref)
 
@@ -22,10 +22,11 @@ export const Friend = React.forwardRef((props, ref) => {
             alignItems="center"
         >
             <Text w="100%">{email}</Text>
-            <Text w="100%">{firstName}</Text>
-            <Text w="100%">{lastName}</Text>
+            {/* potentially get more info about each friend? */}
+            {/* <Text w="100%">{firstName}</Text>
+            <Text w="100%">{lastName}</Text> */}
             {/* need to add a link here to view their frogs */}
-            <Text w="100%">Frogs</Text>
+            <Text w="100%">View Frogs</Text>
             <IconButton icon={<AiOutlineMinusCircle/>} variant='unstyled'/>
         </HStack>
     )
