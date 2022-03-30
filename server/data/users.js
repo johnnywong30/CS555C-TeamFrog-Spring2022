@@ -236,6 +236,10 @@ module.exports = {
             password: 'thats not very froggers of you',
             successMsg: 'Successfully updated friends list'
         }
+    },
+    async removeFriend(_email, _friendEmail) {
+        
     }
+
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
