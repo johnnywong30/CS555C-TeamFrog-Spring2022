@@ -238,7 +238,33 @@ module.exports = {
         }
     },
     async removeFriend(_email, _friendEmail) {
-        
+        const email = checkStr(_email)
+        const friendEmail = checkStr(_friendEmail)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const friendExists = user.friends.filter(friend => friend === friendEmail)
+        if (friendExists.length < 1) throw 'This user is not your friend'
+        const friend = friendExists[0]
+        const collection = await users()
+        const updatedFriends = user.friends.filter(friend => friend !== friendEmail)
+        const updatedUser = {
+            ...user,
+            friends: updatedFriends
+        }
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: updatedUser}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated friends list'
+        }
     }
 
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
