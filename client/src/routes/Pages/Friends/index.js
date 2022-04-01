@@ -1,5 +1,5 @@
 import React from 'react'
-import { VStack, StackDivider, Container, useBreakpointValue, useColorModeValue,} from '@chakra-ui/react'
+import { Grid, VStack, StackDivider, Container, useBreakpointValue, useColorModeValue,} from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Layout from '../../../components/layouts/Layout'
@@ -22,7 +22,7 @@ export const Friends = () => {
                 }}
                 bg={useBreakpointValue({
                     base: 'transparent',
-                    sm: 'bg-surface',
+                    sm: 'bg-surface'
                 })}
                 boxShadow={{
                     base: 'none',
@@ -33,7 +33,6 @@ export const Friends = () => {
                     sm: 'xl',
                 }}
                 backgroundColor = 'white'
-                minW='5xl'
             >
                 <VStack 
                     divider={<StackDivider borderColor='gray.200' />}
@@ -41,8 +40,9 @@ export const Friends = () => {
                     align='stretch'
                 >
                     <Add/>
+                    <Grid>
                         {friends.map(friend => <Friend userEmail={email} friendEmail={friend}/>)}
-                        {/* <Friend email={"hahsdasdasdasdi"} firstName={"yajsdajsddsfo"} lastName={"khasdfasdfasfdp"}/> */}
+                    </Grid>   
                 </VStack>
             </Container>
             

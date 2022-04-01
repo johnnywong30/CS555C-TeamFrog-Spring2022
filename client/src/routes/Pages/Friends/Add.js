@@ -39,7 +39,7 @@ const Add = () => {
                         <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
                     </Alert>
                 }
-                <Button onClick={onOpen} w="25%" colorScheme='green'>Add Friend</Button>
+                <Button onClick={onOpen} px={{ base: '8'}} colorScheme='green'>Add Friend</Button>
                 <Modal
                     isOpen={isOpen}
                     onClose={onClose}
