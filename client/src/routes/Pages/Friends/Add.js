@@ -31,7 +31,7 @@ const Add = () => {
     }
 
     return (
-            <Stack>
+            <Stack justifyContent="center" alignItems="center">
                 {msg &&
                     <Alert status={status} borderRadius="10">
                         <AlertIcon />
@@ -39,7 +39,7 @@ const Add = () => {
                         <CloseButton position='absolute' right='8px' top='8px' onClick={handleClear} />
                     </Alert>
                 }
-                <Button onClick={onOpen}>Add Friend</Button>
+                <Button onClick={onOpen} px={{ base: '8'}} colorScheme='green'>Add Friend</Button>
                 <Modal
                     isOpen={isOpen}
                     onClose={onClose}

@@ -1,4 +1,5 @@
 const express = require("express");
+const { MongoCursorInUseError } = require("mongodb");
 const router = express.Router();
 const users = require("../data/users");
 
@@ -58,6 +59,19 @@ router
         try {
             const { email, friendEmail} = req.body
             const user = await users.updateFriendsList(email, friendEmail)
+            res.json(user).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+router
+    .route('/removeFriend')
+    .post(async (req, res) => {
+        try {
+            const { email, friendEmail} = req.body
+            const user = await users.removeFriend(email, friendEmail)
             res.json(user).end()
         } catch (e) {
             console.log(e)

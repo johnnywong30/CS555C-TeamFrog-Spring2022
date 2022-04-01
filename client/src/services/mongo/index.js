@@ -1,5 +1,5 @@
 import { onRegister, onLogin } from "./auth";
-import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateMeasurement } from './user'
+import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, removeFriend, updateMeasurement } from './user'
 import { insertWater, getWater, getWaterHistory } from './water'
 
 const Mongo = {
@@ -13,6 +13,7 @@ const Mongo = {
     updateChallenges: updateChallenges,
     updateMeasurement: updateMeasurement,
     addFriend: addFriend,
+    removeFriend: removeFriend,
     // TODO: rest of the updates
     // Water
     insertWater: insertWater,
