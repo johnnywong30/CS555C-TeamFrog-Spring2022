@@ -1,6 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { ButtonGroup, Editable, EditableInput, EditablePreview, Flex, FormLabel, IconButton, useEditableControls } from "@chakra-ui/react";
 

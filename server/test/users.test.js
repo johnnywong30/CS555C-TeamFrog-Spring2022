@@ -119,6 +119,12 @@ test('Test for removeFriend', async () => {
     expect(updatedFriends.friends.length).toBe(0)
 })
 
+test('Test for updateMeasurement', async () => {
+    const measurement = 'metric'
+    const updatedMeasurement = await users.updateMeasurement(email, measurement)
+    expect(updatedMeasurement.measurement).toBe(measurement)
+})
+
 afterAll(async () => {
     await users.deleteUser(email)
     await users.deleteUser(email2)

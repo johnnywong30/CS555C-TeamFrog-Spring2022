@@ -9,20 +9,10 @@ module.exports = {
         return trimmed
     },
     checkNum(num) {
-        if (! num) throw 'num does not exist'
-        if (typeof num !== 'string' && typeof num !== 'number') throw 'num is not a number'
-        if (typeof num === 'string') {
-           const checked = num.trim()
-           if (checked.length < 1) throw 'input cannot be empty string'
-           if( isNaN(parseInt(checked))) throw 'input must be a number'
-           if (!Number.isInteger(Number(checked))) throw 'input should be a whole number'
-           if (Number(checked) < 0) throw 'input should be greater or equal to 0'
-           return Number(checked)
-        }
-        else {
-           if (isNaN(num)) throw 'num is not a number' 
-        }
-        return Number(num)
+        if (! num) throw new Error(`number does not exist!`)
+        const ret = Number(num)
+        if (typeof ret !== 'number' || isNaN(ret)) throw `input is not a number!`
+        return ret.toString()
     },
     checkId(id) {
         if ( ! id) throw 'id does not exist'

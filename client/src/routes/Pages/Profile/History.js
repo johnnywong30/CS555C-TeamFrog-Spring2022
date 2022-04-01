@@ -15,9 +15,9 @@ const History = () => {
     const { msg, status, loading } = useSelector(({ common }) => common)
     const { user } = useSelector(({ auth }) => auth)
 
-    // 
+    const round = num => Math.round(num * 100) / 100
     const measurement = user.measurement === 'imperial' ? 'cups' : 'liters'
-    const parseAmount = amount => measurement === 'cups' ? Number(amount) : Number(amount) * 4.22675
+    const parseAmount = amount => measurement === 'cups' ? round(amount) : round(amount * 0.236588)
 
     const cleaned = user.waterHistory.map(stat => {
         return {
@@ -26,6 +26,8 @@ const History = () => {
             amount: parseAmount(stat.amount)
         }
     })
+
+    console.log(cleaned)
 
 
     let data = []
@@ -40,10 +42,11 @@ const History = () => {
             data.push(day)
         }
         else {
-            obj.amount = obj.amount + water.amount
+            obj.amount = round(obj.amount + water.amount)
             obj.details = [...obj.details, { date: water.timestamp, value: water.amount }]
         }
     }
+    console.log(data)
 
     return (
         <Stack spacing="8">
