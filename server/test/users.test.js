@@ -5,16 +5,20 @@ const connection = require('../config/mongoConnection')
 const firstName = 'Sophia'
 const lastName = 'Zuo'
 const email = 'froggers@gmail.com'
+const email2 = 'hi@gmail.com'
 const frogPassword = 'frog'
 const company = 'Bronx Zoo'
 const testArgs = [firstName, lastName, email, frogPassword, company]
+const testArgs2 = ["hi", 'p', email2, 'fr', 'y']
 let testUser = {}
+let testUser2 = {}
 
 beforeAll(async () => {
     // Spreads the test arguments into the function 
     // so we don't have to modify the line itself
     // keeps code clear
     testUser = await users.createUser(...testArgs)
+    testUser2 = await users.createUser(...testArgs2)
 })
 
 test('Test for createUser firstName', async () => {
@@ -105,8 +109,19 @@ test('Test for updateChallenge', async () => {
     expect(updatedChallenge.challenges[0]).toBe(challenge)
 })
 
+test('Test for addFriend', async () => {
+    const updatedFriends = await users.updateFriendsList(email, email2)
+    expect(updatedFriends.friends[0]).toBe(email2) 
+})
+
+test('Test for removeFriend', async () => {
+    const updatedFriends = await users.removeFriend(email, email2)
+    expect(updatedFriends.friends.length).toBe(0)
+})
+
 afterAll(async () => {
     await users.deleteUser(email)
+    await users.deleteUser(email2)
     console.log('Cleaned up leftover test data...')
     connection.closeConnection()
 })
