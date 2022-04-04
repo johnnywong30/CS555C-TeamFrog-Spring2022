@@ -310,12 +310,14 @@ module.exports = {
         const frogExists = getFrog(frogName)
         if (frogExists.length < 1) throw 'This frog does not exist'
         const frog = frogExists[0]
-        const { frogId } = frog
+        const { frogId, price } = frog
         if (user.ownedFrogs.includes(frogId)) throw 'This user owns this frog already'
+        if (price > user.money) throw 'User cannot afford this frog'
+        const updatedMoney = user.money - price
         const collection = await users()
         const updateInfo = await collection.updateOne(
             {email: email},
-            {$push: {ownedFrogs: frog}}
+            {$push: {ownedFrogs: frog}, $set: {money: updatedMoney}}
         )
         if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
         const updated = await this.getUser(email)
