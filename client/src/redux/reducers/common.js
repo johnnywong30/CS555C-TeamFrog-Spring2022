@@ -1,7 +1,8 @@
 const INIT_STATE = {
     msg: '',
     loading: false,
-    status: ''
+    status: '',
+    gradientPos: 0
 }
 
 const commonReducer = (state = INIT_STATE, action) => {
@@ -38,6 +39,11 @@ const commonReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 msg: payload,
+            }
+        case "SET_GRADIENT":
+            return {
+                ...state,
+                gradientPos: payload
             }
         default:
             return state
