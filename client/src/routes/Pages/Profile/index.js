@@ -5,7 +5,6 @@ import { Container, Grid, GridItem, SimpleGrid } from '@chakra-ui/react'
 import Layout from '../../../components/layouts/Layout'
 import Form from './Form'
 import History from './History'
-import Streaks from './Streaks'
 
 export const Profile = () => {
     return (
