@@ -1,6 +1,6 @@
 const { frogs } = require('../config/mongoCollections')
 const { ObjectId } = require('mongodb')
-const { checkStr, checkNum } = require('../misc/validate')
+const { checkStr, checkNum, checkFrogId } = require('../misc/validate')
 
 module.exports = {
     async getFrog(_name) {
@@ -12,11 +12,19 @@ module.exports = {
     },
 
     async getFrogLink(_id) {
-        const id = checkStr(_id)
+        const id = checkFrogId(_id)
         const collection = await frogs()
         const frog = await collection.findOne({frogId: id})
         if (frog === null) return []
         return frog.url
+    },
+
+    async getFrogPrice(_id) {
+        const id = checkFrogId(_id)
+        const collection = await frogs()
+        const frog = await collection.findOne({frogId: id})
+        if (frog === null) return []
+        return frog.price
     },
 
     async getFrogs() {
@@ -26,6 +34,8 @@ module.exports = {
         return frogList
     },
 
+    
+
     async getFrogUrls() {
         const collection = await frogs()
         const frogList = await collection.find({}).project({ frogId: 1, url: 1, _id: 0 }).toArray()
@@ -34,8 +44,9 @@ module.exports = {
         return frogList
     },
 
-    async createFrog(_frogId, _name, _url) {
-        const frogId = checkNum(_frogId);
+    async createFrog(_frogId, _name, _url, _price) {
+        const frogId = checkFrogId(_frogId);
+        const price = checkNum(_price)
         const name = checkStr(_name);
         const url = checkStr(_url)
         const frogExists = await this.getFrog(name)
@@ -43,7 +54,8 @@ module.exports = {
         const newFrog = {
             frogId: frogId,
             name: name,
-            url: url
+            url: url,
+            price: price
         }
         const collection = await frogs();
         const insertInfo = await collection.insertOne(newFrog)

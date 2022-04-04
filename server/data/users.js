@@ -1,5 +1,6 @@
 const { checkStr, checkNum } = require("../misc/validate");
 const { users } = require("../config/mongoCollections");
+const { getFrog } = require('./frogs')
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 
@@ -300,5 +301,32 @@ module.exports = {
             successMsg: 'Successfully updated friends list'
         }
     },
+    async purchaseFrog(_email, _frogName) {
+        const email = checkStr(_email)
+        const frogName = checkStr(_frogName)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const frogExists = getFrog(frogName)
+        if (frogExists.length < 1) throw 'This frog does not exist'
+        const frog = frogExists[0]
+        const { frogId } = frog
+        if (user.ownedFrogs.includes(frogId)) throw 'This user owns this frog already'
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$push: {ownedFrogs: frog}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
+        
+    }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
