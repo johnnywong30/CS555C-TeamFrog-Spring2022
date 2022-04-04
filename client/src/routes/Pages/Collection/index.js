@@ -8,6 +8,8 @@ export const Collection = () => {
     return (
         <Layout>
           <Heading color='white'>Frog Collection</Heading>
+          <br/>
+          <p class='collectionText'>Click your frog friend to pet them!</p>
           <Container maxW='container.md'
                 py={{
                     base: '20',
