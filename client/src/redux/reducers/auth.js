@@ -18,6 +18,7 @@ const authReducer = (state = INIT_STATE, action) => {
         case "LOGOUT_USER":
             return {
                 ...state,
+                user: false
             }
         // Note: UPDATE_USER and LOGIN_USER do the same thing code wise
         // It's just that we should keep the semantics consistent

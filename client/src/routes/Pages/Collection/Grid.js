@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import useSound from 'use-sound';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Mongo from '../../../services/mongo';
 import { SimpleGrid, Box, Image } from "@chakra-ui/react";
+import audio from '../../../../src/constants/frog.wav';
 
-const urls = ["https://imgur.com/cScfraF.png", "https://imgur.com/p5iRh9X.png", "https://imgur.com/cScfraF.png", "https://imgur.com/VJeksGH.png"]
 
 const Grid = () => {
     const { ownedFrogs } = useSelector(({ auth }) => auth.user)
     const links = []
     const[repo, setRepo]= useState([])
+    const [play] = useSound(audio);
 
     const getRepo = () => {
         axios.get(`/frog/getFrogUrls`)
@@ -34,7 +36,7 @@ const Grid = () => {
     return (
         <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
         {links.map((url) => (
-            <Box height='225px'>
+            <Box onClick={play} height='225px'>
             <Image
                 src={url}
             />
