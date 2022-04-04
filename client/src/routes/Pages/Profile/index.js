@@ -9,13 +9,10 @@ import History from './History'
 export const Profile = () => {
     return (
         <Layout>
-            <SimpleGrid columns={3} spacing={3} minW='50%'>
+            <SimpleGrid columns={3} spacing={3} minW='50%' mb={5}>
                 <GridItem rowSpan={1} colSpan={3}>
                     <Form />
                 </GridItem>
-                {/* <GridItem rowSpan={1} colSpan={1} w='100%' minH='100%'>
-                    <Streaks />
-                </GridItem> */}
                 <GridItem rowSpan={1} colSpan={3}>
                     <History />
                 </GridItem>

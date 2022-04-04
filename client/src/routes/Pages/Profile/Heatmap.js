@@ -14,8 +14,6 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 
 const Heatmap = ({ data, measurement, ...rest }) => {
-    
-
     return (
         <>
             <CalendarHeatmap

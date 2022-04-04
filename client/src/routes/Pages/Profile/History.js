@@ -78,7 +78,7 @@ const History = () => {
                         Water History
                     </Heading>
                     <Divider orientation='horizontal' />
-                    <Text >
+                    <Text>
                         Current Streak: {streak}
                     </Text>
                 </VStack >
