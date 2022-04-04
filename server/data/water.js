@@ -14,9 +14,12 @@ module.exports = {
             timestamp: timestamp,
             amount: amount
         }
+        const currencyEarned = 250
+        console.log(user)
         const updatedUser = {
             ...user, 
-            waterHistory: [...user.waterHistory, newWater]
+            waterHistory: [...user.waterHistory, newWater],
+            money: user.money + currencyEarned
         }
         const updateInfo = await userCollection.updateOne(
             {email: email},

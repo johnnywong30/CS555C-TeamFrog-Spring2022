@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure } from "@chakra-ui/react";
 import { MusicMenuItem } from './MusicMenuItem'
 import { AiFillDownCircle } from "react-icons/ai"
+import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
+import { GiBlackBook } from 'react-icons/gi'
+import { CgProfile } from 'react-icons/cg'
 import Logo from "../ui/Logo";
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -14,9 +17,9 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
         <Text
             mb={{ base: isLast ? 0 : 8, sm: 0 }}
-            mr={{ base: 0, sm: isLast ? 0 : 8 }}
+            mr={{ base: 0, sm: isLast ? 0 : 5 }}
             display="block"
-            color = 'white'
+            color='white'
             {...rest}
         >
             <Link to={to}>{children}</Link>
@@ -47,6 +50,7 @@ const MenuIcon = () => (
 );
 
 const Header = (props) => {
+    const { money } = useSelector(({ auth }) => auth.user)
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
 
@@ -72,7 +76,7 @@ const Header = (props) => {
                     />
                 </MenuItem>
                 <Menu>
-                    <MenuButton as={Button} rightIcon={<AiFillDownCircle/>}>
+                    <MenuButton as={Button} rightIcon={<AiFillDownCircle />} colorScheme='green' variant='ghost' size='sm'>
                         Music
                     </MenuButton>
                     <MenuList>
@@ -98,30 +102,52 @@ const Header = (props) => {
                     direction={["column", "row", "row", "row"]}
                     pt={[4, 4, 0, 0]}
                 >
-                    <MenuItem to="/collection">Frogs</MenuItem>
-                    <MenuItem to="/cyclefrogs">Changefrog</MenuItem>
-                    <MenuItem to="/challenges">Challenges</MenuItem>
+                    <MenuItem to="/collection">
+                        <Button leftIcon={<FaFrog/>} colorScheme='green' variant='ghost' size='sm'>
+                            Frogs
+                        </Button>
+                    </MenuItem>
+                    {/* <MenuItem to="/cyclefrogs">Changefrog</MenuItem> */}
+                    <MenuItem to="/challenges">
+                        <Button leftIcon={<GiBlackBook/>} colorScheme='green' variant='ghost' size='sm'>
+                            Challenges
+                        </Button>
+                    </MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}
-                    <MenuItem to="/friends">Friends</MenuItem>
-                    <MenuItem to="/store">Store</MenuItem>
-                    <MenuItem to="/profile">Profile</MenuItem>
+                    <MenuItem to="/friends">
+                        <Button leftIcon={<FaUserFriends/>} colorScheme='green' variant='ghost' size='sm'>
+                            Friends
+                        </Button>    
+                    </MenuItem>
+                    <MenuItem to="/profile">
+                        <Button leftIcon={<CgProfile/>} colorScheme='green' variant='ghost' size='sm'>
+                            Profile
+                        </Button>
+                    </MenuItem>
+                    <MenuItem to="/store">
+                        <Button leftIcon={<FaCoins/>} colorScheme='green' variant='ghost' size='sm'>
+                            {money}
+                        </Button>
+                    </MenuItem>
+
+
                     <MenuItem to="/logout" isLast>
                         <Button
                             size="sm"
                             rounded="md"
                             color={["white", "white", "primary.500", "primary.500"]}
-                            bg={["primary.500", "primary.500", "white", "white"]}
                             _hover={{
                                 bg: ["primary.600", "primary.600", "white", "white"]
                             }}
+                            variant='ghost'
                         >
                             Log Out
                         </Button>
                     </MenuItem>
                 </Flex>
-            </Box>
-        </Flex>
+            </Box >
+        </Flex >
     );
 };
 
