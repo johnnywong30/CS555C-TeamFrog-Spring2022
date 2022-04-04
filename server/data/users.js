@@ -1,6 +1,6 @@
 const { checkStr, checkNum } = require("../misc/validate");
 const { users } = require("../config/mongoCollections");
-const { getFrog } = require('./frogs')
+const frogs = require('./frogs')
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 
@@ -307,7 +307,7 @@ module.exports = {
         const userExists = await this.getUser(email)
         if (userExists.length < 1) throw 'This user does not exist'
         const user = userExists[0]
-        const frogExists = getFrog(frogName)
+        const frogExists = await frogs.getFrog(frogName)
         if (frogExists.length < 1) throw 'This frog does not exist'
         const frog = frogExists[0]
         const { frogId, price } = frog
@@ -317,7 +317,7 @@ module.exports = {
         const collection = await users()
         const updateInfo = await collection.updateOne(
             {email: email},
-            {$push: {ownedFrogs: frog}, $set: {money: updatedMoney}}
+            {$push: {ownedFrogs: frogId}, $set: {money: updatedMoney}}
         )
         if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
         const updated = await this.getUser(email)
