@@ -2,6 +2,7 @@ const express = require("express");
 const { MongoCursorInUseError } = require("mongodb");
 const router = express.Router();
 const users = require("../data/users");
+const validate = require("../misc/validate");
 
 router.route("/updateFirstName").post(async (req, res) => {
 	try {
@@ -87,6 +88,21 @@ router
             const { email, measurement } = req.body
             const user = await users.updateMeasurement(email, measurement)
             res.json(user).end()
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
+router
+    .route('/getOwnedFrogs')
+    .get(async (req, res) => {
+        //get users
+        try {
+            const { email } = req.body
+            let userInfo = await users.getUser(email)
+            //console.log(userInfo)
+            res.json(userInfo[0].ownedFrogs).end()
         } catch (e) {
             console.log(e)
             res.statusMessage = e

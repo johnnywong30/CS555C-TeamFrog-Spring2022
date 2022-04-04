@@ -19,7 +19,9 @@ export const Collection = () => {
                 px={{
                     base: '0',
                     sm: '2',
-                }}><Grid/></Container>
+                }}>
+                    <Grid/>
+            </Container>
         </Layout>
       );
 }
