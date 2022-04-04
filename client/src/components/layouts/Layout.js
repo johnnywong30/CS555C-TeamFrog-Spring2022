@@ -46,8 +46,17 @@ export default function Layout (props) {
   };
 
   return (
-    <motion.div style = {{width: '100vw', height: '100vh', backgroundImage: gradient[gradientPos]}}>
-      <Box w='100%' h='100vh'>
+    <motion.div style = {
+      { 
+        // position: 'fixed',
+        width: '100%', 
+        height: '100%',
+        top: '0px', 
+        left: '0px',
+        zIndex: 1000,
+        backgroundImage: gradient[gradientPos]}
+    }>
+      <Box w='100%' minH='100vh' h='100%'>
         <Flex
           direction="column"
           align="center"
@@ -57,7 +66,7 @@ export default function Layout (props) {
           <Header />
           {props.children}
           <Slider
-            colorScheme="white"
+            colorScheme="gray"
             aria-label="slider-ex-5"
             onChange={onChange}
             onChangeEnd={(val) => console.log(val)}
@@ -72,7 +81,7 @@ export default function Layout (props) {
             <SliderTrack
               height="10px"
               borderRadius="10px"
-              bg="white"
+              bg="gray"
             >
             <SliderFilledTrack />
             </SliderTrack>
@@ -85,6 +94,7 @@ export default function Layout (props) {
                   boxShadow: "0 0 3px #fff"
                 }
               }}
+              bg="green.300"
             >
             </SliderThumb>
           </Slider>
