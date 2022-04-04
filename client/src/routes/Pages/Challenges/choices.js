@@ -5,21 +5,21 @@ import { Switch, Alert, AlertIcon, AlertTitle, AlertDescription, Box, Button, Cl
     AccordionIcon, } from '@chakra-ui/react'
 
 import { useDispatch, useSelector } from 'react-redux';
-
+import React from "react";
 import Mongo from '../../../services/mongo';
-
-import * as React from 'react'
 
 const AllChallenges = () => {
     const dispatch = useDispatch()
-    const [disable, setDisable] = React.useState(false);
-    const { email } = useSelector(({ auth }) => auth.user)
+    const [accepted, setAccept] = useSelector({disabled: false, text: "Accept"})
+    const { challenges } = useSelector(({ auth }) => auth.user)
 
-    const handleAcccept = (e) => {
+    const accept = (e) => {
         e.preventDefault();
         dispatch(Mongo.updateChallenges(email, e.target.value));
-        setDisable(true);
-    }
+		if (accepted.disabled === false) {
+			setAccept({disabled: true, text: "Accepted" });
+		}
+	};
 
     return (
         <Accordion allowMultiple>
@@ -37,7 +37,7 @@ const AllChallenges = () => {
                 <AccordionPanel pb={4}>
                 <Box fontSize = 'sm'>Description</Box>
                 <Stack align='center' direction='center' marginTop = '1'>
-                    <Button disabled={disable} colorScheme='green' size='sm' marginRight = '1' value={'challenge1'} onClick={handleAcccept}>Accept</Button>
+                    <Button onClick={accept} disabled={accepted.disabled} colorScheme='green' size='sm' marginRight = '1' value={'challenge1'}>{accepted.text}</Button>
                     <Button colorScheme='green' size='sm' variant='outline'>Complete</Button>
                 </Stack>
                 </AccordionPanel>
