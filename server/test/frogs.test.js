@@ -1,10 +1,11 @@
 const frogs = require('../data/frogs')
 const connection = require('../config/mongoConnection')
 
-const frogId = "33"
+const frogId = 33
 const name = 'Starter Frog'
 const url = 'https://imgur.com/cScfraF.png'
-const testArgs = [frogId, name, url]
+const price = 69
+const testArgs = [frogId, name, url, price]
 let testFrog = {}
 
 beforeAll(async () => {
@@ -19,9 +20,18 @@ test('Test for createFrog url', async() => {
     expect(testFrog.url).toBe(url)
 })
 
+test('Test for createFrog price', async() => {
+    expect(testFrog.price).toBe(price)
+})
+
 test('Test for getFrogs', async() => {
     const froglist = await frogs.getFrogs()
     expect(froglist.length).toBeGreaterThan(0)
+})
+
+test('Test for getFrogPrice', async() => {
+    const frogPrice = await frogs.getFrogPrice(frogId)
+    expect(frogPrice).toBe(price)
 })
 
 test('Test for updateFrogName', async() => {

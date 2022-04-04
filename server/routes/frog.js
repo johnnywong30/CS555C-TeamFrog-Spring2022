@@ -47,16 +47,16 @@ router.route("/getFrogLink/:id").get(async (req, res) => {
 });
 router.route("/getFrogUrls").get(async (req, res) => {
 	try {
-		const link = await frogs.getFrogUrls();
-		return res.json(link);
+		const links = await frogs.getFrogUrls();
+		return res.json(links);
 	} catch (e) {
 		return res.status(200).json({ errorMsg: e }).end();
 	}
 });
 router.route("/getFrogs").get(async (req, res) => {
 	try {
-		const link = await frogs.getFrogs();
-		return res.json(link);
+		const frogList = await frogs.getFrogs();
+		return res.json(frogList);
 	} catch (e) {
 		return res.status(200).json({ errorMsg: e }).end();
 	}

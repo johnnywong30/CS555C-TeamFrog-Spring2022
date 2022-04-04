@@ -11,12 +11,12 @@ async function main() {
 
     const frogCollection = await db.collection('frogs')
     
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "0", "name": 'Green Frog', "url": "https://imgur.com/cScfraF.png"})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "1", "name": 'Yellow Frog', "url": "https://imgur.com/p5iRh9X.png"})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "2", "name": 'Blue Frog', "url": "https://imgur.com/Iyi0NpO.png"})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "3", "name": 'Purple Frog', "url": "https://imgur.com/vxiufc8.png"})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "4", "name": 'Purple Spotted Frog', "url": "https://imgur.com/BoMeidq.png"})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": "5", "name": 'Orange Spotted Frog', "url": "https://imgur.com/XchqGtg.png"})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 0, "name": 'Green Frog', "url": "https://imgur.com/cScfraF.png", price: 0})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 1, "name": 'Yellow Frog', "url": "https://imgur.com/p5iRh9X.png", price: 500})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 2, "name": 'Blue Frog', "url": "https://imgur.com/Iyi0NpO.png", price: 2000})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 3, "name": 'Purple Frog', "url": "https://imgur.com/vxiufc8.png", price: 5000})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 4, "name": 'Purple Spotted Frog', "url": "https://imgur.com/BoMeidq.png", price: 10000})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 5, "name": 'Orange Spotted Frog', "url": "https://imgur.com/XchqGtg.png", price: 20000})
     
     await dbConnection.closeConnection();
 }
