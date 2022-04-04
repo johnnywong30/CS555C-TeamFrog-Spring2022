@@ -4,7 +4,7 @@ import s3 from '../../constants/coketown.mp3'
 import s4 from '../../constants/snowdrop.mp3'
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure, color } from "@chakra-ui/react";
 import { MusicMenuItem } from './MusicMenuItem'
 import { AiFillDownCircle } from "react-icons/ai"
 import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
@@ -12,6 +12,7 @@ import { GiBlackBook } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import Logo from "../ui/Logo";
 import { useDispatch, useSelector } from 'react-redux'
+
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
     return (
@@ -51,8 +52,12 @@ const MenuIcon = () => (
 
 const Header = (props) => {
     const { money } = useSelector(({ auth }) => auth.user)
+    const { gradientPos } = useSelector(({ common }) => common)
+    console.log(gradientPos)
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
+
+    const colorScheme = gradientPos < 5 ? 'whiteAlpha' : 'blackAlpha'
 
     return (
         <Flex
@@ -76,14 +81,14 @@ const Header = (props) => {
                     />
                 </MenuItem>
                 <Menu>
-                    <MenuButton as={Button} rightIcon={<AiFillDownCircle />} colorScheme='green' variant='ghost' size='sm'>
+                    <MenuButton as={Button} rightIcon={<AiFillDownCircle />} colorScheme={colorScheme} variant='ghost' size='sm'>
                         Music
                     </MenuButton>
                     <MenuList>
-                        <MusicMenuItem src={s1} song={1} text={"Song 1"}></MusicMenuItem>
-                        <MusicMenuItem src={s2} song={2} text={"Song 2"}></MusicMenuItem>
-                        <MusicMenuItem src={s3} song={3} text={"Song 3"}></MusicMenuItem>
-                        <MusicMenuItem src={s4} song={4} text={"Song 4"}></MusicMenuItem>
+                        <MusicMenuItem src={s1} song={1} text={"Song 1"} colorScheme={colorScheme}></MusicMenuItem>
+                        <MusicMenuItem src={s2} song={2} text={"Song 2"} colorScheme={colorScheme}></MusicMenuItem>
+                        <MusicMenuItem src={s3} song={3} text={"Song 3"} colorScheme={colorScheme}></MusicMenuItem>
+                        <MusicMenuItem src={s4} song={4} text={"Song 4"} colorScheme={colorScheme}></MusicMenuItem>
                     </MenuList>
                 </Menu>
             </Flex>
@@ -103,30 +108,30 @@ const Header = (props) => {
                     pt={[4, 4, 0, 0]}
                 >
                     <MenuItem to="/collection">
-                        <Button leftIcon={<FaFrog/>} colorScheme='green' variant='ghost' size='sm'>
+                        <Button leftIcon={<FaFrog/>} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Frogs
                         </Button>
                     </MenuItem>
                     {/* <MenuItem to="/cyclefrogs">Changefrog</MenuItem> */}
                     <MenuItem to="/challenges">
-                        <Button leftIcon={<GiBlackBook/>} colorScheme='green' variant='ghost' size='sm'>
+                        <Button leftIcon={<GiBlackBook/>} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Challenges
                         </Button>
                     </MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}
                     <MenuItem to="/friends">
-                        <Button leftIcon={<FaUserFriends/>} colorScheme='green' variant='ghost' size='sm'>
+                        <Button leftIcon={<FaUserFriends/>} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Friends
                         </Button>    
                     </MenuItem>
                     <MenuItem to="/profile">
-                        <Button leftIcon={<CgProfile/>} colorScheme='green' variant='ghost' size='sm'>
+                        <Button leftIcon={<CgProfile/>} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Profile
                         </Button>
                     </MenuItem>
                     <MenuItem to="/store">
-                        <Button leftIcon={<FaCoins/>} colorScheme='green' variant='ghost' size='sm'>
+                        <Button leftIcon={<FaCoins/>} colorScheme={colorScheme} variant='ghost' size='sm'>
                             {money}
                         </Button>
                     </MenuItem>
@@ -136,10 +141,7 @@ const Header = (props) => {
                         <Button
                             size="sm"
                             rounded="md"
-                            color={["white", "white", "primary.500", "primary.500"]}
-                            _hover={{
-                                bg: ["primary.600", "primary.600", "white", "white"]
-                            }}
+                            colorScheme={colorScheme}
                             variant='ghost'
                         >
                             Log Out
