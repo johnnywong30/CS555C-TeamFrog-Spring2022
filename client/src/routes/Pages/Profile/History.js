@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import Heatmap from './Heatmap';
+import { summary } from 'date-streaks';
 
 
 import Mongo from '../../../services/mongo';
@@ -19,16 +20,16 @@ const History = () => {
     const measurement = user.measurement === 'imperial' ? 'cups' : 'liters'
     const parseAmount = amount => measurement === 'cups' ? round(amount) : round(amount * 0.236588)
 
+    const dateList = user.waterHistory.map(stat => new Date(moment(stat.timestamp).format("MM-DD-YYYY")))
+    const streak = summary(dateList).currentStreak
+
     const cleaned = user.waterHistory.map(stat => {
         return {
-            date: moment(stat.timestamp).format("YYYY-MM-DD"),
+            date: moment(stat.timestamp).format("MM-DD-YYYY"),
             timestamp: stat.timestamp,
             amount: parseAmount(stat.amount)
         }
     })
-
-    console.log(cleaned)
-
 
     let data = []
     for (const water of cleaned) {
@@ -46,7 +47,6 @@ const History = () => {
             obj.details = [...obj.details, { date: water.timestamp, value: water.amount }]
         }
     }
-    console.log(data)
 
     return (
         <Stack spacing="8">
@@ -78,6 +78,9 @@ const History = () => {
                         Water History
                     </Heading>
                     <Divider orientation='horizontal' />
+                    <Text >
+                        Current Streak: {streak}
+                    </Text>
                 </VStack >
                 <Heatmap data={data} measurement={measurement} />
             </Box>

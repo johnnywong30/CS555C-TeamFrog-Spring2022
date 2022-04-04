@@ -14,7 +14,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 
 const Heatmap = ({ data, measurement, ...rest }) => {
-    // TODO min date and max date
+    
 
     return (
         <>
