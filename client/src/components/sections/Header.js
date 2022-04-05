@@ -11,6 +11,9 @@ import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
 import { GiBlackBook } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import Logo from "../ui/Logo";
+
+import { logoutAuthUser } from '../../redux/actions/auth';
+
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -38,6 +41,8 @@ const CloseIcon = () => (
     </svg>
 );
 
+
+
 const MenuIcon = () => (
     <svg
         width="24px"
@@ -50,12 +55,19 @@ const MenuIcon = () => (
     </svg>
 );
 
+
+
 const Header = (props) => {
+    const dispatch = useDispatch()
     const { money } = useSelector(({ auth }) => auth.user)
     const { gradientPos } = useSelector(({ common }) => common)
-    console.log(gradientPos)
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        dispatch(logoutAuthUser())
+    }
 
     const colorScheme = gradientPos < 5 ? 'whiteAlpha' : 'blackAlpha'
 
@@ -137,7 +149,7 @@ const Header = (props) => {
                     </MenuItem>
 
 
-                    <MenuItem to="/logout" isLast>
+                    <MenuItem onClick={handleLogout} isLast>
                         <Button
                             size="sm"
                             rounded="md"

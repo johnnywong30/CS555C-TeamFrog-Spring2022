@@ -1,8 +1,10 @@
 import { GridItem, StackDivider, Stack, Text, IconButton, useBreakpointValue, useColorModeValue, VStack, useMergeRefs } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 import * as React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineMinusCircle } from "react-icons/ai"
+import { useHistory } from "react-router-dom";
 
 import Mongo from '../../../services/mongo';
 
@@ -12,6 +14,14 @@ export const Friend = React.forwardRef((props, ref) => {
     const { msg, status } = useSelector(({ common }) => common)
     const inputRef = React.useRef(null)
     const mergeRef = useMergeRefs(inputRef, ref)
+    let history = useHistory();
+
+    const someEventHandler = event => {
+        history.push({
+            friendCollection: true,
+            email: friendEmail
+        });
+     };
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -34,7 +44,13 @@ export const Friend = React.forwardRef((props, ref) => {
                 {/* <Text w="100%">{firstName}</Text>
                 <Text w="100%">{lastName}</Text> */}
                 {/* need to add a link here to view their frogs */}
-                <Text w="100%">View Frogs</Text>
+                <Link to={{
+                        pathname: "/collection",
+                        state: { friendEmail: friendEmail } 
+                    }}  
+                    w="100%">View Frogs
+                </Link>
+                
                 <IconButton icon={<AiOutlineMinusCircle/>} variant='outline' onClick={handleSubmit}/>
             </Stack>
         </GridItem>
