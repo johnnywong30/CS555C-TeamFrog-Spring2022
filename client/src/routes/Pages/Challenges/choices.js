@@ -14,11 +14,11 @@ const AllChallenges = () => {
     const { email, challenges, completedChallenges} = useSelector(({ auth }) => auth.user)
 
     const challengesArr = [
-        {name: 'Challenge 1', description: 'Drink 10 cups of water in a week'},
-        {name: 'Challenge 2', description: 'Drink 10 cups of water in a week'},
-        {name: 'Challenge 3', description: 'Drink 10 cups of water in a week'},
-        {name: 'Challenge 4', description: 'Drink 10 cups of water in a week'},
-        {name: 'Challenge 5', description: 'Drink 10 cups of water in a week'},
+        {name: 'Challenge 1', description: 'Drink 5 cups of water (40 fl oz) in a day.'},
+        {name: 'Challenge 2', description: 'Drink 35 cups of water (280 fl oz) in a week.'},
+        {name: 'Challenge 3', description: 'Refill your cup right after you finish drinking from it.'},
+        {name: 'Challenge 4', description: 'Drink 12 cups of water (96 fl oz) in a day.'},
+        {name: 'Challenge 5', description: 'Drink 84 cups of water (672 fl oz) in a week.'},
     ]
 
     const mappedChallenges = challengesArr.map(challenge => {
