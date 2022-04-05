@@ -65,7 +65,7 @@ test('Test for createUser measurement', async () => {
     expect(testUser.measurement).toStrictEqual('imperial')
 })
 test('Test for createUser titles', async () => {
-    expect(testUser.titles).toStrictEqual([0])
+    expect(testUser.titles).toStrictEqual(['Tadpole'])
 })
 test('Test for createUser email', async () => {
     expect(testUser.email).toBe(email)
@@ -129,6 +129,18 @@ test('Test for updateMeasurement', async () => {
     const measurement = 'metric'
     const updatedMeasurement = await users.updateMeasurement(email, measurement)
     expect(updatedMeasurement.measurement).toBe(measurement)
+})
+
+test('Test for addTitle', async () => {
+    const title = 'Beluga Frog'
+    const updated = await users.addTitle(email, title)
+    expect(updated.titles).toStrictEqual(['Tadpole', title])
+})
+
+test('Test for updateTitle', async () => {
+    const i = 1
+    const updated = await users.updateTitle(email, i)
+    expect(updated.title).toBe(i)
 })
 
 afterAll(async () => {
