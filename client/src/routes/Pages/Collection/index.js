@@ -3,60 +3,46 @@ import useSound from 'use-sound';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Mongo from '../../../services/mongo';
-import { SimpleGrid, Box, Image, Container, Heading} from "@chakra-ui/react";
+import { SimpleGrid, Box, Image, Container, Heading } from "@chakra-ui/react";
 import Layout from '../../../components/layouts/Layout'
-// import Grid from './Grid';
 import { useLocation } from "react-router";
 import audio from '../../../../src/constants/frog.wav';
 
 export const Collection = () => {
+    const dispatch = useDispatch()
     const { ownedFrogs, email } = useSelector(({ auth }) => auth.user)
-    const links = []
-    const[repo, setRepo]= useState([])
+    const { store } = useSelector(({ auth }) => auth)
+    const [friendFrogs, setFriendFrogs] = useState([])
     const [play] = useSound(audio);
-    const location = useLocation();
-    let frogEmail = ""
-    let owned = []
 
-    try {
-        //console.log(location.state.email);
-        frogEmail = location.state.email.friendEmail
-        //console.log(email)
-    } catch (e) {
-        //console.log('failed')
-        frogEmail = email
-        //console.log(frogEmail)
-    }
-    const getOwned = () => {
-        axios.get(`/frog/getOwnedFrogs/${frogEmail}`).then(response => {
-            const ownedFrogArray = response.data;
-            console.log(ownedFrogArray)         
+    const location = useLocation();
+    const friendEmail = location?.state?.friendEmail
+
+    const frogEmail = friendEmail !== undefined ? friendEmail : email
+    const mysteryFrogUrl = 'https://imgur.com/VJeksGH.png'
+
+    const getFriendFrogs = async () => {
+        axios.get(`/user/getOwnedFrogs/${frogEmail}`).then(response => {
+            const friendOwnedFrogs = response.data;
+            setFriendFrogs(friendOwnedFrogs)
         });
     };
-    const getRepo = () => {
-		axios.get(`/frog/getFrogUrls`).then(response => {
-			const myRepo = response.data;
-			setRepo(myRepo);
-		});
-	};
-    useEffect(() => getRepo(), []);
 
-    
-    for (let i = 0; i < repo.length; i++) {
-        const frogID = ownedFrogs[i]
-        if (frogID === undefined) {
-            links.push("https://imgur.com/VJeksGH.png")
-        }
-        else {
-            links.push(repo[frogID].url)
-        }
+    const getFrogs = async () => {
+        dispatch(Mongo.getFrogList())
     }
+
+    useEffect(async () => {
+        await getFrogs()
+        if (friendEmail !== undefined) await getFriendFrogs()
+    }, []);
+
     return (
         <Layout>
-          <Heading color='white'>Frog Collection</Heading>
-          <br/>
-          <p class='collectionText'>Click your frog friend to pet them!</p>
-          <Container maxW='container.md'
+            <Heading color='white'>Frog Collection</Heading>
+            <br />
+            <p class='collectionText'>Click your frog friend to pet them!</p>
+            <Container maxW='container.md'
                 py={{
                     base: '20',
                     md: '24',
@@ -66,15 +52,21 @@ export const Collection = () => {
                     base: '0',
                     sm: '2',
                 }}>
-                    <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
-                        {links.map((url) => (
-                        <Box onClick={play} height='225px'>
-                        <Image
-                            src={url}
-                        />
-                        </Box>))}
-                    </SimpleGrid>
+                <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
+                    {store.map(frog => {
+                        const { _id, frogId, url } = frog
+                        const owned = friendEmail !== undefined ? friendFrogs.includes(frogId) : ownedFrogs.includes(frogId)
+                        const onClick = owned ? play : console.log('Mystery ribbit')
+                        const imgUrl = owned ? url : mysteryFrogUrl
+                        return (
+                            <Box key={_id} onClick={onClick} height='225px'>
+                                <Image src={imgUrl}/>
+                            </Box>
+                        )
+                    })}
+
+                </SimpleGrid>
             </Container>
         </Layout>
-      );
+    );
 }

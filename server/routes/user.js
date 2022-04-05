@@ -100,10 +100,9 @@ router
 router
     .route('/getOwnedFrogs/:email')
     .get(async (req, res) => {
-        //get users
         try {
             const email = req.params.email
-            let userInfo = await users.getUser(email)
+            const userInfo = await users.getUser(email)
             res.json(userInfo[0].ownedFrogs).end()
         } catch (e) {
             console.log(e)

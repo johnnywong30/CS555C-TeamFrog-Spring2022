@@ -46,7 +46,7 @@ export const Friend = React.forwardRef((props, ref) => {
                 {/* need to add a link here to view their frogs */}
                 <Link to={{
                         pathname: "/collection",
-                        state: { email: {friendEmail} } 
+                        state: { friendEmail: friendEmail } 
                     }}  
                     w="100%">View Frogs
                 </Link>

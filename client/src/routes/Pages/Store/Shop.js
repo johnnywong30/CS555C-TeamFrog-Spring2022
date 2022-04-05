@@ -12,6 +12,7 @@ const Shop = () => {
 	const { ownedFrogs } = useSelector(({ auth }) => auth.user);
 	const { store } = useSelector(({ auth }) => auth)
 	const { msg, status, loading } = useSelector(({ common }) => common);
+	
 	const getFrogs = () => {
 		dispatch(Mongo.getFrogList())
 	}
