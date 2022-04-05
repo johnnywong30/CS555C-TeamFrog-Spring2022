@@ -3,7 +3,9 @@ const { MongoCursorInUseError } = require("mongodb");
 const router = express.Router();
 const users = require("../data/users");
 
-router.route("/updateFirstName").post(async (req, res) => {
+router
+    .route("/updateFirstName")
+    .post(async (req, res) => {
 	try {
 		const { email, firstName } = req.body;
 		const user = await users.updateFirstName(email, firstName);
@@ -15,7 +17,8 @@ router.route("/updateFirstName").post(async (req, res) => {
 	}
 })
 router
-    .route('/updateMoney').post(async (req, res) => {
+    .route('/updateMoney')
+    .post(async (req, res) => {
     try {
       const { email, money } = req.body;
       const user = await users.updateMoney(email, money);
@@ -93,6 +96,22 @@ router
             res.status(200).json({ errorMsg: e }).end()
         }
     })
+
+
+router
+    .route('/purchaseFrog')
+    .post(async (req, res) => {
+        try {
+            const { email, frogName } = req.body
+            const user = await users.purchaseFrog(email, frogName)
+            res.json(user).end()
+        } catch (e) {
+            console.log(e)
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    }) 
 // TODO: the rest of the update routes
 
 module.exports = router;
