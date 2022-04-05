@@ -1,5 +1,6 @@
 import { onRegister, onLogin } from "./auth";
 import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateCompletedChallenges, removeFriend, updateMeasurement, purchaseFrog } from './user'
+import { addTitle, updateTitle } from "./user";
 import { insertWater, getWater, getWaterHistory } from './water'
 import { getFrogList } from "./frog";
 
@@ -23,7 +24,10 @@ const Mongo = {
     getWaterHistory: getWaterHistory,
     // Frogs
     purchaseFrog: purchaseFrog,
-    getFrogList: getFrogList
+    getFrogList: getFrogList,
+    // Titles
+    addTitle: addTitle,
+    updateTitle: updateTitle
 }
 
 export default Mongo;

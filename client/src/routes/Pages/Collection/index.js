@@ -7,6 +7,7 @@ import { SimpleGrid, Box, Image, Container, Heading, Text } from "@chakra-ui/rea
 import Layout from '../../../components/layouts/Layout'
 import { useLocation } from "react-router";
 import audio from '../../../../src/constants/frog.wav';
+import Titles from './Titles';
 
 export const Collection = () => {
     const dispatch = useDispatch()
@@ -39,12 +40,11 @@ export const Collection = () => {
 
     return (
         <Layout>
-            <Heading color='white'>Frog Collection</Heading>
-            {friendEmail !== undefined &&
-                <Text m={3} size='sm'>{friendEmail}'s Frogs</Text>
-            }
+            <Heading color='white'>
+                {friendEmail !== undefined ? `${friendEmail}'s` : ''} Frog Collection
+            </Heading>
             <Text m={1} size='sm'>Click a frog friend to pet them!</Text>
-
+            <Titles />
             <Container maxW='container.md'
                 py={{
                     base: '20',
@@ -67,7 +67,6 @@ export const Collection = () => {
                             </Box>
                         )
                     })}
-
                 </SimpleGrid>
             </Container>
         </Layout>
