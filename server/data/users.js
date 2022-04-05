@@ -219,6 +219,25 @@ module.exports = {
             successMsg: 'Successfully updated Challenge'
         }
     },
+    async updateCompletedChallenges(_email, _completedChallenge){
+        const email = checkStr(_email)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$push: {completedChallenges: _completedChallenge}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully updated Completed Challenge'
+        }
+    },
     async updateFriendsList(_email, _friendEmail) {
         const email = checkStr(_email)
         const friendEmail = checkStr(_friendEmail)
