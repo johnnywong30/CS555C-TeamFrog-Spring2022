@@ -32,7 +32,7 @@ const Select = () => {
                 }}
                 backgroundColor = 'white'
             >
-                <Stack spacing="5">
+                <Stack spacing="3">
                     <VStack>
                         <Heading orientation="horizontal" size="lg">
                             Challenges

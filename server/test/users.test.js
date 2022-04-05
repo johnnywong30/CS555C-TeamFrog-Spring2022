@@ -104,9 +104,15 @@ test('Test for updateCompany', async () => {
 })
 
 test('Test for updateChallenge', async () => {
-    const challenge = 'challenge1'
+    const challenge = 'Challenge 1'
     const updatedChallenge = await users.updateChallenges(email, challenge)
     expect(updatedChallenge.challenges[0]).toBe(challenge)
+})
+
+test('Test for updateCompletedChallenge', async () => {
+    const completedChallenge = 'Challenge 1'
+    const updatedCompletedChallenge = await users.updateCompletedChallenges(email, completedChallenge)
+    expect(updatedCompletedChallenge.completedChallenges[0]).toBe('Challenge 1')
 })
 
 test('Test for addFriend', async () => {

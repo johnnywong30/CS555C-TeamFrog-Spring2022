@@ -106,7 +106,6 @@ export const updateChallenges = (email, challenge) => {
             email: email,
             challenge: challenge
         }
-        console.log(reqBody)
         try {
             dispatch(startLoading())
             const { data } = await axios.post('/challenge/updateChallenges', reqBody)
@@ -119,6 +118,29 @@ export const updateChallenges = (email, challenge) => {
             dispatch(endLoading())
         } catch (error) {
             console.log("There was an error in updateChallenge...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+export const updateCompletedChallenges = (email, completedChallenge) => {
+    return async dispatch => {
+        const reqBody = {
+            email: email,
+            completedChallenge: completedChallenge
+        }
+        try {
+            dispatch(startLoading())
+            const { data } = await axios.post('/challenge/updateCompletedChallenges', reqBody)
+            const { successMsg, errorMsg } = data
+            if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateCompletedChallenges...", error)
             dispatch(notifyFail(error.message))
             dispatch(endLoading())
         }
