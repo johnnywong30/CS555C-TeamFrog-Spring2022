@@ -13,25 +13,23 @@ const Grid = () => {
     const[repo, setRepo]= useState([])
     const [play] = useSound(audio);
 
-    const getRepo = () => {
-        axios.get(`/frog/getFrogUrls`)
-        .then(response => {
-            const myRepo = response.data;
-            setRepo(myRepo)                
-        });
-    };
+	const getRepo = () => {
+		axios.get(`/frog/getFrogUrls`).then(response => {
+			const myRepo = response.data;
+			setRepo(myRepo);
+		});
+	};
 
-    useEffect(() => getRepo(), []);
+	useEffect(() => getRepo(), []);
 
-    for (let i = 0; i < repo.length; i++) {
-        const frogID = ownedFrogs[i]
-        if (frogID === undefined) {
-            links.push("https://imgur.com/VJeksGH.png")
-        }
-        else {
-            links.push(repo[frogID].url)
-        }
-    }
+	for (let i = 0; i < repo.length; i++) {
+		const frogID = ownedFrogs[i];
+		if (frogID === undefined) {
+			links.push("https://imgur.com/VJeksGH.png");
+		} else {
+			links.push(repo[frogID].url);
+		}
+	}
 
     return (
         <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
@@ -45,4 +43,4 @@ const Grid = () => {
     )
 }
 
-export default Grid
+export default Grid;

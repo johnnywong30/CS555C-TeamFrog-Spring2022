@@ -1,6 +1,7 @@
 import { onRegister, onLogin } from "./auth";
-import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, removeFriend, updateMeasurement } from './user'
+import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateCompletedChallenges, removeFriend, updateMeasurement, purchaseFrog } from './user'
 import { insertWater, getWater, getWaterHistory } from './water'
+import { getFrogList } from "./frog";
 
 const Mongo = {
     // Authentication
@@ -11,6 +12,7 @@ const Mongo = {
     updateLastName: updateLastName,
     updateCompany: updateCompany,
     updateChallenges: updateChallenges,
+    updateCompletedChallenges: updateCompletedChallenges,
     updateMeasurement: updateMeasurement,
     addFriend: addFriend,
     removeFriend: removeFriend,
@@ -18,7 +20,10 @@ const Mongo = {
     // Water
     insertWater: insertWater,
     getWater: getWater, 
-    getWaterHistory: getWaterHistory
+    getWaterHistory: getWaterHistory,
+    // Frogs
+    purchaseFrog: purchaseFrog,
+    getFrogList: getFrogList
 }
 
 export default Mongo;

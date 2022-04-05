@@ -12,7 +12,7 @@ module.exports = {
         if (! num) throw new Error(`number does not exist!`)
         const ret = Number(num)
         if (typeof ret !== 'number' || isNaN(ret)) throw `input is not a number!`
-        return ret.toString()
+        return ret
     },
     checkId(id) {
         if ( ! id) throw 'id does not exist'
@@ -21,5 +21,11 @@ module.exports = {
         if (trimmed.length < 1) throw 'id cannot be empty'
         if (! ObjectId.isValid(id)) throw 'id is not valid'
         return trimmed
+    },
+    checkFrogId(id) {
+        if (! id) throw new Error(`number does not exist!`)
+        const ret = Number(id)
+        if (typeof ret !== 'number' || isNaN(ret)) throw `input is not a number!`
+        return ret
     }
 }

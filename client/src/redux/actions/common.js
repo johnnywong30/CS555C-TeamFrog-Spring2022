@@ -48,3 +48,12 @@ export const notifySet = (msg) => {
         })
     }
 }
+
+export const setGradient = (pos) => {
+    return async dispatch => {
+        dispatch({
+            type: "SET_GRADIENT",
+            payload: pos
+        })
+    }
+}

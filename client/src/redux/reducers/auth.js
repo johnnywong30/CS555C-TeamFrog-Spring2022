@@ -2,7 +2,8 @@ import { User } from "../../models/User";
 
 const INIT_STATE = {
     user: {},
-    auth: false
+    auth: false,
+    store: []
 }
 
 const authReducer = (state = INIT_STATE, action) => {
@@ -24,12 +25,15 @@ const authReducer = (state = INIT_STATE, action) => {
         // It's just that we should keep the semantics consistent
         // With the actual action we're trying to accomplish
         case "UPDATE_USER":
-            console.log('i am this reducer')
-            console.log(payload)
             return {
                 ...state,
                 user: new User(payload),
                 auth: true
+            }
+        case "LOAD_STORE":
+            return {
+                ...state,
+                store: payload
             }
         default:
             return state

@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
-import { Box, Button, Flex, Image, Heading, Stack, Text, HStack, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Heading, Stack, Text, HStack, VStack, StackDivider } from "@chakra-ui/react";
 import Mongo from "../../../services/mongo";
 import { useDispatch, useSelector } from "react-redux";
 import { notifyClear } from "../../../redux/actions/common";
+import { FaCoins } from 'react-icons/fa'
 
-export const Listing = ({ frogLink, frogName, price }) => {
+export const Listing = ({ frogLink, frogName, price, own }) => {
 	const dispatch = useDispatch();
 	const { email, money } = useSelector(({ auth }) => auth.user);
 	const { msg, status, loading } = useSelector(({ common }) => common);
-	const [purchased, setState] = useState({ colorScheme: "primary", text: price });
 
-	const handleClear = e => {
+	const scheme = own ? "red" : "primary"
+	const text = own ? "Owned" : price
+
+	const handlePurchase = e => {
 		e.preventDefault();
-		dispatch(notifyClear());
-	};
-
-	const purchase = () => {
-		if (purchased.colorScheme === "primary") {
-			setState({ colorScheme: "red", text: "Purchased" });
-			// TODO: fix backend componenets to allow for money change
-			// dispatch(Mongo.updateMoney(email, money - parseInt(price)));
-		}
-	};
+		if (! own) dispatch(Mongo.purchaseFrog(email, frogName))
+	}
 
 	return (
-		<VStack align="stretch" alignItems="center" spacing="4px">
-			<Heading color="white">{frogName}</Heading>
-			<Image src={frogLink} size="100%" />
-			<Button onClick={purchase} w="100%" colorScheme={purchased.colorScheme} borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
-				{purchased.text}
+		<VStack
+			align="stretch"
+			alignItems="center"
+			spacing="8px"
+			border="4px"
+			borderColor="white"
+			rounded="1rem"
+			divider={<StackDivider borderColor="white" borderWidth="4px" />}>
+			<Heading size="md" color="white">
+				{frogName}
+			</Heading>
+			<Image src={frogLink} boxSize="235px" />
+			<Button leftIcon={!own ? <FaCoins/> : <></>} onClick={handlePurchase} h="50%" w="80%" colorScheme={scheme} borderRadius="8px" py="2" px="4" lineHeight="1" size="md">
+				{text}
 			</Button>
 		</VStack>
 	);
