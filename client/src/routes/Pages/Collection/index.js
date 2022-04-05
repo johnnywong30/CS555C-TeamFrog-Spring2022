@@ -3,7 +3,7 @@ import useSound from 'use-sound';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Mongo from '../../../services/mongo';
-import { SimpleGrid, Box, Image, Container, Heading } from "@chakra-ui/react";
+import { SimpleGrid, Box, Image, Container, Heading, Text } from "@chakra-ui/react";
 import Layout from '../../../components/layouts/Layout'
 import { useLocation } from "react-router";
 import audio from '../../../../src/constants/frog.wav';
@@ -40,8 +40,11 @@ export const Collection = () => {
     return (
         <Layout>
             <Heading color='white'>Frog Collection</Heading>
-            <br />
-            <p class='collectionText'>Click your frog friend to pet them!</p>
+            {friendEmail !== undefined &&
+                <Text m={3} size='sm'>{friendEmail}'s Frogs</Text>
+            }
+            <Text m={1} size='sm'>Click a frog friend to pet them!</Text>
+
             <Container maxW='container.md'
                 py={{
                     base: '20',
