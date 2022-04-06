@@ -43,27 +43,28 @@ export const Collection = () => {
             <Heading color='white'>
                 {friendEmail !== undefined ? `${friendEmail}'s` : ''} Frog Collection
             </Heading>
-            <Text m={1} size='sm'>Click a frog friend to pet them!</Text>
+            <Text m={1} mt={2} size='sm'>Click a frog friend to pet them!</Text>
+            <Text mb={1} size='sm'>You can also select your Frog Title below.</Text>
             <Titles />
             <Container maxW='container.md'
                 py={{
-                    base: '20',
-                    md: '24',
+                    base: '12',
+                    md: '6',
                 }
                 }
                 px={{
                     base: '0',
                     sm: '2',
                 }}>
-                <SimpleGrid columns={4} spacingX='10px' spacingY='10px'>
+                <SimpleGrid columns={3} spacing={10}>
                     {store.map(frog => {
                         const { _id, frogId, url } = frog
                         const owned = friendEmail !== undefined ? friendFrogs.includes(frogId) : ownedFrogs.includes(frogId)
                         const onClick = owned ? play : console.log('Mystery ribbit')
                         const imgUrl = owned ? url : mysteryFrogUrl
                         return (
-                            <Box key={_id} onClick={onClick} height='225px'>
-                                <Image src={imgUrl}/>
+                            <Box key={_id} height='225px'>
+                                <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl"/>
                             </Box>
                         )
                     })}
