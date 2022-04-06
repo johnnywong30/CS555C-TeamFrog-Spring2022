@@ -45,7 +45,7 @@ export const Collection = () => {
             </Heading>
             <Text m={1} mt={2} size='sm'>Click a frog friend to pet them!</Text>
             <Text mb={1} size='sm'>You can also select your Frog Title below.</Text>
-            <Titles />
+            {friendEmail === undefined && <Titles />}
             <Container maxW='container.md'
                 py={{
                     base: '12',
