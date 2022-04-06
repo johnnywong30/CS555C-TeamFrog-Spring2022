@@ -40,7 +40,7 @@ export const Collection = () => {
     }, []);
 
     const selectFrog = (e) => {
-        console.log(e.target.value)
+        dispatch(Mongo.updateFrog(email, e.target.value))
     }
 
     return (

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Box, Center, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
 
-export default function Hero({ title, subtitle, image, imageCaption, ctaLink, ctaText, ctaAction, ...rest }) {
+export default function Hero({ title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, ...rest }) {
   return (
     <Flex
       align="center"
@@ -57,7 +57,7 @@ export default function Hero({ title, subtitle, image, imageCaption, ctaLink, ct
         <Center>
           <Text color='white' fontSize='lg' textAlign={'center'} mr={9}>{imageCaption}</Text>
         </Center>
-        <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+        <Image onClick={imageOnClick} src={image} size="100%" rounded="1rem" shadow="2xl" />
       </Box>
 
     </Flex>
