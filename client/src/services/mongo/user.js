@@ -240,4 +240,77 @@ export const purchaseFrog = (email, frogName) => {
         }
     }
 }
+
+export const addTitle = (email, title) => {
+	return async dispatch => {
+		const reqBody = {
+			email: email,
+			title: title
+		}
+		try {
+			dispatch(startLoading())
+            const { data } = await axios.post('/user/addTitle', reqBody)
+            const { successMsg, errorMsg } = data
+			if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in addTitle...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+
+export const updateTitle = (email, titleIndex) => {
+	return async dispatch => {
+		const reqBody = {
+			email: email,
+			titleIndex: titleIndex
+		}
+		try {
+			dispatch(startLoading())
+            const { data } = await axios.post('/user/updateTitle', reqBody)
+            const { successMsg, errorMsg } = data
+			if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateTitle...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+
+export const updateFrog = (email, frogId) => {
+    return async dispatch => {
+		const reqBody = {
+			email: email,
+			frogId: frogId
+		}
+		try {
+			dispatch(startLoading())
+            const { data } = await axios.post('/user/updateFrog', reqBody)
+            const { successMsg, errorMsg } = data
+			if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateFrog...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+
 // TODO: update mongo actions for the other user fields like water, titles, etc.

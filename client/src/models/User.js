@@ -5,6 +5,7 @@ export class User {
         this.email = user.email
         this.company = user.company
         this.ownedFrogs = user.ownedFrogs
+        this.frog = user.frog
         this.friends = user.friends
         this.money = user.money
         this.prestige = user.prestige

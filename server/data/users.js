@@ -1,4 +1,4 @@
-const { checkStr, checkNum } = require("../misc/validate");
+const { checkStr, checkNum, checkFrogId } = require("../misc/validate");
 const { users } = require("../config/mongoCollections");
 const frogs = require('./frogs')
 const { ObjectId } = require("mongodb");
@@ -61,9 +61,9 @@ module.exports = {
 			completedChallenges: [],
 			// preferred system: metric vs imperial
 			measurement: "imperial", // we are flawed Americans
-			// titles is an array of title ids that this user has obtained
-			// 0 is 'Tadpole'
-			titles: [0],
+			// titles is an array of titles that this user has obtained
+			// 'Tadpole'
+			titles: ['Tadpole'],
 			// title is the currently selected title
 			title: 0,
 		};
@@ -347,7 +347,70 @@ module.exports = {
             password: 'thats not very froggers of you',
             successMsg: 'Successfully purchased frog'
         }
-        
+    },
+    async addTitle(_email, _title) {
+        const email = checkStr(_email)
+        const title = checkStr(_title)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$push: {titles: title}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
+
+    },
+    async updateTitle(_email, _titleIndex) {
+        const email = checkStr(_email)
+        const titleIndex = checkNum(_titleIndex)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: {title: titleIndex}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
+    },
+    async updateFrog(_email, _frogId) {
+        const email = checkStr(_email)
+        const frogId = checkFrogId(_frogId)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: {frog: frogId}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
     }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
