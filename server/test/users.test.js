@@ -143,6 +143,12 @@ test('Test for updateTitle', async () => {
     expect(updated.title).toBe(i)
 })
 
+test('Test for updateFrog', async () => {
+    const i = 69
+    const updated = await users.updateFrog(email, i)
+    expect(updated.frog).toBe(updated)
+})
+
 afterAll(async () => {
     await users.deleteUser(email)
     await users.deleteUser(email2)

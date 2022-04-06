@@ -39,6 +39,10 @@ export const Collection = () => {
         if (friendEmail !== undefined) await getFriendFrogs()
     }, []);
 
+    const selectFrog = (e) => {
+        console.log(e.target.value)
+    }
+
     return (
         <Layout>
             <Heading color='white'>
@@ -70,11 +74,10 @@ export const Collection = () => {
                                 <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
                                 {(friendEmail === undefined && owned) &&
                                     <Center>
-                                        <Button size='sm' variant='unstyled' colorScheme='blackAlpha' isDisabled={selected} leftIcon={<GiFrogFoot />}>
+                                        <Button value={frogId} onClick={selectFrog} size='sm' variant='unstyled' colorScheme='blackAlpha' isDisabled={selected} leftIcon={<GiFrogFoot />}>
                                             {buttonText}
                                         </Button>
                                     </Center>
-
                                 }
                             </Box>
                         )
