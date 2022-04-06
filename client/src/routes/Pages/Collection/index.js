@@ -3,15 +3,16 @@ import useSound from 'use-sound';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Mongo from '../../../services/mongo';
-import { SimpleGrid, Box, Image, Container, Heading, Text } from "@chakra-ui/react";
+import { Button, Center, SimpleGrid, Box, Image, Container, Heading, Text } from "@chakra-ui/react";
 import Layout from '../../../components/layouts/Layout'
 import { useLocation } from "react-router";
+import { GiFrogFoot } from 'react-icons/gi'
 import audio from '../../../../src/constants/frog.wav';
 import Titles from './Titles';
 
 export const Collection = () => {
     const dispatch = useDispatch()
-    const { ownedFrogs, email } = useSelector(({ auth }) => auth.user)
+    const { ownedFrogs, email, frog } = useSelector(({ auth }) => auth.user)
     const { store } = useSelector(({ auth }) => auth)
     const [friendFrogs, setFriendFrogs] = useState([])
     const [play] = useSound(audio);
@@ -57,14 +58,24 @@ export const Collection = () => {
                     sm: '2',
                 }}>
                 <SimpleGrid columns={3} spacing={10}>
-                    {store.map(frog => {
-                        const { _id, frogId, url } = frog
+                    {store.map(element => {
+                        const { _id, frogId, url } = element
                         const owned = friendEmail !== undefined ? friendFrogs.includes(frogId) : ownedFrogs.includes(frogId)
                         const onClick = owned ? play : console.log('Mystery ribbit')
                         const imgUrl = owned ? url : mysteryFrogUrl
+                        const selected = frogId === frog
+                        const buttonText = selected ? 'Selected' : 'Select'
                         return (
-                            <Box key={_id} height='225px'>
-                                <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl"/>
+                            <Box key={_id} height='275px' mb={'1rem'}>
+                                <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
+                                {(friendEmail === undefined && owned) &&
+                                    <Center>
+                                        <Button size='sm' variant='unstyled' colorScheme='blackAlpha' isDisabled={selected} leftIcon={<GiFrogFoot />}>
+                                            {buttonText}
+                                        </Button>
+                                    </Center>
+
+                                }
                             </Box>
                         )
                     })}

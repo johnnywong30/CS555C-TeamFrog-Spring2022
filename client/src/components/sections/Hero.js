@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
 
 export default function Hero({ title, subtitle, image, imageCaption, ctaLink, ctaText, ctaAction, ...rest }) {
   return (
@@ -54,10 +54,12 @@ export default function Hero({ title, subtitle, image, imageCaption, ctaLink, ct
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         {/* TODO: Make this change every X secs */}
-        <Text color='white'fontSize='lg' textAlign={'center'} mr={9}>{imageCaption}</Text>
+        <Center>
+          <Text color='white' fontSize='lg' textAlign={'center'} mr={9}>{imageCaption}</Text>
+        </Center>
         <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
       </Box>
-      
+
     </Flex>
   );
 }
