@@ -73,7 +73,10 @@ test('Test for createUser email', async () => {
 test('Test for createUser title', async () => {
     expect(testUser.title).toBe(0)
 })
-test('Test for createUser frog default selection', async() => {
+test('Test for createUser default frog', async () => {
+    expect(testUser.frog).toBe(0)
+})
+test('Test for createUser frogNames default', async() => {
     expect(testUser.frogNames[0]).toBe({id: 0, name: "Green Frog"})
 })
 
