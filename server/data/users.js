@@ -411,6 +411,9 @@ module.exports = {
             password: 'thats not very froggers of you',
             successMsg: 'Successfully purchased frog'
         }
+    },
+    async updateFrogName(_email, _frogId, _name, _newName) {
+        
     }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
