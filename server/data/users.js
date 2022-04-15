@@ -68,7 +68,8 @@ module.exports = {
 			title: 0,
             //frog is the currently selected frog
             frog: 0,
-            //frogNames is an array of objects, with frogId and frogName. defaulted with 0
+            // frogNames is an array of objects, with frogId and frogName. defaulted with 0
+            // used to keep track of the user's current names of the frogs
             frogNames: [
                 {
                     id: 0,
@@ -341,7 +342,7 @@ module.exports = {
         const { frogId, name, price } = frog
         if (user.ownedFrogs.includes(frogId)) throw 'This user owns this frog already'
         if (price > user.money) throw 'User cannot afford this frog'
-        const updatedFrogName = {frogId: frogId, name: name}
+        const updatedFrogName = {frogId: frogId, name: name} //for the frogNames array
         const updatedMoney = user.money - price
         const collection = await users()
         const updateInfo = await collection.updateOne(
@@ -423,7 +424,7 @@ module.exports = {
             successMsg: 'Successfully purchased frog'
         }
     },
-    async updateFrogName(_email, _frogId, _name, _newName) {
+    async updateFrogName(_email, _frogId, _newName) {
         const email = checkStr(_email)
         const frogId = checkFrogId(_frogId)
         const userExists = await this.getUser(email)
