@@ -430,7 +430,23 @@ module.exports = {
         const userExists = await this.getUser(email)
         if (userExists.length < 1) throw 'This user does not exist'
         const user = userExists[0]
+        const frogOwned = user.frogNames.filter((id) => id === frogId)
+        if (frogOwned.length < 1) throw `This user does not own frog with frogId ${frogId}`
+        const updatedFrogNames = user.frogNames.map((object) => (object.id === frogId) ? {id: frogId, name: _newName} : object)
         const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: {frogNames: updatedFrogNames}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user's frogNames successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
     }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
