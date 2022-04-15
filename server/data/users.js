@@ -66,6 +66,15 @@ module.exports = {
 			titles: ['Tadpole'],
 			// title is the currently selected title
 			title: 0,
+            //frog is the currently selected frog
+            frog: 0,
+            //frogNames is an array of objects, with frogId and frogName. defaulted with 0
+            frogNames: [
+                {
+                    id: 0,
+                    name: "Green Frog"
+                }
+            ]
 		};
 		const insertInfo = await collection.insertOne(newUser);
 		if (!insertInfo.acknowledged || !insertInfo.insertedId) throw "Could not register user";
@@ -413,7 +422,12 @@ module.exports = {
         }
     },
     async updateFrogName(_email, _frogId, _name, _newName) {
-        
+        const email = checkStr(_email)
+        const frogId = checkFrogId(_frogId)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const collection = await users()
     }
     // TODO: do the rest of the updates, Johnny doesn't have to do them yet because they're not part of his user stories
 }
