@@ -13,6 +13,7 @@ export const FrogCharities = React.forwardRef((props, ref) => {
         <>
           <Button ref={btnRef} colorScheme={colorScheme} variant='ghost' size='sm' onClick={onOpen}>
             Frog Charities
+            {console.log("hi")}
           </Button>
           <Drawer
             isOpen={isOpen}

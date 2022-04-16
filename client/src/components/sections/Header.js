@@ -149,10 +149,7 @@ const Header = (props) => {
                         </Button>
                     </MenuItem>
                     {/* drawer for frogcharities */}
-                    <MenuItem>
-                        <FrogCharities colorScheme={colorScheme}></FrogCharities>
-                    </MenuItem>
-
+                    <FrogCharities colorScheme={colorScheme}></FrogCharities>
                     <MenuItem onClick={handleLogout} isLast>
                         <Button
                             size="sm"
