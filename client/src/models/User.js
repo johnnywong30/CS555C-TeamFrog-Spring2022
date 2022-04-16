@@ -16,5 +16,6 @@ export class User {
         this.measurement = user.measurement
         this.titles = user.titles
         this.title = user.title
+        this.frogNames = user.frogNames
     }
 }

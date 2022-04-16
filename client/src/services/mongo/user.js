@@ -313,4 +313,31 @@ export const updateFrog = (email, frogId) => {
     }
 }
 
+// tell the server to update the frog name
+export const updateFrogName = (email, frogId, newName) => {
+    return async dispatch => {
+        const reqBody = {
+            email: email,
+            frogId: frogId,
+            newName: newName
+        }
+        try {
+			dispatch(startLoading())
+            const { data } = await axios.post('/user/updateFrogName', reqBody)
+            console.log(data)
+            const { successMsg, errorMsg } = data
+			if (successMsg) {
+                dispatch(notifySuccess(successMsg)) 
+                dispatch(updateUser(data))
+            }
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in updateFrogName...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+
 // TODO: update mongo actions for the other user fields like water, titles, etc.

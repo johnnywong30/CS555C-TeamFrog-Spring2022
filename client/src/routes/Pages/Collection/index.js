@@ -9,10 +9,11 @@ import { useLocation } from "react-router";
 import { GiFrogFoot } from 'react-icons/gi'
 import audio from '../../../../src/constants/frog.wav';
 import Titles from './Titles';
+import { FrogName } from './FrogName'
 
 export const Collection = () => {
     const dispatch = useDispatch()
-    const { ownedFrogs, email, frog } = useSelector(({ auth }) => auth.user)
+    const { ownedFrogs, email, frog, frogNames } = useSelector(({ auth }) => auth.user)
     const { store } = useSelector(({ auth }) => auth)
     const [friendFrogs, setFriendFrogs] = useState([])
     const [play] = useSound(audio);
@@ -63,14 +64,19 @@ export const Collection = () => {
                 }}>
                 <SimpleGrid columns={3} spacing={10}>
                     {store.map(element => {
-                        const { _id, frogId, url } = element
+                        const { _id, frogId, url, name } = element
                         const owned = friendEmail !== undefined ? friendFrogs.includes(frogId) : ownedFrogs.includes(frogId)
                         const onClick = owned ? play : console.log('Mystery ribbit')
                         const imgUrl = owned ? url : mysteryFrogUrl
                         const selected = frogId === frog
                         const buttonText = selected ? 'Selected' : 'Select'
+                        // Get the name of the user's frog so we can update the button text
+                        const checkName = frogNames.find(obj => obj.id === frogId)
+                        const frogName = (checkName !== undefined && owned) ? checkName.name : ""
+                        // currently does not display friends' custom names for frogs and only displays user's
                         return (
                             <Box key={_id} height='275px' mb={'1rem'}>
+                                <FrogName frogId={frogId} frogName={frogName} defaultName={""} isDisabled={!owned} friendEmail={friendEmail !== undefined}></FrogName>
                                 <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
                                 {(friendEmail === undefined && owned) &&
                                     <Center>

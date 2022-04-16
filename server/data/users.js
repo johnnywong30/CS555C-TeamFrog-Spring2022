@@ -66,6 +66,16 @@ module.exports = {
 			titles: ['Tadpole'],
 			// title is the currently selected title
 			title: 0,
+            //frog is the currently selected frog
+            frog: 0,
+            // frogNames is an array of objects, with frogId and frogName. defaulted with 0
+            // used to keep track of the user's current names of the frogs
+            frogNames: [
+                {
+                    id: 0,
+                    name: "Green Frog"
+                }
+            ]
 		};
 		const insertInfo = await collection.insertOne(newUser);
 		if (!insertInfo.acknowledged || !insertInfo.insertedId) throw "Could not register user";
@@ -329,14 +339,15 @@ module.exports = {
         const frogExists = await frogs.getFrog(frogName)
         if (frogExists.length < 1) throw 'This frog does not exist'
         const frog = frogExists[0]
-        const { frogId, price } = frog
+        const { frogId, name, price } = frog
         if (user.ownedFrogs.includes(frogId)) throw 'This user owns this frog already'
         if (price > user.money) throw 'User cannot afford this frog'
+        const updatedFrogName = {id: frogId, name: name} //for the frogNames array
         const updatedMoney = user.money - price
         const collection = await users()
         const updateInfo = await collection.updateOne(
             {email: email},
-            {$push: {ownedFrogs: frogId}, $set: {money: updatedMoney}}
+            {$push: {ownedFrogs: frogId, frogNames: updatedFrogName}, $set: {money: updatedMoney}}
         )
         if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
         const updated = await this.getUser(email)
@@ -391,6 +402,7 @@ module.exports = {
             successMsg: 'Successfully purchased frog'
         }
     },
+    //this is to update which frog is currently selected, not anything else
     async updateFrog(_email, _frogId) {
         const email = checkStr(_email)
         const frogId = checkFrogId(_frogId)
@@ -403,6 +415,33 @@ module.exports = {
             {$set: {frog: frogId}}
         )
         if (updateInfo.modifiedCount < 1) throw `Could not update user successfully`
+        const updated = await this.getUser(email)
+        if (updated.length < 1) throw 'Could not get user'
+        const data = updated[0]
+        return {
+            ...data,
+            password: 'thats not very froggers of you',
+            successMsg: 'Successfully purchased frog'
+        }
+    },
+    // given the email, frogId of the frog we're updating, and the newName
+    // update the frog's name for that user
+    async updateFrogName(_email, _frogId, _newName) {
+        const email = checkStr(_email)
+        const frogId = checkFrogId(_frogId)
+        const userExists = await this.getUser(email)
+        if (userExists.length < 1) throw 'This user does not exist'
+        const user = userExists[0]
+        const frogOwned = user.frogNames.filter((object) => object.id === frogId)
+        if (frogOwned.length < 1) throw `This user does not own frog with frogId ${frogId}`
+        const updatedFrogNames = user.frogNames.map((object) => (object.id === frogId) ? {id: frogId, name: _newName} : object)
+        console.log(updatedFrogNames)
+        const collection = await users()
+        const updateInfo = await collection.updateOne(
+            {email: email},
+            {$set: {frogNames: updatedFrogNames}}
+        )
+        if (updateInfo.modifiedCount < 1) throw `Could not update user's frogNames successfully`
         const updated = await this.getUser(email)
         if (updated.length < 1) throw 'Could not get user'
         const data = updated[0]
