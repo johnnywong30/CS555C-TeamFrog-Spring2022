@@ -342,7 +342,7 @@ module.exports = {
         const { frogId, name, price } = frog
         if (user.ownedFrogs.includes(frogId)) throw 'This user owns this frog already'
         if (price > user.money) throw 'User cannot afford this frog'
-        const updatedFrogName = {frogId: frogId, name: name} //for the frogNames array
+        const updatedFrogName = {id: frogId, name: name} //for the frogNames array
         const updatedMoney = user.money - price
         const collection = await users()
         const updateInfo = await collection.updateOne(
@@ -433,6 +433,7 @@ module.exports = {
         const frogOwned = user.frogNames.filter((id) => id === frogId)
         if (frogOwned.length < 1) throw `This user does not own frog with frogId ${frogId}`
         const updatedFrogNames = user.frogNames.map((object) => (object.id === frogId) ? {id: frogId, name: _newName} : object)
+        console.log(updatedFrogNames)
         const collection = await users()
         const updateInfo = await collection.updateOne(
             {email: email},

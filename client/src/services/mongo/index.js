@@ -1,5 +1,5 @@
 import { onRegister, onLogin } from "./auth";
-import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateCompletedChallenges, removeFriend, updateMeasurement, purchaseFrog } from './user'
+import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateCompletedChallenges, removeFriend, updateMeasurement, purchaseFrog, updateFrogName } from './user'
 import { addTitle, updateTitle, updateFrog } from "./user";
 import { insertWater, getWater, getWaterHistory } from './water'
 import { getFrogList } from "./frog";
@@ -26,6 +26,7 @@ const Mongo = {
     purchaseFrog: purchaseFrog,
     getFrogList: getFrogList,
     updateFrog: updateFrog,
+    updateFrogName: updateFrogName,
     // Titles
     addTitle: addTitle,
     updateTitle: updateTitle

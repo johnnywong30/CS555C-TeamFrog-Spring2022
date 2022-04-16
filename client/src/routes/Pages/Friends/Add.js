@@ -16,7 +16,6 @@ const Add = () => {
 
     const handleFriendEmail = (e) => {
         setFriendEmail(e.target.value)
-        console.log(friendEmail)   
     }
 
     const handleClear = (e) => {
