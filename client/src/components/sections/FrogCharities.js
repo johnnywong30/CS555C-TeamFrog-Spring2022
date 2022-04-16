@@ -25,7 +25,7 @@ export const FrogCharities = React.forwardRef((props, ref) => {
               <DrawerCloseButton />
               <DrawerHeader>Frog Charities</DrawerHeader>
     
-              <DrawerBody>
+              <DrawerBody overflow='hidden'>
                 <Text>Please consider donating to these frog charities!</Text>
                 <Divider orientation='horizontal' sm='xl' p='2'/>
                 <Stack
@@ -49,7 +49,7 @@ export const FrogCharities = React.forwardRef((props, ref) => {
               </DrawerBody>
     
               <DrawerFooter>
-                  <Text>Frog Nanny is not sponsored by these charities</Text>
+                  <Text>Frog Nanny is not sponsored by these charities.</Text>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
