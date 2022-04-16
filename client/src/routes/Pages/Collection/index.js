@@ -72,11 +72,11 @@ export const Collection = () => {
                         const buttonText = selected ? 'Selected' : 'Select'
                         // Get the name of the user's frog so we can update the button text
                         const checkName = frogNames.find(obj => obj.id === frogId)
-                        const frogName = (checkName !== undefined && owned) ? checkName.name : name
+                        const frogName = (checkName !== undefined && owned) ? checkName.name : ""
                         // currently does not display friends' custom names for frogs and only displays user's
                         return (
                             <Box key={_id} height='275px' mb={'1rem'}>
-                                <FrogName frogId={frogId} frogName={frogName} defaultName={name} isDisabled={!owned} friendEmail={friendEmail !== undefined}></FrogName>
+                                <FrogName frogId={frogId} frogName={frogName} defaultName={""} isDisabled={!owned} friendEmail={friendEmail !== undefined}></FrogName>
                                 <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
                                 {(friendEmail === undefined && owned) &&
                                     <Center>
