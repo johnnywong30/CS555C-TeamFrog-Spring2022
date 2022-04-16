@@ -73,6 +73,12 @@ test('Test for createUser email', async () => {
 test('Test for createUser title', async () => {
     expect(testUser.title).toBe(0)
 })
+test('Test for createUser default frog', async () => {
+    expect(testUser.frog).toBe(0)
+})
+test('Test for createUser frogNames default', async() => {
+    expect(testUser.frogNames[0]).toStrictEqual({id: 0, name: "Green Frog"})
+})
 
 test('Test for getUser', async () => {
     const user = await users.getUser(email)
@@ -146,7 +152,14 @@ test('Test for updateTitle', async () => {
 test('Test for updateFrog', async () => {
     const i = 69
     const updated = await users.updateFrog(email, i)
-    expect(updated.frog).toBe(updated)
+    expect(updated.frog).toBe(i)
+})
+
+test('Test for updateFrogName', async () => {
+    const name = 'Jayson Infante'
+    const updated = await users.updateFrogName(email, 0, name)
+    console.log(updated)
+    expect(updated.frogNames[0].name).toBe(name)
 })
 
 afterAll(async () => {

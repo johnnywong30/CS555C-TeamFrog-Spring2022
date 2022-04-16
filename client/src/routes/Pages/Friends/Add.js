@@ -16,7 +16,6 @@ const Add = () => {
 
     const handleFriendEmail = (e) => {
         setFriendEmail(e.target.value)
-        console.log(friendEmail)   
     }
 
     const handleClear = (e) => {
@@ -56,8 +55,8 @@ const Add = () => {
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button colorScheme='green' mr={3} type="submit" onClick={handleSubmit}>Add</Button>
-                            <Button onClick={onClose}>Cancel</Button>
+                            <Button onClick={onClose} mr={4}>Cancel</Button>
+                            <Button colorScheme='green' mr={3} type="submit" onClick={handleSubmit}>Submit</Button>
                         </ModalFooter>
                     </ModalContent>
                 </Modal>
