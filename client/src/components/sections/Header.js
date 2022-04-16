@@ -110,45 +110,35 @@ const Header = (props) => {
                     pt={[4, 4, 0, 0]}
                 >
                     <MenuItem to="/collection">
-                        <Button leftIcon={<FaFrog/>} colorScheme={colorScheme} variant='ghost' size='sm'>
+                        <Button leftIcon={<FaFrog />} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Frogs
                         </Button>
                     </MenuItem>
                     {/* <MenuItem to="/cyclefrogs">Changefrog</MenuItem> */}
                     <MenuItem to="/challenges">
-                        <Button leftIcon={<GiBlackBook/>} colorScheme={colorScheme} variant='ghost' size='sm'>
+                        <Button leftIcon={<GiBlackBook />} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Challenges
                         </Button>
                     </MenuItem>
                     {/* probably make friends a small bar that pops up on the right side of the screen */}
                     {/* ux/ui thing instead of it being a separate page */}
                     <MenuItem to="/friends">
-                        <Button leftIcon={<FaUserFriends/>} colorScheme={colorScheme} variant='ghost' size='sm'>
+                        <Button leftIcon={<FaUserFriends />} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Friends
-                        </Button>    
-                    </MenuItem>
-                    <MenuItem to="/profile">
-                        <Button leftIcon={<CgProfile/>} colorScheme={colorScheme} variant='ghost' size='sm'>
-                            Profile
-                        </Button>
-                    </MenuItem>
-                    <MenuItem to="/store">
-                        <Button leftIcon={<FaCoins/>} colorScheme={colorScheme} variant='ghost' size='sm'>
-                            {money}
                         </Button>
                     </MenuItem>
                     {/* drawer for frogcharities */}
                     <FrogCharities colorScheme={colorScheme}></FrogCharities>
                     {/* music refactoring into menu */}
                     <Menu>
-                        <MenuButton 
-                            as={Button} 
-                            rightIcon={<AiFillDownCircle />} 
-                            colorScheme={colorScheme} 
-                            variant='ghost' 
+                        <MenuButton
+                            as={Button}
+                            rightIcon={<AiFillDownCircle />}
+                            colorScheme={colorScheme}
+                            variant='ghost'
                             size='sm'
-                            mb={{base: 8, sm: 0}} 
-                            mr={{base: 0, sm: 5}} 
+                            mb={{ base: 8, sm: 0 }}
+                            mr={{ base: 0, sm: 5 }}
                         >
                             Music
                         </MenuButton>
@@ -159,6 +149,16 @@ const Header = (props) => {
                             <MusicMenuItem src={s4} song={4} text={"Song 4"}></MusicMenuItem>
                         </MenuList>
                     </Menu>
+                    <MenuItem to="/profile">
+                        <Button leftIcon={<CgProfile />} colorScheme={colorScheme} variant='ghost' size='sm'>
+                            Profile
+                        </Button>
+                    </MenuItem>
+                    <MenuItem to="/store">
+                        <Button leftIcon={<FaCoins />} colorScheme={colorScheme} variant='ghost' size='sm'>
+                            {money}
+                        </Button>
+                    </MenuItem>
                     <MenuItem onClick={handleLogout} isLast>
                         <Button
                             size="sm"
