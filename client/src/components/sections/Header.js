@@ -5,6 +5,7 @@ import s4 from '../../constants/snowdrop.mp3'
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure, color } from "@chakra-ui/react";
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton } from '@chakra-ui/react'
 import { MusicMenuItem } from './MusicMenuItem'
 import { AiFillDownCircle } from "react-icons/ai"
 import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
@@ -147,6 +148,7 @@ const Header = (props) => {
                             {money}
                         </Button>
                     </MenuItem>
+                    {/* drawer for frogcharities */}
 
 
                     <MenuItem onClick={handleLogout} isLast>
