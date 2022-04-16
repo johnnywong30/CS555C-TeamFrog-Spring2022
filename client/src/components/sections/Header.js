@@ -93,17 +93,6 @@ const Header = (props) => {
                         to={"/froggers"}
                     />
                 </MenuItem>
-                <Menu>
-                    <MenuButton as={Button} rightIcon={<AiFillDownCircle />} colorScheme={colorScheme} variant='ghost' size='sm'>
-                        Music
-                    </MenuButton>
-                    <MenuList>
-                        <MusicMenuItem src={s1} song={1} text={"Song 1"} colorScheme={colorScheme}></MusicMenuItem>
-                        <MusicMenuItem src={s2} song={2} text={"Song 2"} colorScheme={colorScheme}></MusicMenuItem>
-                        <MusicMenuItem src={s3} song={3} text={"Song 3"} colorScheme={colorScheme}></MusicMenuItem>
-                        <MusicMenuItem src={s4} song={4} text={"Song 4"} colorScheme={colorScheme}></MusicMenuItem>
-                    </MenuList>
-                </Menu>
             </Flex>
 
             <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -150,6 +139,26 @@ const Header = (props) => {
                     </MenuItem>
                     {/* drawer for frogcharities */}
                     <FrogCharities colorScheme={colorScheme}></FrogCharities>
+                    {/* music refactoring into menu */}
+                    <Menu>
+                        <MenuButton 
+                            as={Button} 
+                            rightIcon={<AiFillDownCircle />} 
+                            colorScheme={colorScheme} 
+                            variant='ghost' 
+                            size='sm'
+                            mb={{base: 8, sm: 0}} 
+                            mr={{base: 0, sm: 5}} 
+                        >
+                            Music
+                        </MenuButton>
+                        <MenuList color='green'>
+                            <MusicMenuItem src={s1} song={1} text={"Song 1"}></MusicMenuItem>
+                            <MusicMenuItem src={s2} song={2} text={"Song 2"}></MusicMenuItem>
+                            <MusicMenuItem src={s3} song={3} text={"Song 3"}></MusicMenuItem>
+                            <MusicMenuItem src={s4} song={4} text={"Song 4"}></MusicMenuItem>
+                        </MenuList>
+                    </Menu>
                     <MenuItem onClick={handleLogout} isLast>
                         <Button
                             size="sm"
