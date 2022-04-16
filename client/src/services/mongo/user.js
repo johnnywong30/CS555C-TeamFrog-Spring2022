@@ -323,6 +323,7 @@ export const updateFrogName = (email, frogId, newName) => {
         try {
 			dispatch(startLoading())
             const { data } = await axios.post('/user/updateFrogName', reqBody)
+            console.log(data)
             const { successMsg, errorMsg } = data
 			if (successMsg) {
                 dispatch(notifySuccess(successMsg)) 

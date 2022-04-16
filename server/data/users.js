@@ -430,8 +430,9 @@ module.exports = {
         const userExists = await this.getUser(email)
         if (userExists.length < 1) throw 'This user does not exist'
         const user = userExists[0]
-        const frogOwned = user.frogNames.filter((id) => id === frogId)
+        const frogOwned = user.frogNames.filter((object) => object.id === frogId)
         if (frogOwned.length < 1) throw `This user does not own frog with frogId ${frogId}`
+        console.log("hi")
         const updatedFrogNames = user.frogNames.map((object) => (object.id === frogId) ? {id: frogId, name: _newName} : object)
         console.log(updatedFrogNames)
         const collection = await users()

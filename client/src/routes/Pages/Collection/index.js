@@ -72,7 +72,7 @@ export const Collection = () => {
                         const buttonText = selected ? 'Selected' : 'Select'
                         return (
                             <Box key={_id} height='275px' mb={'1rem'}>
-                                <FrogName frogId={frogId} frogName={name}></FrogName>
+                                <FrogName frogId={frogId} frogName={name} isDisabled={!owned}></FrogName>
                                 <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
                                 {(friendEmail === undefined && owned) &&
                                     <Center>

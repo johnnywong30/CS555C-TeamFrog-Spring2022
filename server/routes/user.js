@@ -173,7 +173,7 @@ router
     .post(async (req, res) => {
         try {
             const { email, frogId, newName } = req.body
-            const user = await users.updateFrog(email, frogId, newName)
+            const user = await users.updateFrogName(email, frogId, newName)
             res.json(user).end()
         } catch (e) {
             console.log(e)

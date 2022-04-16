@@ -23,8 +23,6 @@ module.exports = {
         return trimmed
     },
     checkFrogId(id) {
-        console.log(`asdasdfrogId: ${id}`)
-        console.log(!id)
         if (typeof id === 'undefined') throw new Error(`number does not exist!`)
         const ret = Number(id)
         if (typeof ret !== 'number' || isNaN(ret)) throw `input is not a number!`
