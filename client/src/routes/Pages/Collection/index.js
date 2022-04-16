@@ -13,7 +13,7 @@ import { FrogName } from './FrogName'
 
 export const Collection = () => {
     const dispatch = useDispatch()
-    const { ownedFrogs, email, frog } = useSelector(({ auth }) => auth.user)
+    const { ownedFrogs, email, frog, frogNames } = useSelector(({ auth }) => auth.user)
     const { store } = useSelector(({ auth }) => auth)
     const [friendFrogs, setFriendFrogs] = useState([])
     const [play] = useSound(audio);
@@ -70,9 +70,12 @@ export const Collection = () => {
                         const imgUrl = owned ? url : mysteryFrogUrl
                         const selected = frogId === frog
                         const buttonText = selected ? 'Selected' : 'Select'
+                        // need to figure out the name of the frog so we can update the button text
+                        const checkName = frogNames.find(obj => obj.id === frogId)
+                        const frogName = (checkName !== undefined && owned) ? checkName.name : name
                         return (
                             <Box key={_id} height='275px' mb={'1rem'}>
-                                <FrogName frogId={frogId} frogName={name} isDisabled={!owned}></FrogName>
+                                <FrogName frogId={frogId} frogName={frogName} defaultName={name} isDisabled={!owned} friendEmail={friendEmail !== undefined}></FrogName>
                                 <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
                                 {(friendEmail === undefined && owned) &&
                                     <Center>
