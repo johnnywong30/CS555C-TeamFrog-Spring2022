@@ -155,6 +155,12 @@ test('Test for updateFrog', async () => {
     expect(updated.frog).toBe(updated)
 })
 
+test('Test for updateFrogName', async () => {
+    const name = 'Jayson Infante'
+    const updated = await users.updateFrogName(email, 0, name)
+    expect(updated.frogNames[0].name).toBe(name)
+})
+
 afterAll(async () => {
     await users.deleteUser(email)
     await users.deleteUser(email2)

@@ -402,7 +402,7 @@ module.exports = {
             successMsg: 'Successfully purchased frog'
         }
     },
-    //this is to update which frog is currently selected
+    //this is to update which frog is currently selected, not anything else
     async updateFrog(_email, _frogId) {
         const email = checkStr(_email)
         const frogId = checkFrogId(_frogId)
@@ -432,7 +432,6 @@ module.exports = {
         const user = userExists[0]
         const frogOwned = user.frogNames.filter((object) => object.id === frogId)
         if (frogOwned.length < 1) throw `This user does not own frog with frogId ${frogId}`
-        console.log("hi")
         const updatedFrogNames = user.frogNames.map((object) => (object.id === frogId) ? {id: frogId, name: _newName} : object)
         console.log(updatedFrogNames)
         const collection = await users()
