@@ -4,7 +4,7 @@ import useSound from 'use-sound'
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
 
 export const MusicMenuItem = React.forwardRef((props, ref) => {
-    const { src, song, text } = props
+    const { src, song, text, colorScheme } = props
     const inputRef = React.useRef(null)
     const mergeRef = useMergeRefs(inputRef, ref)
     const [playingS1, setPlayingS1] = React.useState(false);
