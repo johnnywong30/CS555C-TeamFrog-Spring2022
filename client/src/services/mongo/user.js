@@ -313,6 +313,7 @@ export const updateFrog = (email, frogId) => {
     }
 }
 
+// tell the server to update the frog name
 export const updateFrogName = (email, frogId, newName) => {
     return async dispatch => {
         const reqBody = {

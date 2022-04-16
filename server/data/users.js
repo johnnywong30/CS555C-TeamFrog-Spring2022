@@ -424,6 +424,8 @@ module.exports = {
             successMsg: 'Successfully purchased frog'
         }
     },
+    // given the email, frogId of the frog we're updating, and the newName
+    // update the frog's name for that user
     async updateFrogName(_email, _frogId, _newName) {
         const email = checkStr(_email)
         const frogId = checkFrogId(_frogId)
