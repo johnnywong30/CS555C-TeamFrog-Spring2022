@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, Center, Button, Flex, Image, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Button, Flex, Image, Heading, Stack, Text, Progress } from "@chakra-ui/react";
 
-export default function Hero({ title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, ...rest }) {
+export default function Hero({ level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, ...rest }) {
   return (
     <Flex
       align="center"
@@ -20,6 +20,19 @@ export default function Hero({ title, subtitle, image, imageCaption, imageOnClic
         w={{ base: "80%", md: "40%" }}
         align={["center", "center", "flex-start", "flex-start"]}
       >
+        <Heading
+          as="h1"
+          size="md"
+          fontWeight="bold"
+          color="primary.1000"
+          textAlign={["center", "center", "left", "left"]}
+          w={{ base: '85%', md: '85%'}}
+          mb={10}
+        >
+          Level: {level}
+          <Progress mt={2} borderRadius='.3rem' hasStripe colorScheme='gray' size='sm' value={currentExp} min={0} max={requiredExp} />
+        </Heading>
+        
         <Heading
           as="h1"
           size="xl"
@@ -41,7 +54,7 @@ export default function Hero({ title, subtitle, image, imageCaption, imageOnClic
           {subtitle}
         </Heading>
         <Button
-          colorScheme="primary"
+          colorScheme='gray'
           borderRadius="8px"
           py="4"
           px="4"
@@ -53,7 +66,6 @@ export default function Hero({ title, subtitle, image, imageCaption, imageOnClic
         </Button>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-        {/* TODO: Make this change every X secs */}
         <Center>
           <Text color='white' fontSize='lg' textAlign={'center'} mr={9}>{imageCaption}</Text>
         </Center>

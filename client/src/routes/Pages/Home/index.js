@@ -25,9 +25,19 @@ export const Home = () => {
   const selectedFrog = store.find(({frogId}) => frogId === frog)
   const mysteryFrogUrl = 'https://imgur.com/VJeksGH.png'
   const frogUrl = selectedFrog !== undefined ? selectedFrog.url : mysteryFrogUrl
+
+  const level = 1
+  const currentExp = 25
+  const requiredExp = 50
+
+  // Level ^ 2 * 50
+
   return (
     <Layout>
       <Hero
+        level={level}
+        currentExp={currentExp}
+        requiredExp={requiredExp}
         title="Frog Nanny"
         subtitle="Stay hydrated with these cute companions."
         // fix image please we need 8 bit frog
