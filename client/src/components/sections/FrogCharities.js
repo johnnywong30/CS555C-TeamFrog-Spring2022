@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure, color } from "@chakra-ui/react";
-import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useMergeRefs } from '@chakra-ui/react'
-import { useDispatch, useSelector } from 'react-redux'
+import { Image, Stack, Text, Button,useDisclosure, Link } from "@chakra-ui/react";
+import { StackDivider, Divider, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useMergeRefs } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 export const FrogCharities = React.forwardRef((props, ref) => {
     const { colorScheme } = props
@@ -13,7 +13,6 @@ export const FrogCharities = React.forwardRef((props, ref) => {
         <>
           <Button ref={btnRef} colorScheme={colorScheme} variant='ghost' size='sm' onClick={onOpen}>
             Frog Charities
-            {console.log("hi")}
           </Button>
           <Drawer
             isOpen={isOpen}
@@ -27,11 +26,30 @@ export const FrogCharities = React.forwardRef((props, ref) => {
               <DrawerHeader>Frog Charities</DrawerHeader>
     
               <DrawerBody>
-                <Text>hi</Text>
+                <Text>Please consider donating to these frog charities!</Text>
+                <Divider orientation='horizontal' sm='xl' p='2'/>
+                <Stack
+                  divider={<StackDivider borderColor='gray.200' />}
+                  pt='2'
+                >
+                  <Link href='https://www.froglife.org/' isExternal>
+                      Frog Life <ExternalLinkIcon mx='2px' />
+                  </Link>
+                  <Link href='https://www.amphibians.org/' isExternal>
+                      Amphibian Survival Alliance <ExternalLinkIcon mx='2px' />
+                  </Link>
+                  <Link href='https://www.amphibianfoundation.org/' isExternal>
+                      Amphibian Foundation <ExternalLinkIcon mx='2px' />
+                  </Link>
+                  <Link href='https://www.rainforesttrust.org/saving-endangered-species/frogs/' isExternal>
+                      Rain Forest Trust <ExternalLinkIcon mx='2px' />
+                  </Link>
+                  <Image src='https://imgur.com/cScfraF.png' alt='frog image'></Image>
+                </Stack>
               </DrawerBody>
     
               <DrawerFooter>
-                  <Text>We are not sponsored by these charities!</Text>
+                  <Text>Frog Nanny is not sponsored by these charities</Text>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
