@@ -5,12 +5,12 @@ import s4 from '../../constants/snowdrop.mp3'
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure, color } from "@chakra-ui/react";
-import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton } from '@chakra-ui/react'
 import { MusicMenuItem } from './MusicMenuItem'
 import { AiFillDownCircle } from "react-icons/ai"
 import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
 import { GiBlackBook } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
+import { FrogCharities } from './FrogCharities';
 import Logo from "../ui/Logo";
 
 import { logoutAuthUser } from '../../redux/actions/auth';
@@ -149,7 +149,9 @@ const Header = (props) => {
                         </Button>
                     </MenuItem>
                     {/* drawer for frogcharities */}
-
+                    <MenuItem>
+                        <FrogCharities colorScheme={colorScheme}></FrogCharities>
+                    </MenuItem>
 
                     <MenuItem onClick={handleLogout} isLast>
                         <Button
