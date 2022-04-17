@@ -10,6 +10,8 @@ export class User {
         this.money = user.money
         this.prestige = user.prestige
         this.level = user.level
+        this.experience = user.experience
+        this.requiredExp = user.requiredExp
         this.waterHistory = user.waterHistory
         this.challenges = user.challenges
         this.completedChallenges = user.completedChallenges

@@ -12,7 +12,7 @@ import audio from '../../../../src/constants/frog.wav';
 export const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
-  const { email, title, titles, frog } = useSelector(({ auth }) => auth.user)
+  const { email, title, titles, frog, level, experience, requiredExp } = useSelector(({ auth }) => auth.user)
   const { store } = useSelector(({ auth }) => auth)
   const [ play ] = useSound(audio);
 
@@ -26,17 +26,13 @@ export const Home = () => {
   const mysteryFrogUrl = 'https://imgur.com/VJeksGH.png'
   const frogUrl = selectedFrog !== undefined ? selectedFrog.url : mysteryFrogUrl
 
-  const level = 1
-  const currentExp = 25
-  const requiredExp = 50
-
-  // Level ^ 2 * 50
+  // requiredExp = level * level * 50
 
   return (
     <Layout>
       <Hero
         level={level}
-        currentExp={currentExp}
+        currentExp={experience}
         requiredExp={requiredExp}
         title="Frog Nanny"
         subtitle="Stay hydrated with these cute companions."

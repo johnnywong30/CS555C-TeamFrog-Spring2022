@@ -4,6 +4,15 @@ const frogs = require('./frogs')
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 
+const hashPassword = async(plaintext, SALT_ROUNDS = 10) => {
+    try {
+        const hash = bcrypt.hash(plaintext, SALT_ROUNDS)
+        return hash
+    } catch (error) {
+        throw('Error hashing password...', error)
+    }
+}
+
 module.exports = {
 	async getUser(_email) {
 		const email = checkStr(_email);
@@ -26,7 +35,7 @@ module.exports = {
 		if (deletionInfo.deleteCount === 0) throw `Could not delete account for ${email}`;
 		return true;
 	},
-	async createUser(_firstName, _lastName, _email, _password, _company) {
+	async createUser(_firstName, _lastName, _email, _password, _company, adminMoney = 0 ) {
 		const email = checkStr(_email);
 		const userExists = await this.getUser(email);
 		if (userExists.length > 0) throw "Account with that email exists";
@@ -48,11 +57,11 @@ module.exports = {
 			ownedFrogs: [0],
 			// friends is an array of emails of this user's friends
 			friends: [],
-			money: 0,
+			money: adminMoney,
 			prestige: 0,
-			// TODO: create formula for gaining exp based on current level and water drank amount
 			level: 1,
 			experience: 0,
+            requiredExp: 100,
 			// waterHistory is an array of water objects that contain a timestamp and amount of water drank
 			waterHistory: [],
 			// challenges is an array of challenge objects this user has accepted
@@ -88,6 +97,12 @@ module.exports = {
 		};
 		return ret;
 	},
+
+    async createTestUser(_firstName, _lastName, _email, _company, adminMoney) {
+        const plaintextPassword = 'test'
+        const password = await hashPassword(plaintextPassword)
+        return await this.createUser(_firstName, _lastName, _email, password, _company, adminMoney)
+    },
 
 	async updateMoney(_email, _money) {
 		const email = checkStr(_email);
