@@ -57,3 +57,15 @@ export const setGradient = (pos) => {
         })
     }
 }
+
+export const earnExp = (expEarned, leveledUp) => {
+    return async dispatch => {
+        dispatch({
+            type: "EARNED_EXP",
+            payload: {
+                expEarned: expEarned,
+                leveledUp: leveledUp
+            }
+        })
+    }
+}

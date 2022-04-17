@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { updateUser } from '../../redux/actions/auth'
-import { startLoading, endLoading, notifySuccess, notifyFail } from '../../redux/actions/common'
+import { startLoading, endLoading, notifySuccess, notifyFail, earnExp } from '../../redux/actions/common'
 
 export const insertWater = (email, amount) => {
     return async dispatch => {
@@ -12,14 +12,20 @@ export const insertWater = (email, amount) => {
         try {
             dispatch(startLoading())
             const { data } = await axios.post('/water/add', reqBody)
-            const { successMsg, errorMsg } = data
-            console.log(data)
+            const { successMsg, errorMsg, expEarned, leveledUp } = data
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
                 dispatch(updateUser(data))
+                setTimeout(() => {
+                    dispatch(earnExp(expEarned, leveledUp))
+                }, 25)
+                setTimeout(() => {
+                    dispatch(endLoading())
+                }, 1975)
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
+
         } catch (error) {
             console.log("There was an error in insertWater...", error)
             dispatch(notifyFail(error.message))
@@ -36,7 +42,7 @@ export const getWater = (email, id) => {
             const { successMsg, errorMsg } = data
             console.log(data)
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
@@ -56,7 +62,7 @@ export const getWaterHistory = (email) => {
             const { successMsg, errorMsg } = data
             console.log(data)
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())

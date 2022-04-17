@@ -2,7 +2,9 @@ const INIT_STATE = {
     msg: '',
     loading: false,
     status: '',
-    gradientPos: 0
+    gradientPos: 0,
+    expEarned: 0,
+    leveledUp: false
 }
 
 const commonReducer = (state = INIT_STATE, action) => {
@@ -16,7 +18,9 @@ const commonReducer = (state = INIT_STATE, action) => {
         case "END_LOADING":
             return {
                 ...state,
-                loading: false
+                loading: false,
+                expEarned: 0,
+                leveledUp: false
             }
         case "SET_NOTIFICATION": 
             return {
@@ -44,6 +48,13 @@ const commonReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 gradientPos: payload
+            }
+        case "EARNED_EXP":
+            const { expEarned, leveledUp } = payload
+            return {
+                ...state,
+                expEarned: expEarned,
+                leveledUp: leveledUp
             }
         default:
             return state

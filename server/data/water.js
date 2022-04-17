@@ -15,11 +15,33 @@ module.exports = {
             amount: amount
         }
         const currencyEarned = 250
-        console.log(user)
+
+        // Handle experience earned
+        const multiplier = 10
+        const expEarned = Number(multiplier * amount); // 10 exp points per cup of water
+        let userExp = user.experience + expEarned
+        let reqExp = user.requiredExp
+        let level = user.level
+        const maxLevel = 10
+        while (userExp >= reqExp) {
+            userExp -= reqExp
+            level += 1
+            if (level === maxLevel) {
+                reqExp = 0
+                userExp = 0
+                break;
+            } else {
+                reqExp = (level * level) * 50
+            }
+        }
+
         const updatedUser = {
             ...user, 
             waterHistory: [...user.waterHistory, newWater],
-            money: user.money + currencyEarned
+            money: user.money + currencyEarned,
+            level: level,
+            experience: userExp,
+            requiredExp: reqExp
         }
         const updateInfo = await userCollection.updateOne(
             {email: email},
@@ -36,9 +58,10 @@ module.exports = {
         return {
             ...data,
             password: 'thats not very froggers of you',
-            successMsg: `Drank ${localizedAmount} ${unitString} of water at ${timestamp}`
+            successMsg: `Drank ${localizedAmount} ${unitString} of water at ${timestamp}`,
+            expEarned: expEarned,
+            leveledUp: level > user.level
         }
-
     },
     async getWater(_email, _id) {
         const email = checkStr(_email)
