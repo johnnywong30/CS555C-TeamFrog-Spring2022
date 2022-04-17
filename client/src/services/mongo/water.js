@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { updateUser } from '../../redux/actions/auth'
-import { startLoading, endLoading, notifySuccess, notifyFail } from '../../redux/actions/common'
+import { startLoading, endLoading, notifySuccess, notifyFail, earnExp } from '../../redux/actions/common'
 
 export const insertWater = (email, amount) => {
     return async dispatch => {
@@ -12,11 +12,12 @@ export const insertWater = (email, amount) => {
         try {
             dispatch(startLoading())
             const { data } = await axios.post('/water/add', reqBody)
-            const { successMsg, errorMsg } = data
+            const { successMsg, errorMsg, expEarned, leveledUp } = data
             console.log(data)
             if (successMsg) {
                 dispatch(notifySuccess(successMsg)) 
                 dispatch(updateUser(data))
+                dispatch(earnExp(expEarned, leveledUp))
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())

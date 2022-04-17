@@ -58,7 +58,9 @@ module.exports = {
         return {
             ...data,
             password: 'thats not very froggers of you',
-            successMsg: `Drank ${localizedAmount} ${unitString} of water at ${timestamp}`
+            successMsg: `Drank ${localizedAmount} ${unitString} of water at ${timestamp}`,
+            expEarned: expEarned,
+            leveledUp: level > user.level
         }
     },
     async getWater(_email, _id) {
