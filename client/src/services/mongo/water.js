@@ -13,14 +13,19 @@ export const insertWater = (email, amount) => {
             dispatch(startLoading())
             const { data } = await axios.post('/water/add', reqBody)
             const { successMsg, errorMsg, expEarned, leveledUp } = data
-            console.log(data)
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
                 dispatch(updateUser(data))
-                dispatch(earnExp(expEarned, leveledUp))
+                setTimeout(() => {
+                    dispatch(earnExp(expEarned, leveledUp))
+                }, 25)
+                setTimeout(() => {
+                    dispatch(endLoading())
+                }, 1975)
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
+
         } catch (error) {
             console.log("There was an error in insertWater...", error)
             dispatch(notifyFail(error.message))
@@ -37,7 +42,7 @@ export const getWater = (email, id) => {
             const { successMsg, errorMsg } = data
             console.log(data)
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())
@@ -57,7 +62,7 @@ export const getWaterHistory = (email) => {
             const { successMsg, errorMsg } = data
             console.log(data)
             if (successMsg) {
-                dispatch(notifySuccess(successMsg)) 
+                dispatch(notifySuccess(successMsg))
             }
             if (errorMsg) dispatch(notifyFail(errorMsg))
             dispatch(endLoading())

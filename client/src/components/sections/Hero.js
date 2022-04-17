@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Box, Center, Button, Flex, Image, Heading, Stack, Text, Progress } from "@chakra-ui/react";
+import { fadeOutUp } from 'react-animations'
+import { css, StyleSheet } from 'aphrodite'
 
-export default function Hero({ level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, ...rest }) {
+const styles = StyleSheet.create({
+  fadeOutUp: {
+    animationName: fadeOutUp,
+    animationDuration: '2s'
+  }
+})
+
+export default function Hero({ level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, expEarned, leveledUp, ...rest }) {
   return (
     <Flex
       align="center"
@@ -26,13 +35,26 @@ export default function Hero({ level, currentExp, requiredExp, title, subtitle, 
           fontWeight="bold"
           color="primary.1000"
           textAlign={["center", "center", "left", "left"]}
-          w={{ base: '85%', md: '85%'}}
+          w={{ base: '85%', md: '85%' }}
           mb={10}
         >
-          Level: {level}
+
+          <Flex>
+            { leveledUp
+              ?
+              <Text className={css(styles.fadeOutUp)} color='lightgreen' fontSize={'1.25rem'}>Leveled Up!</Text>
+              :
+              `Level: ${level}`
+            }
+            {
+              expEarned > 0
+              &&
+              <Text ml={5} className={css(styles.fadeOutUp)} color='yellow' fontSize={'1rem'}>+{expEarned} EXP</Text>
+            }
+          </Flex>
           <Progress mt={2} borderRadius='.3rem' hasStripe colorScheme='gray' size='sm' value={currentExp} min={0} max={requiredExp} />
         </Heading>
-        
+
         <Heading
           as="h1"
           size="xl"

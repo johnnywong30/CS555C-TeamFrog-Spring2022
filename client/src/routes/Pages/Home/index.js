@@ -13,6 +13,7 @@ export const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
   const { email, title, titles, frog, level, experience, requiredExp } = useSelector(({ auth }) => auth.user)
+  const { expEarned, leveledUp } = useSelector(({ common }) => common )
   const { store } = useSelector(({ auth }) => auth)
   const [ play ] = useSound(audio);
 
@@ -42,6 +43,8 @@ export const Home = () => {
         imageOnClick={play}
         ctaText="Give Your Frog Some Water"
         ctaAction={onOpen}
+        expEarned={expEarned}
+        leveledUp={leveledUp}
       />
       <Water isOpen={isOpen} onClose={onClose} />
     </Layout>
