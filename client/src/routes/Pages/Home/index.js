@@ -14,7 +14,7 @@ import moment from 'moment';
 export const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
-  const { email, title, titles, frog, level, experience, requiredExp } = useSelector(({ auth }) => auth.user)
+  const { email, title, titles, frog, level, experience, requiredExp, waterHistory } = useSelector(({ auth }) => auth.user)
   const { expEarned, leveledUp } = useSelector(({ common }) => common )
   const { store } = useSelector(({ auth }) => auth)
   const [ play ] = useSound(audio);
@@ -52,22 +52,21 @@ export const Home = () => {
     }
   }
 
-  
   useEffect(async () => {
     await getFrogs()
     await getLatestTime()
     getTimeDistance()
-  }, [time]);
+  }, [waterHistory, time]);
 
   const selectedFrog = store.find(({frogId}) => frogId === frog)
   const mysteryFrogUrl = 'https://imgur.com/VJeksGH.png'
-  console.log(frogHealth)
+  // console.log(frogHealth)
   if (frogHealth === 1 || frogHealth === 2) {
     frogUrl = (frogHealth === 1) ? "https://imgur.com/f3svxvI.png" : "https://imgur.com/3dC8mcg.png"
   }
 
   else {
-    console.log("hi", frogHealth)
+    // console.log("hi", frogHealth)
     frogUrl = selectedFrog !== undefined ? selectedFrog.url : mysteryFrogUrl
   }
 
