@@ -35,6 +35,7 @@ const FrogBox = ({ _id, frogId, url, name }) => {
         dispatch(Mongo.getFrogList())
     }
 
+
     useEffect(async () => {
         await getFrogs()
         if (friendEmail !== undefined) await getFriendFrogs()
