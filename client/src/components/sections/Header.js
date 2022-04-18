@@ -13,7 +13,7 @@ import { CgProfile } from 'react-icons/cg'
 import { FrogCharities } from './FrogCharities';
 import Logo from "../ui/Logo";
 
-import { logoutAuthUser } from '../../redux/actions/auth';
+import Mongo from '../../services/mongo'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -67,7 +67,7 @@ const Header = (props) => {
 
     const handleLogout = (e) => {
         e.preventDefault()
-        dispatch(logoutAuthUser())
+        dispatch(Mongo.onLogout())
     }
 
     const colorScheme = gradientPos < 5 ? 'whiteAlpha' : 'blackAlpha'

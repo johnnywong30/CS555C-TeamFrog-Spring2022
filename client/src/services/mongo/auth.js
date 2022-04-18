@@ -38,6 +38,27 @@ export const onRegister = (firstName, lastName, email, password, company) => {
     }
 }
 
+export const onCookieLogin = (session) => {
+    return async dispatch => {
+        const reqBody = {
+            session: session
+        }
+        try {
+            dispatch(startLoading())
+            const { data } = await axios.post(`/auth/login`, reqBody)
+            dispatch(loginAuthUser(data))
+            const { successMsg, errorMsg } = data
+            if (successMsg) dispatch(notifySuccess(successMsg))
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in onCookieLogin...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+} 
+
 export const onLogin = (email, password) => {
     return async dispatch => {
         const reqBody = {
@@ -54,6 +75,24 @@ export const onLogin = (email, password) => {
             dispatch(endLoading())
         } catch (error) {
             console.log("There was an error in onLogin...", error)
+            dispatch(notifyFail(error.message))
+            dispatch(endLoading())
+        }
+    }
+}
+
+export const onLogout = () => {
+    return async dispatch => {
+        try {
+            dispatch(startLoading())
+            const { data } = await axios.post(`/auth/logout`)
+            const { successMsg, errorMsg } = data
+            if (successMsg) dispatch(notifySuccess(successMsg))
+            if (errorMsg) dispatch(notifyFail(errorMsg))
+            dispatch(logoutAuthUser())
+            dispatch(endLoading())
+        } catch (error) {
+            console.log("There was an error in onLogout...", error)
             dispatch(notifyFail(error.message))
             dispatch(endLoading())
         }

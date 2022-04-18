@@ -8,14 +8,22 @@ import { Field } from './Field'
 import { PasswordField } from './PasswordField'
 
 import Mongo from '../../../services/mongo';
+import Cookies from 'js-cookie';
+
 import { notifyClear } from '../../../redux/actions/common'
 
 const Login = () => {
     // hook to use redux actions
     const dispatch = useDispatch()
     const { msg, status, loading } = useSelector(({ common }) => common)
-
-    // TODO: use useEffect to check cookies to see if we can login already
+    
+    useEffect(() => {
+        const user = Cookies.get('AuthCookie')
+        console.log(user)
+        const { email, password } = user
+        console.log(email, password)
+        if (email !== undefined && password !== undefined) dispatch(Mongo.onLogin(email, password))
+    }, [])
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

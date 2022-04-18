@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 const configRoutes = require('./routes');
 const connection = require('./config/mongoConnection');
@@ -10,9 +11,21 @@ const connection = require('./config/mongoConnection');
 const appName = "Frog Nanny"
 const port = 8000
 
+const secret = 'BS6e4a9aC6Fm8hK4jssTFCSXdYh94SaTsEiny14MSl5ERAvlbODzMSqoXCVWgIFYoyi47sTYVg+MFBSAnWnwtzRvdHja7N6qgsLLJ4pyxw3QzEcv9vstlg8tD6E/bTz2JXj7q8w3qhDCdEsrBWrn4i9sGcKbFAM7aNcmsT86bP3+tJIbuv11tLwKfWzg5oFcY8pxNmJ8wT2q+vEzl5iJPx81P/Advj/+E3dnMk5xbKFQubZhIcqW7vABHif/D+zuz4iC4xOAE/oB2ILfsUW7C0oH7AjiG+93XvdhgxPZjqJgff8/Gq+rsg+PptJQAAjaS0+Rzg29LO+eF31nyKuerQ=='
+
 app.use(express.json())
 app.use(cors())
 app.use(cookieParser());
+
+app.use(session({
+    name: 'AuthCookie',
+    secret: secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: false
+    }
+}))
 
 
 configRoutes(app);

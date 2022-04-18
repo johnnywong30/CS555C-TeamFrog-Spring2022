@@ -9,6 +9,7 @@ import { Field } from './Field'
 import { PasswordField } from './PasswordField'
 
 import Mongo from '../../../services/mongo';
+import Cookies from 'js-cookie';
 import { notifyClear } from '../../../redux/actions/common'
 
 const Register = () => {
@@ -16,7 +17,11 @@ const Register = () => {
     const dispatch = useDispatch()
     const { msg, status, loading } = useSelector(({ common }) => common)
 
-    // TODO: use useEffect to check cookies to see if we can login already
+    
+    useEffect(() => {
+        const user = Cookies.get('AuthCookie')
+        if (user !== undefined) dispatch(Mongo.onCookieLogin(user))
+    }, [])
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')

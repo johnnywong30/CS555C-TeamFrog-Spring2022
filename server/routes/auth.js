@@ -8,11 +8,21 @@ router
     .route('/login')
     .post(async (req, res) => {
         try {
-            const { email, password } = req.body
-            const user = await users.validateUser(email, password)
-            // TODO use cookies to store authentication session
-            // res.cookie("auth", user)
-            res.json(user).end()
+            let user;
+            if (req.session.user) {
+                const { email, password } = req.session.user
+                user = await users.validateUser(email, password)
+            }
+            else {
+                const { email, password } = req.body
+                user = await users.validateUser(email, password)
+                // not secure but whatever for the project
+                req.session.user = {
+                    email: email,
+                    password: password
+                }
+            }
+            return res.json(user).end()
         } catch (e) {
             console.log(e)
             res.statusMessage = e
@@ -23,6 +33,7 @@ router
 router
     .route('/register')
     .post(async (req, res) => {
+        if (req.session.user) return res.redirect('/login')
         try {
             const { firstName, lastName, email, password, company } = req.body
             const user = await users.createUser(firstName, lastName, email, password, company)
@@ -37,8 +48,13 @@ router
 router
     .route('/logout')
     .post(async (req, res) => {
+        console.log('hi')
+        console.log(req.session)
         try {
-            // res.clearCookie("auth").end()
+            if (req.session.user) {
+                req.session.destroy()
+            }
+            res.status(200).json()
         } catch (e) {
             console.log(e)
             res.statusMessage = e
