@@ -7,7 +7,6 @@ import Mongo from '../../../services/mongo';
 import titleData from '../../../constants/titles';
 import { notifyClear } from '../../../redux/actions/common'
 import Lottie from 'reactjs-lottie'
-import waterBottle from '../../../constants/lotties/water-bottle.json'
 import drinkWater from '../../../constants/lotties/drink-water.json'
 
 const Water = ({ isOpen, onClose, ...rest }) => {
@@ -110,8 +109,8 @@ const Water = ({ isOpen, onClose, ...rest }) => {
             handleWater(amount)
             setSegments([0, segments[1]])
         }} isCentered>
-            <ModalOverlay />
-            <ModalContent>
+            <ModalOverlay  />
+            <ModalContent >
                 <ModalHeader>Hydrate</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
@@ -127,7 +126,6 @@ const Water = ({ isOpen, onClose, ...rest }) => {
                     </FormControl>
                     <>
                         <Lottie
-                            // onClick={() => }
                             options={defaultOptions}
                             height={200}
                             width={200}
