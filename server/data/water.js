@@ -74,6 +74,7 @@ module.exports = {
         if (water === undefined) throw 'Could not get water'
         return water
     },
+
     async getAllWater(_email) {
         const email = checkStr(_email)
         const user = await getUser(email)
@@ -82,6 +83,7 @@ module.exports = {
         const { waterHistory } = data
         return waterHistory
     },
+
     async deleteWater(_email, _id) {
         const email = checkStr(_email)
         const id = checkId(_id)

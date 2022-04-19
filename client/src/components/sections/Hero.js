@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function Hero({ level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, ctaLink, ctaText, ctaAction, expEarned, leveledUp, ...rest }) {
+
+export default function Hero({ level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, soundText, ctaLink, ctaText, ctaAction, expEarned, leveledUp, ...rest }) {
   return (
     <Flex
       align="center"
@@ -91,6 +92,9 @@ export default function Hero({ level, currentExp, requiredExp, title, subtitle, 
         <Center>
           <Text color='white' fontSize='lg' textAlign={'center'} mr={9}>{imageCaption}</Text>
         </Center>
+        <Center>
+          <Text fontSize='sm' textAlign={'center'} mr={9}>{soundText}</Text>
+        </Center>
         <Image onClick={imageOnClick} src={image} size="100%" rounded="1rem" shadow="2xl" />
       </Box>
 
@@ -104,6 +108,7 @@ Hero.propTypes = {
   image: PropTypes.string,
   ctaText: PropTypes.string,
   ctaLink: PropTypes.string,
+  soundText: PropTypes.string,
 };
 
 Hero.defaultProps = {

@@ -13,12 +13,36 @@ async function main() {
 
     const frogCollection = await db.collection('frogs')
     
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 0, "name": 'Green Frog', "url": "https://imgur.com/cScfraF.png", price: 0})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 1, "name": 'Yellow Frog', "url": "https://imgur.com/p5iRh9X.png", price: 500})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 2, "name": 'Blue Frog', "url": "https://imgur.com/Iyi0NpO.png", price: 2000})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 3, "name": 'Purple Frog', "url": "https://imgur.com/vxiufc8.png", price: 5000})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 4, "name": 'Purple Spotted Frog', "url": "https://imgur.com/BoMeidq.png", price: 10000})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 5, "name": 'Orange Spotted Frog', "url": "https://imgur.com/XchqGtg.png", price: 20000})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 0, "name": 'Green Frog', "url": "https://imgur.com/cScfraF.png", price: 0, "statusUrls": {
+        "healthy": "https://imgur.com/cScfraF.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 1, "name": 'Yellow Frog', "url": "https://imgur.com/p5iRh9X.png", price: 500, "statusUrls": {
+        "healthy": "https://imgur.com/p5iRh9X.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 2, "name": 'Blue Frog', "url": "https://imgur.com/Iyi0NpO.png", price: 2000, "statusUrls": {
+        "healthy": "https://imgur.com/Iyi0NpO.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 3, "name": 'Purple Frog', "url": "https://imgur.com/vxiufc8.png", price: 5000, "statusUrls": {
+        "healthy": "https://imgur.com/vxiufc8.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 4, "name": 'Purple Spotted Frog', "url": "https://imgur.com/BoMeidq.png", price: 10000, "statusUrls": {
+        "healthy": "https://imgur.com/BoMeidq.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 5, "name": 'Orange Spotted Frog', "url": "https://imgur.com/XchqGtg.png", price: 20000, "statusUrls": {
+        "healthy": "https://imgur.com/XchqGtg.png",
+        "thirsty": 'https://imgur.com/f3svxvI.png',
+        "dying": 'https://imgur.com/3dC8mcg.png'
+    }})
 
     // All passwords are test
     await users.createTestUser('Test', 'Test', 'test@test.com', 'Testers', 9999999)

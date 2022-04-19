@@ -181,6 +181,28 @@ router
             res.status(200).json({ errorMsg: e }).end()
         }
     })
+
+    router
+    .route('/getLatestWaterTime/:email')
+    .get(async (req, res) => {
+        try {
+            const email = req.params.email
+            const userInfo = await users.getUser(email)
+            if (userInfo[0].waterHistory.length === 0) {
+                res.json("None").end()
+            }
+            else {
+                let time = userInfo[0].waterHistory;
+                time = time[time.length - 1]
+                time = time.timestamp.replace(/,/g,'');
+                res.json(time).end()
+            }
+        } catch (e) {
+            console.log(e)
+            res.statusMessage = e
+            res.status(200).json({ errorMsg: e }).end()
+        }
+    })
 // TODO: the rest of the update routes
 
 module.exports = router;
