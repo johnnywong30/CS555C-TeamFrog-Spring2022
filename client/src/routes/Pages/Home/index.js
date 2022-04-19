@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useDisclosure } from '@chakra-ui/react'
+import { useDisclosure, Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import useSound from 'use-sound';
 
@@ -18,6 +18,7 @@ export const Home = () => {
   const { expEarned, leveledUp } = useSelector(({ common }) => common )
   const { store } = useSelector(({ auth }) => auth)
   const [ play ] = useSound(audio);
+  const [subtitleText, setSubtitle] = useState("");
   const [ time, setTime] = useState('');
   const getFrogs = async () => dispatch(Mongo.getFrogList())
   const [frogHealth, setHealth] = useState();
@@ -29,6 +30,12 @@ export const Home = () => {
         setTime(timestamp);
     });
   };
+
+  function subtitleOnClick() {
+    play();
+    setSubtitle('gua');
+    setTimeout(() => setSubtitle(''), 500);
+  } 
 
   function getTimeDistance() {
     if (time === 'None') {
@@ -81,7 +88,8 @@ export const Home = () => {
         // fix image please we need 8 bit frog
         image={frogUrl}
         imageCaption={titles[title]}
-        imageOnClick={play}
+        imageOnClick={subtitleOnClick}
+        soundText={subtitleText}
         ctaText="Give Your Frog Some Water"
         ctaAction={onOpen}
         expEarned={expEarned}

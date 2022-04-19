@@ -63,7 +63,9 @@ const FrogBox = ({ _id, frogId, url, name }) => {
     return (
         <Box key={_id} height='275px' mb={'1rem'}>
         <FrogName frogId={frogId} frogName={frogName} defaultName={""} isDisabled={!owned} friendEmail={friendEmail !== undefined}></FrogName>
-        <Text as="i" align='center'>{subtitle}</Text>
+        <Center>
+            <Text as="i">{subtitle}</Text>
+        </Center>
         <Image onClick={onClick} src={imgUrl} rounded="1rem" shadow="2xl" />
         {(friendEmail === undefined && owned) &&
             <Center>
