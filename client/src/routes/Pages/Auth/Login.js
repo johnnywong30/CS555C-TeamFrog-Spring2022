@@ -1,6 +1,6 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription, Box, Button, CloseButton, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Stack, Text, useBreakpointValue, useColorModeValue, VStack, bgGradient } from '@chakra-ui/react'
+import { Alert, AlertIcon, Box, Button, CloseButton, Container, HStack, Stack, Text, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 

@@ -1,24 +1,25 @@
 import React from 'react'
 import { Container} from '@chakra-ui/react'
 
-
 import Layout from '../../../components/layouts/Layout'
+import RandomFrog from './randomFrog'
 
 export const Random = () => {
     return (
         <Layout>
             <Container
-                maxW="lg"
+                maxW="xl"
                 py={{
-                    base: '12',
-                    md: '24',
+                    base: '0',
+                    sm: '2',
                 }
                 }
                 px={{
                     base: '0',
-                    sm: '8',
+                    sm: '0',
                 }}
             >
+                <RandomFrog/>
             </Container>
         </Layout>
     );
