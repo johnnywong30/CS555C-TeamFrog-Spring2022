@@ -50,7 +50,7 @@ export default function Hero({ prestige, level, currentExp, requiredExp, title, 
 			<Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
 				<Center>
 					<Text color="white" fontweight="bold" fontSize="2xl" textAlign={"center"} mr={9}>
-						{imageCaption} {emotion}
+						{emotion} {imageCaption}
 					</Text>
 				</Center>
 				<Center>
