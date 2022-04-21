@@ -34,8 +34,6 @@ module.exports = {
         return frogList
     },
 
-    
-
     async getFrogUrls() {
         const collection = await frogs()
         const frogList = await collection.find({}).project({ frogId: 1, url: 1, _id: 0 }).toArray()
@@ -55,7 +53,12 @@ module.exports = {
             frogId: frogId,
             name: name,
             url: url,
-            price: price
+            price: price,
+			statusUrls: {
+				healthy: url,
+				thirsty: 'https://imgur.com/f3svxvI.png',
+				dying: 'https://imgur.com/3dC8mcg.png'
+			}
         }
         const collection = await frogs();
         const insertInfo = await collection.insertOne(newFrog)

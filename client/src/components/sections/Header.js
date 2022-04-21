@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button, Menu, MenuList, MenuButton, IconButton, useDisclosure, color } from "@chakra-ui/react";
 import { MusicMenuItem } from './MusicMenuItem'
 import { AiFillDownCircle } from "react-icons/ai"
-import { FaCoins, FaFrog, FaUserFriends } from 'react-icons/fa'
+import { FaCoins, FaFrog, FaUserFriends, FaQuestionCircle } from 'react-icons/fa'
 import { GiBlackBook } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { FrogCharities } from './FrogCharities';
@@ -125,6 +125,11 @@ const Header = (props) => {
                     <MenuItem to="/friends">
                         <Button leftIcon={<FaUserFriends />} colorScheme={colorScheme} variant='ghost' size='sm'>
                             Friends
+                        </Button>
+                    </MenuItem>
+                    <MenuItem to="/random">
+                        <Button leftIcon={<FaQuestionCircle />} colorScheme={colorScheme} variant='ghost' size='sm'>
+                            Random Frog
                         </Button>
                     </MenuItem>
                     {/* drawer for frogcharities */}

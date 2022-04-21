@@ -10,8 +10,10 @@ const connection = require('./config/mongoConnection');
 const appName = "Frog Nanny"
 const port = 8000
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+
+app.use(cors());
+
 app.use(cookieParser());
 
 

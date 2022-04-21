@@ -69,3 +69,12 @@ export const earnExp = (expEarned, leveledUp) => {
         })
     }
 }
+
+export const setFrogUrl = (url) => {
+    return async dispatch => {
+        dispatch({
+            type: "RANDOM_FROG_URL",
+            payload: url
+        })
+    }
+}
