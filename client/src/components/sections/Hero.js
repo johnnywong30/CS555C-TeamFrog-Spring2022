@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default function Hero({ prestige, level, currentExp, requiredExp, title, subtitle, image, imageCaption, imageOnClick, soundText, ctaLink, ctaText, ctaAction, psText, psAction, expEarned, leveledUp, ...rest }) {
+export default function Hero({ prestige, level, currentExp, requiredExp, title, subtitle, image, imageCaption, emotion, imageOnClick, soundText, ctaLink, ctaText, ctaAction, psText, psAction, expEarned, leveledUp, ...rest }) {
 	return (
 		<Flex align="center" justify={{ base: "center", md: "space-around", xl: "space-between" }} direction={{ base: "column-reverse", md: "row" }} wrap="no-wrap" minH="70vh" px={8} mb={16} {...rest}>
 			<Stack spacing={4} w={{ base: "80%", md: "40%" }} align={["center", "center", "flex-start", "flex-start"]}>
@@ -50,7 +50,7 @@ export default function Hero({ prestige, level, currentExp, requiredExp, title, 
 			<Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
 				<Center>
 					<Text color="white" fontweight="bold" fontSize="2xl" textAlign={"center"} mr={9}>
-						{imageCaption}
+						{emotion} {imageCaption}
 					</Text>
 				</Center>
 				<Center>
