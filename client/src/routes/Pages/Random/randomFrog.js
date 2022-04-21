@@ -43,12 +43,12 @@ const RandomFrog = () => {
                             Random Frog Images
                         </Heading>
                         <Text orientation="horizontal" size="sm">
-                            Please note we do not have control over the image as it is sourced from Reddit (r/frog).
+                            Please note that we do not have control over the image, as it is sourced from Reddit (r/frog).
                         </Text>
                         <Divider orientation='horizontal' />
                     </VStack>
                     <Stack spacing="5">
-                        <Button onClick = {generate} colorScheme='green' size='sm'>Generate Random Frog</Button>
+                        <Button onClick = {generate} colorScheme='green' size='sm'>Generate Random Frog Image</Button>
                         <Box boxSize='lg'>
                             <Center>
                                 <Image boxSize='500px' objectFit='cover' src={randomFrogUrl} alt='Frog' />
