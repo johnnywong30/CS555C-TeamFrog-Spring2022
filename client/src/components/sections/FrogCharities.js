@@ -16,7 +16,7 @@ export const FrogCharities = React.forwardRef((props, ref) => {
     }
   }
 
-  const { colorScheme } = props
+  const { colorScheme, leftIcon, rightIcon } = props
   const inputRef = React.useRef(null)
   const mergeRef = useMergeRefs(inputRef, ref)
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,6 +31,8 @@ export const FrogCharities = React.forwardRef((props, ref) => {
         onClick={onOpen}
         mb={{ base: 8, sm: 0 }}
         mr={{ base: 0, sm: 5 }}
+        leftIcon={leftIcon ? leftIcon : <></>}
+        rightIcon={rightIcon ? rightIcon : <></>}
       >
         Frog Charities
       </Button>
