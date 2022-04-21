@@ -1,8 +1,9 @@
 import { onRegister, onLogin } from "./auth";
 import { updateFirstName, updateLastName, updateCompany, addFriend, updateChallenges, updateCompletedChallenges, removeFriend, updateMeasurement, purchaseFrog, updateFrogName, updatePrestige } from "./user";
 import { addTitle, updateTitle, updateFrog } from "./user";
-import { insertWater, getWater, getWaterHistory } from "./water";
+import { insertWater, getWater, getWaterHistory, getDaily } from "./water";
 import { getFrogList } from "./frog";
+import { get } from "http";
 
 const Mongo = {
 	// Authentication
@@ -23,6 +24,7 @@ const Mongo = {
 	insertWater: insertWater,
 	getWater: getWater,
 	getWaterHistory: getWaterHistory,
+	getDaily: getDaily,
 	// Frogs
 	purchaseFrog: purchaseFrog,
 	getFrogList: getFrogList,

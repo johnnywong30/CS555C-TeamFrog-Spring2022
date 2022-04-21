@@ -20,6 +20,8 @@ export const Home = () => {
 	const [play] = useSound(audio);
 	const [subtitleText, setSubtitle] = useState("");
 	const [time, setTime] = useState("");
+	const [dailyWater, setWater] = useState(0);
+	const [emotion, setEmotion] = useState("Neutral");
 	const getFrogs = async () => dispatch(Mongo.getFrogList());
 	const [frogHealth, setHealth] = useState();
 	let frogUrl = "";
@@ -36,6 +38,13 @@ export const Home = () => {
 		axios.get(`user/getLatestWaterTime/${email}`).then(response => {
 			const timestamp = response.data;
 			setTime(timestamp);
+		});
+	};
+
+	const getDailyWater = async () => {
+		axios.get(`water/getDaily/${email}`).then(response => {
+			const water = response.data;
+			setWater(water);
 		});
 	};
 
@@ -66,10 +75,22 @@ export const Home = () => {
 		}
 	}
 
+	function getEmotion() {
+		if (dailyWater === 0) {
+			setEmotion("Sad");
+		} else if (dailyWater <= 5) {
+			setEmotion("Neutral");
+		} else {
+			setEmotion("Happy");
+		}
+	}
+
 	useEffect(async () => {
 		await getFrogs();
 		await getLatestTime();
+		await getDailyWater();
 		getTimeDistance();
+		getEmotion();
 	}, [waterHistory, time]);
 
 	const selectedFrog = store.find(({ frogId }) => frogId === frog);
@@ -94,6 +115,7 @@ export const Home = () => {
 				// fix image please we need 8 bit frog
 				image={frogUrl}
 				imageCaption={titles[title]}
+				emotion={emotion}
 				imageOnClick={subtitleOnClick}
 				soundText={subtitleText}
 				ctaText="Give Your Frog Some Water"
