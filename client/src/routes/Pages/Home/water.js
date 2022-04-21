@@ -8,10 +8,12 @@ import titleData from '../../../constants/titles';
 import { notifyClear } from '../../../redux/actions/common'
 import Lottie from 'reactjs-lottie'
 import drinkWater from '../../../constants/lotties/drink-water.json'
+import useKeypress from '../../../hooks/keypress';
 
 const Water = ({ isOpen, onClose, ...rest }) => {
     // hook to use redux actions
     const dispatch = useDispatch()
+
 
     // Segments
     /*
@@ -55,8 +57,17 @@ const Water = ({ isOpen, onClose, ...rest }) => {
         beyond: 120
     }
 
-    const handleWater = value => {
+    useKeypress('ArrowUp', () => {
+        handleWater(amount + 1)
+    }, amount);
+
+    useKeypress('ArrowDown', () => {
+        handleWater(amount - 1)
+    }, amount);
+
+    const handleWater = (value) => {
         const num = Number(value)
+        if (num < 0) return
         if (isNaN(num)) setAmount(0)
         if (num > 10) setAmount(11)
         else setAmount(num)
@@ -103,13 +114,15 @@ const Water = ({ isOpen, onClose, ...rest }) => {
         onClose()
     }
 
+
+
     return (
         <Modal isOpen={isOpen} onClose={() => {
             onClose()
             handleWater(amount)
             setSegments([0, segments[1]])
         }} isCentered>
-            <ModalOverlay  />
+            <ModalOverlay />
             <ModalContent >
                 <ModalHeader>Hydrate</ModalHeader>
                 <ModalCloseButton />
@@ -143,7 +156,7 @@ const Water = ({ isOpen, onClose, ...rest }) => {
                         handleWater(amount)
                         setSegments([0, segments[1]])
                     }} >
-                        Close
+                        Cancel
                     </Button>
                     <Button isLoading={loading} onClick={handleSubmit}>
                         Drink
