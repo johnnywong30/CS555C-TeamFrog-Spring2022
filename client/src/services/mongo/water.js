@@ -64,6 +64,7 @@ export const getDaily = (email, id) => {
 				dispatch(notifySuccess(successMsg));
 			}
 			if (errorMsg) dispatch(notifyFail(errorMsg));
+			console.log('am i doing this')
 			dispatch(endLoading());
 		} catch (error) {
 			console.log("There was an error in getDaily...", error);

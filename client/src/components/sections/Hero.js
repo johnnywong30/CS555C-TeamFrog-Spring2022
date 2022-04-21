@@ -23,7 +23,7 @@ export default function Hero({ prestige, level, currentExp, requiredExp, title, 
 								Leveled Up!
 							</Text>
 						) : (
-							`Level: ${level} - Prestige: ${prestige}`
+							`Level: ${level}`
 						)}
 						{expEarned > 0 && (
 							<Text ml={5} className={css(styles.fadeOutUp)} color="yellow" fontSize={"1rem"}>
@@ -31,6 +31,7 @@ export default function Hero({ prestige, level, currentExp, requiredExp, title, 
 							</Text>
 						)}
 					</Flex>
+					<Text fontSize={"1rem"}>Prestige: {prestige} </Text>
 					<Progress mt={2} borderRadius=".3rem" hasStripe colorScheme="gray" size="sm" value={currentExp} min={0} max={requiredExp} />
 				</Heading>
 

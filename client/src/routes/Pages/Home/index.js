@@ -38,6 +38,18 @@ export const Home = () => {
 		axios.get(`user/getLatestWaterTime/${email}`).then(response => {
 			const timestamp = response.data;
 			setTime(timestamp);
+			if (timestamp === "None") {
+				setHealth(2);
+			} else {
+				let distance = moment(timestamp).toNow();
+				if (distance.search("minute") > 0 || distance.search("hour") > 0 || distance.search("second") > 0) {
+					setHealth(0);
+				} else if (distance.search("day") > 0) {
+					setHealth(1);
+				} else {
+					setHealth(2);
+				}
+			}
 		});
 	};
 
@@ -45,6 +57,13 @@ export const Home = () => {
 		axios.get(`water/getDaily/${email}`).then(response => {
 			const water = response.data;
 			setWater(water);
+			if (water < 3) {
+				setEmotion("Sad");
+			} else if (water < 10) {
+				setEmotion("Neutral");
+			} else {
+				setEmotion("Happy");
+			}
 		});
 	};
 
@@ -55,51 +74,24 @@ export const Home = () => {
 
 	function subtitleOnClick() {
 		play();
-		setSubtitle("*Ribbit*");
+		setSubtitle('Ribbit');
 		setTimeout(() => setSubtitle(""), 500);
 	}
 
-	function getTimeDistance() {
-		if (time === "None") {
-			setHealth(2);
-		} else {
-			let distance = moment(time).toNow();
-			console.log(distance);
-			if (distance.search("minute") > 0 || distance.search("hour") > 0 || distance.search("second") > 0) {
-				setHealth(0);
-			} else if (distance.search("day") > 0) {
-				setHealth(1);
-			} else {
-				setHealth(2);
-			}
-		}
-	}
-
-	function getEmotion() {
-		if (dailyWater < 3) {
-			setEmotion("Sad");
-		} else if (dailyWater < 10) {
-			setEmotion("Neutral");
-		} else {
-			setEmotion("Happy");
-		}
-	}
+	useEffect(async () => {
+		await getLatestTime();
+		await getDailyWater();
+	}, [waterHistory, time]);
 
 	useEffect(async () => {
 		await getFrogs();
-		await getLatestTime();
-		await getDailyWater();
-		getTimeDistance();
-		getEmotion();
-	}, [waterHistory, time]);
+	}, [])
 
 	const selectedFrog = store.find(({ frogId }) => frogId === frog);
 	const mysteryFrogUrl = "https://imgur.com/VJeksGH.png";
-	// console.log(frogHealth)
 	if (frogHealth === 1 || frogHealth === 2) {
 		frogUrl = frogHealth === 1 ? "https://imgur.com/f3svxvI.png" : "https://imgur.com/3dC8mcg.png";
 	} else {
-		// console.log("hi", frogHealth)
 		frogUrl = selectedFrog !== undefined ? selectedFrog.url : mysteryFrogUrl;
 	}
 

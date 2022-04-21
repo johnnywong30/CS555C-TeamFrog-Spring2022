@@ -47,7 +47,7 @@ const FrogBox = ({ _id, frogId, url, name }) => {
 
     function subtitleOnClick() {
         play();
-        setSubtitle('gua');
+        setSubtitle('Ribbit');
         setTimeout(() => setSubtitle(''), 500);
     }
         
