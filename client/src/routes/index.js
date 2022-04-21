@@ -13,6 +13,7 @@ import { Cyclefrog } from "./Pages/Changefrog";
 import { Friends } from "./Pages/Friends";
 import { Store } from "./Pages/Store";
 import { Challenges } from './Pages/Challenges';
+import { Random } from './Pages/Random';
 
 const Routes = () => {
 	// hook to dispatch actions
@@ -26,7 +27,7 @@ const Routes = () => {
 		return <Redirect to={"/froggers"} />;
 	};
   const freePaths = ['/', '/login', '/register']
-  const restrictedPaths = ['', '/froggers', '/profile', '/collection', '/friends', '/store', '/logout', '/challenges', '/cyclefrogs']
+  const restrictedPaths = ['', '/froggers', '/profile', '/collection', '/friends', '/store', '/logout', '/challenges', '/cyclefrogs', '/random']
   if (! isAuth && (restrictedPaths.includes(location.pathname))) {
       return <Redirect to={'/login'} />
   } else if (isAuth && (freePaths.includes(location.pathname))) {
@@ -45,6 +46,7 @@ const Routes = () => {
               <RestrictedRoute exact path="/store" component={Store} />
               <RestrictedRoute exact path="/challenges" component={Challenges} />
               <RestrictedRoute exact path="/cyclefrogs" component={Cyclefrog} />
+              <RestrictedRoute exact path="/random" component={Random} />
               {/* This last route is to redirect any bad routes to home page if logged in */}
               {/* If not logged in, then redirects to login page */}
               <Route exact path="*" component={redirectHome}/>
