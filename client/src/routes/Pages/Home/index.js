@@ -21,7 +21,7 @@ export const Home = () => {
 	const [subtitleText, setSubtitle] = useState("");
 	const [time, setTime] = useState("");
 	const [dailyWater, setWater] = useState(0);
-	const [emotion, setEmotion] = useState("Neutral");
+	const [emotion, setEmotion] = useState("");
 	const getFrogs = async () => dispatch(Mongo.getFrogList());
 	const [frogHealth, setHealth] = useState();
 	let frogUrl = "";
@@ -50,7 +50,7 @@ export const Home = () => {
 
 	const handlePrestige = async e => {
 		e.preventDefault();
-		if (level === 10) dispatch(Mongo.updatePrestige(email));
+		if (level === 10 && prestige < 10) dispatch(Mongo.updatePrestige(email));
 	};
 
 	function subtitleOnClick() {
@@ -76,9 +76,9 @@ export const Home = () => {
 	}
 
 	function getEmotion() {
-		if (dailyWater === 0) {
+		if (dailyWater < 3) {
 			setEmotion("Sad");
-		} else if (dailyWater <= 5) {
+		} else if (dailyWater < 10) {
 			setEmotion("Neutral");
 		} else {
 			setEmotion("Happy");
