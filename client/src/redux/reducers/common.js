@@ -6,6 +6,7 @@ const INIT_STATE = {
     expEarned: 0,
     leveledUp: false,
     randomFrogUrl: "https://i.pinimg.com/736x/ab/c4/8b/abc48b4afe75a9c72f5cc162e6bf2be9.jpg",
+    color: "Green"
 }
 
 const commonReducer = (state = INIT_STATE, action) => {
@@ -61,6 +62,11 @@ const commonReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 randomFrogUrl: payload
+            }
+        case "COLOR_ID":
+            return {
+                ...state,
+                color: payload
             }
         default:
             return state

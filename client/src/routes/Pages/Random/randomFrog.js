@@ -9,7 +9,6 @@ const RandomFrog = () => {
 
     const generate = async () => {
         dispatch(RandomService.getRandomFrog());
-        console.log(randomFrogUrl);
     };
 
     return (
