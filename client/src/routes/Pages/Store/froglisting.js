@@ -36,8 +36,9 @@ export const Listing = ({ frogLink, frogName, price, own }) => {
 			border="4px"
 			borderColor="white"
 			rounded="1rem"
+			backgroundColor="white"
 			divider={<StackDivider borderColor="white" borderWidth="4px" />}>
-			<Heading size="md" color="white">
+			<Heading marginTop="8px" paddingTop="8px" size="md" color="black">
 				{frogName}
 			</Heading>
 			<Image src={frogLink} boxSize="235px" />

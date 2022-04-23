@@ -78,3 +78,12 @@ export const setFrogUrl = (url) => {
         })
     }
 }
+
+export const setColor = (color) => {
+    return async dispatch => {
+        dispatch({
+            type: "COLOR_ID",
+            payload: color
+        })
+    }
+}

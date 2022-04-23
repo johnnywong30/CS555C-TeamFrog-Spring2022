@@ -24,7 +24,7 @@ async function main() {
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 8, "name": 'Blue Fedora Frog', "url": "https://imgur.com/PPP5nO4.png", price: 20000})
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 9, "name": 'Purple Fedora Frog', "url": "https://imgur.com/gHaplMr.png", price: 20500})
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 10, "name": 'Purple Spotted Fedora Frog', "url": "https://imgur.com/3jVjqdO.png", price: 20500})
-    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 11, "name": 'Orange Spotted Fedora Frog', "url": "https://imgur.com/3jVjqdO.png", price: 20500})
+    await frogCollection.insertOne({"_id": ObjectId(), "frogId": 11, "name": 'Orange Spotted Fedora Frog', "url": "https://imgur.com/ZZXRM0Q.png", price: 20500})
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 12, "name": 'Green Bowtie Frog', "url": "https://imgur.com/OQtjukH.png", price: 20500})
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 13, "name": 'Yellow Bowtie Frog', "url": "https://imgur.com/YANUXWV.png", price: 20500})
     await frogCollection.insertOne({"_id": ObjectId(), "frogId": 14, "name": 'Blue Bowtie Frog', "url": "https://imgur.com/NaFqy9a.png", price: 25000})
