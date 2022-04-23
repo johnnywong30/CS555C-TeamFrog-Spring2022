@@ -21,6 +21,7 @@ const Shop = () => {
 
 	useEffect(() => getFrogs(), []);
 
+
 	const frogs = [];
 	for (let i = 0; i < store.length; i++) {
 		const { _id, frogId, name, url, price } = store[i]
@@ -68,7 +69,7 @@ const Shop = () => {
 			</Center>
 			<Center marginBottom='10px'>
 				<Menu>
-					<MenuButton as={Button} colorScheme="green">
+					<MenuButton as={Button} colorScheme="blackAlpha">
 						Select Frog Color
 					</MenuButton>
 					<MenuList>
