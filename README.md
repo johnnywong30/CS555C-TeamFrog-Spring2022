@@ -30,3 +30,8 @@ We are planning on building a water-drinking progression game called Frog Nanny.
 3. Wait for client to start (should see unused variable errors)
 4. Ctrl + C
 5. Wait for server to start
+
+##Running Test Script
+1. cd server
+2. cd test
+3. npm test
