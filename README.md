@@ -16,9 +16,10 @@ We are planning on building a water-drinking progression game called Frog Nanny.
 4. Install required client dependencies using `yarn`
 5. `cd server`
 6. Install required server dependencies using `yarn`
-7. Run the client with `yarn start` when you're in the client directory.
-8. Run the server with `yarn start` when you're in the server directory.
-9. Script to do this for you to come later...(maybe?)
+7. Add seed data to server `yarn seed`
+8. Run the client with `yarn start` when you're in the client directory.
+9. Run the server with `yarn start` when you're in the server directory.
+10. Script to do this for you to come later...(maybe?)
 
 ## Dependency Installation via scripts
 1. cd scripts
