@@ -35,3 +35,7 @@ We are planning on building a water-drinking progression game called Frog Nanny.
 1. cd server
 2. cd test
 3. npm test
+
+## Running Server Seed
+1. cd server
+2. yarn seed
